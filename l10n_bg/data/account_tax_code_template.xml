@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data noupdate="0">
+    <record model="account.tax.code.template" id="vat_code_tax">
+        <field name="name">Дневник на покупките и продажбите</field>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_0-10_30">
+      <field name="code">0-10/30</field>
+      <field name="name">Данъчна основа</field>
+      <field name="sequence">1000</field>
+      <field name="parent_id" ref="vat_code_tax"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_0-50_60">
+      <field name="info">Раздел В: Резултат за периода</field>
+      <field name="code">0-50/60</field>
+      <field name="name">ДДС за внасяне/ възстановяване</field>
+      <field name="sequence">1001</field>
+      <field name="parent_id" ref="vat_code_tax"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_1_10">
+      <field name="info">9. Общ размер на данъчните основи за облагане с ДДС</field>
+      <field name="code">1-10</field>
+      <field name="name">ДО- продажби (9)</field>
+      <field name="sequence">1100</field>
+      <field name="parent_id" ref="tax_code_0-10_30"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_1_11">
+      <field name="info">11. Данъчна основа на облагаемите доставки със ставка 20 %, вкл. доставките при условията на дистанционни продажби, с място на изпълнение на територията на страната</field>
+      <field name="code">1-11</field>
+      <field name="name">ДО- продажби за облагане (20%) (11)</field>
+      <field name="sequence">1110</field>
+      <field name="parent_id" ref="tax_code_1_10"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_1_13">
+      <field name="info">17. ДО на облагаемите доставки със ставка 7/9% за периоди от 201101 до 201205 включително и със ставка 9% за периоди след 201206 включително</field>
+      <field name="code">1-13</field>
+      <field name="name">ДО- продажби при туристически услуги 9% (17)</field>
+      <field name="sequence">1130</field>
+      <field name="parent_id" ref="tax_code_1_10"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_1_14">
+      <field name="info">19. ДО на доставките със ставка 0 % по глава трета от ЗДДС</field>
+      <field name="code">1-14</field>
+      <field name="name">ДО- продажби износ (19)</field>
+      <field name="sequence">1140</field>
+      <field name="parent_id" ref="tax_code_1_10"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_1_15">
+      <field name="info">20. ДО на доставките със ставка 0 % на ВОД на стоки</field>
+      <field name="code">1-15</field>
+      <field name="name">ДО- продажби ВОД (20)</field>
+      <field name="sequence">1150</field>
+      <field name="parent_id" ref="tax_code_1_10"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_1_16">
+      <field name="info">21. ДО на доставките със ставка 0 % по чл. 140, чл. 146, ал. 1 и чл. 173, ал. 1 и 4 ЗДДС</field>
+      <field name="code">1-16</field>
+      <field name="name">ДО- продажби по чл.140, 146,173 (21)</field>
+      <field name="sequence">1160</field>
+      <field name="parent_id" ref="tax_code_1_10"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_1_17_1">
+      <field name="info">22. Данъчна основа на доставки на услуги по чл. 21, ал. 2 ЗДДС, с място на изпълнение на територията на друга държава членка</field>
+      <field name="code">1-17</field>
+      <field name="name">ДО- продажби на територията на ЕС (22)</field>
+      <field name="sequence">1171</field>
+      <field name="parent_id" ref="tax_code_0-10_30"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_1_17_2">
+      <field name="info">23. Данъчна основа на доставки по чл. 69, ал. 2 ЗДДС, вкл. данъчна основа на доставките при условията на дистанционни продажби, с място на изпълнение на територията на друга държава членка</field>
+      <field name="code">1-17</field>
+      <field name="name">ДО- продажби по чл.62(2) на територията на ЕС (23)</field>
+      <field name="sequence">1172</field>
+      <field name="parent_id" ref="tax_code_0-10_30"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_1_19">
+      <field name="info">24. ДО на освободени доставки и освободените ВОП </field>
+      <field name="code">1-19</field>
+      <field name="name">ДО- продажби освободени ВОД (24)</field>
+      <field name="sequence">1190</field>
+      <field name="parent_id" ref="tax_code_0-10_30"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_1_20">
+      <field name="info">10. Всичко начислен ДДС</field>
+      <field name="code">1-20</field>
+      <field name="name">ДДС- продажби (10)</field>
+      <field name="sequence">1200</field>
+      <field name="parent_id" ref="tax_code_0-50_60"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_1_21">
+      <field name="info">12. Начислен ДДС 20 %</field>
+      <field name="code">1-21</field>
+      <field name="name">ДДС- продажби за облагане с 20% (12)</field>
+      <field name="sequence">1210</field>
+      <field name="parent_id" ref="tax_code_1_20"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_1_24">
+      <field name="info">18. Начислен ДДС по кл.17</field>
+      <field name="code">1-24</field>
+      <field name="name">ДДС- продажби при туристически услуги 9% (18)</field>
+      <field name="sequence">1240</field>
+      <field name="parent_id" ref="tax_code_1_20"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_1_91">
+      <field name="code">1-91</field>
+      <field name="name">ДДС- продажби за облагане с 0%</field>
+      <field name="sequence">1910</field>
+      <field name="parent_id" ref="tax_code_1_20"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_1_92">
+      <field name="code">1-92</field>
+      <field name="name">ДДС- продажби освободени</field>
+      <field name="sequence">1920</field>
+      <field name="parent_id" ref="tax_code_1_20"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_2_90">
+      <field name="code">2-90</field>
+      <field name="name">ДО- покупки</field>
+      <field name="sequence">2900</field>
+      <field name="parent_id" ref="tax_code_0-10_30"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_2_30_1">
+      <field name="info">9. Данъчна основа и данък на получените доставки, ВОП, получените доставки по чл. 82, ал. 2 – 5 ЗДДС и вносът без право на данъчен кредит или без данък</field>
+      <field name="code">2-30</field>
+      <field name="name">ДО- покупки без право на ДК (9)</field>
+      <field name="sequence">2301</field>
+      <field name="parent_id" ref="tax_code_2_90"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_2_30_2">
+      <field name="code">2-30</field>
+      <field name="name">ДО- покупки освободени (9)</field>
+      <field name="sequence">2302</field>
+      <field name="parent_id" ref="tax_code_2_30_1"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_2_31">
+      <field name="info">10. Данъчна основа на получените доставки, ВОП, получените доставки по чл. 82, ал. 2 - 5 ЗДДС, вносът, както и данъчната основа на получените доставки, използвани за извършване на доставки по чл. 69, ал. 2 ЗДДС с право на пълен данъчен кредит</field>
+      <field name="code">2-31</field>
+      <field name="name">ДО- покупки с право на пълен ДК (10)</field>
+      <field name="sequence">2310</field>
+      <field name="parent_id" ref="tax_code_2_90"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_2_32">
+      <field name="info">12. Данъчна основа на получените доставки, ВОП, получените доставки по чл. 82, ал. 2 - 5 ЗДДС, вносът, както и данъчната основа на получените доставки, използвани за извършване на доставки по чл. 69, ал. 2 ЗДДС с право на частичен данъчен кредит</field>
+      <field name="code">2-32</field>
+      <field name="name">ДО- покупки с частичен ДК (~%) (12)</field>
+      <field name="sequence">2320</field>
+      <field name="parent_id" ref="tax_code_2_90"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_2_40">
+      <field name="info"/>
+      <field name="code">2-40</field>
+      <field name="name">ДДС- покупки (11)</field>
+      <field name="sequence">2400</field>
+      <field name="parent_id" ref="tax_code_0-50_60"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_2_41">
+      <field name="info">11. ДДС с право на пълен данъчен кредит</field>
+      <field name="code">2-41</field>
+      <field name="name">ДДС- покупки пълен ДК (11)</field>
+      <field name="sequence">2410</field>
+      <field name="parent_id" ref="tax_code_2_40"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_2_42">
+      <field name="info">13. ДДС с право на частичен данъчен кредит</field>
+      <field name="code">2-42</field>
+      <field name="name">ДДС- покупки с частичен ДК (~%) (13)</field>
+      <field name="sequence">2420</field>
+      <field name="parent_id" ref="tax_code_2_40"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_2_91">
+      <field name="code">2-91</field>
+      <field name="name">ДДС- покупки за облагане с 0%</field>
+      <field name="sequence">2910</field>
+      <field name="parent_id" ref="tax_code_2_40"/>
+    </record>
+    <record model="account.tax.code.template" id="tax_code_2_92">
+      <field name="code">2-92</field>
+      <field name="name">ДДС- покупки освободени</field>
+      <field name="sequence">2920</field>
+      <field name="parent_id" ref="tax_code_2_40"/>
+    </record>
+  </data>
+</openerp>

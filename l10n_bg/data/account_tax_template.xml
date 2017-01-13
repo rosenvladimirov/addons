@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data noupdate="0">
+    <record model="account.tax.template" id="tax_sale">
+      <field name="chart_template_id" ref="l10_bg_chart_template"/>
+      <field name="sequence">1</field>
+      <field name="base_code_id" ref="tax_code_1_11"/>
+      <field name="base_sign">1.0</field>
+      <field name="tax_code_id" ref="tax_code_1_21"/>
+      <field name="tax_sign">1.00</field>
+      <field name="account_paid_id" ref="pcg_4532"/>
+      <field name="applicable_type">true</field>
+      <field name="account_collected_id" ref="pcg_4532"/>
+      <field name="python_compute_inv"># price_unit # product: product.product object or False  result = price_unit * 0.10</field>
+      <field name="ref_tax_sign">-1.0</field>
+      <field name="type">percent</field>
+<!--
+      <field name="tax_credit_payable">taxpay</field>
+-->
+      <field name="ref_base_code_id" ref="tax_code_1_11"/>
+      <field name="ref_base_sign">-1.0</field>
+      <field name="ref_tax_code_id" ref="tax_code_1_21"/>
+      <field name="ref_tax_sign">-1.00</field>
+      <field name="company_id" ref="base.main_company"/>
+      <field name="type_tax_use">sale</field>
+      <field name="active" eval="True"/>
+      <field name="python_applicable"/>
+      <field name="name">ДДС продажби на територията на страната 20.00%</field>
+      <field name="amount">0.2</field>
+      <field name="python_compute"># price_unit # or False # product: product.product object or None # partner: res.partner object or None  result = price_unit * 0.10</field>
+    </record>
+
+    <record model="account.tax.template" id="tax_vod">
+      <field name="chart_template_id" ref="l10_bg_chart_template"/>
+      <field name="sequence">20</field>
+      <field name="base_code_id" ref="tax_code_1_15"/>
+      <field name="base_sign">1.0</field>
+      <field name="tax_code_id" ref="tax_code_1_91"/>
+      <field name="tax_sign">1.00</field>
+      <field name="account_paid_id" ref="pcg_4532"/>
+      <field name="applicable_type">true</field>
+      <field name="account_collected_id" ref="pcg_4532"/>
+      <field name="python_compute_inv"># price_unit # product: product.product object or False  result = price_unit * 0.10</field>
+      <field name="ref_tax_sign">-1.0</field>
+      <field name="type">percent</field>
+<!--
+      <field name="tax_credit_payable">taxpay</field>
+-->
+      <field name="ref_base_code_id" ref="tax_code_1_15"/>
+      <field name="ref_base_sign">-1.0</field>
+      <field name="ref_tax_code_id" ref="tax_code_1_91"/>
+      <field name="ref_tax_sign">-1.00</field>
+      <field name="company_id" ref="base.main_company"/>
+      <field name="type_tax_use">sale</field>
+      <field name="active" eval="True"/>
+      <field name="python_applicable"/>
+      <field name="tax_credit_payable">taxpay</field>
+      <field name="name">Вътреобщностни доставки - ВОД (0%)</field>
+      <field name="amount">0.0</field>
+      <field name="python_compute"># price_unit # or False # product: product.product object or None # partner: res.partner object or None  result = price_unit * 0.10</field>
+    </record>
+
+    <record model="account.tax.template" id="tax_tour">
+      <field name="chart_template_id" ref="l10_bg_chart_template"/>
+      <field name="sequence">30</field>
+      <field name="base_code_id" ref="tax_code_1_13"/>
+      <field name="base_sign">1.0</field>
+      <field name="tax_code_id" ref="tax_code_1_24"/>
+      <field name="tax_sign">1.00</field>
+      <field name="account_paid_id" ref="pcg_4532"/>
+      <field name="applicable_type">true</field>
+      <field name="account_collected_id" ref="pcg_4532"/>
+      <field name="python_compute_inv"># price_unit # product: product.product object or False  result = price_unit * 0.10</field>
+      <field name="type">percent</field>
+<!--
+      <field name="tax_credit_payable">taxpay</field>
+-->
+      <field name="ref_base_code_id" ref="tax_code_1_13"/>
+      <field name="ref_base_sign">-1.0</field>
+      <field name="ref_tax_code_id" ref="tax_code_1_24"/>
+      <field name="ref_tax_sign">-1.00</field>
+      <field name="company_id" ref="base.main_company"/>
+      <field name="type_tax_use">sale</field>
+      <field name="active" eval="True"/>
+      <field name="python_applicable"/>
+      <field name="name">Туристически услуги (9%)</field>
+      <field name="amount">0.09</field>
+      <field name="python_compute"># price_unit # or False # product: product.product object or None # partner: res.partner object or None  result = price_unit * 0.10</field>
+    </record>
+
+    <record model="account.tax.template" id="tax_vop">
+      <field name="chart_template_id" ref="l10_bg_chart_template"/>
+      <field name="sequence">40</field>
+      <field name="child_depend" eval="True"/>
+      <field name="applicable_type">true</field>
+      <field name="python_compute_inv"># price_unit # product: product.product object or False  result = price_unit * 0.10</field>
+      <field name="type">balance</field>
+<!--
+      <field name="type">separate</field>
+      <field name="tax_credit_payable">taxpay</field>
+      <field name="account_separate" eval="True"/>
+-->
+      <field name="company_id" ref="base.main_company"/>
+      <field name="type_tax_use">purchase</field>
+      <field name="active" eval="True"/>
+      <field name="python_applicable"/>
+      <field name="name">Вътреобщностното придобиване - ВОП (0%)</field>
+      <field name="amount">0.0</field>
+      <field name="python_compute"># price_unit # or False # product: product.product object or None # partner: res.partner object or None  result = price_unit * 0.10</field>
+    </record>
+
+    <record model="account.tax.template" id="tax_vop-1">
+      <field name="chart_template_id" ref="l10_bg_chart_template"/>
+      <field name="sequence">401</field>
+      <field name="base_code_id" ref="tax_code_2_31"/>
+      <field name="base_sign">1.0</field>
+      <field name="tax_code_id" ref="tax_code_2_41"/>
+      <field name="tax_sign">1.00</field>
+      <field name="account_paid_id" ref="pcg_4531"/>
+      <field name="description">2-31 ВОП 20% дневници на покупки</field>
+      <field name="account_collected_id" ref="pcg_4531"/>
+      <field name="python_compute_inv"># price_unit
+# product: product.product object or False
+
+result = price_unit * 0.10</field>
+      <field name="type">percent</field>
+<!--
+      <field name="tax_parent_sign">1.0</field>
+      <field name="tax_credit_payable">taxcredit</field>
+      <field name="account_separate" eval="True"/>
+-->
+      <field name="ref_base_code_id" ref="tax_code_2_31"/>
+      <field name="ref_base_sign">-1.0</field>
+      <field name="ref_tax_code_id" ref="tax_code_2_31"/>
+      <field name="ref_tax_sign">-1.00</field>
+      <field name="company_id" ref="base.main_company"/>
+      <field name="type_tax_use">purchase</field>
+      <field name="python_applicable"/>
+      <field name="name">ВОП 20% дневници на покупки</field>
+      <field name="account_separate" eval="True"/>
+      <field name="amount">0.2</field>
+      <field name="python_compute"># price_unit
+# or False
+# product: product.product object or None
+# partner: res.partner object or None
+
+result = price_unit * 0.10</field>
+      <field name="parent_id" ref="tax_vop"/>
+    </record>
+
+    <record model="account.tax.template" id="tax_vop-2">
+      <field name="chart_template_id" ref="l10_bg_chart_template"/>
+      <field name="sequence">402</field>
+      <field name="base_code_id" ref="tax_code_1_11"/>
+      <field name="base_sign">1.0</field>
+      <field name="tax_code_id" ref="tax_code_1_21"/>
+      <field name="tax_sign">1.00</field>
+      <field name="account_paid_id" ref="pcg_4532"/>
+      <field name="description">1-17 ВОП 20% дневници на продажбите</field>
+      <field name="account_collected_id" ref="pcg_4532"/>
+      <field name="python_compute_inv"># price_unit
+# product: product.product object or False
+
+result = price_unit * 0.10</field>
+      <field name="type">percent</field>
+<!--
+      <field name="tax_parent_sign">-1.0</field>
+      <field name="tax_credit_payable">taxpay</field>
+      <field name="account_separate" eval="True"/>
+-->
+      <field name="ref_base_code_id" ref="tax_code_1_11"/>
+      <field name="ref_base_sign">-1.0</field>
+      <field name="ref_tax_code_id" ref="tax_code_1_21"/>
+      <field name="ref_tax_sign">-1.00</field>
+      <field name="company_id" ref="base.main_company"/>
+      <field name="type_tax_use">sale</field>
+      <field name="python_applicable"/>
+      <field name="name">ВОП 20% дневници на продажбите</field>
+      <field name="account_separate" eval="True"/>
+      <field name="amount">0.2</field>
+      <field name="python_compute"># price_unit
+# or False
+# product: product.product object or None
+# partner: res.partner object or None
+
+result = price_unit * 0.10</field>
+      <field name="parent_id" ref="tax_vop"/>
+    </record>
+
+    <record model="account.tax.template" id="tax_0">
+      <field name="chart_template_id" ref="l10_bg_chart_template"/>
+      <field name="sequence">45</field>
+      <field name="base_code_id" ref="tax_code_1_14"/>
+      <field name="base_sign">1.0</field>
+      <field name="tax_code_id" ref="tax_code_1_92"/>
+      <field name="tax_sign">1.00</field>
+      <field name="account_paid_id" ref="pcg_4532"/>
+      <field name="applicable_type">true</field>
+      <field name="account_collected_id" ref="pcg_4532"/>
+      <field name="python_compute_inv"># price_unit # product: product.product object or False  result = price_unit * 0.10</field>
+      <field name="type">percent</field>
+<!--
+      <field name="tax_credit_payable">taxpay</field>
+-->
+      <field name="ref_base_code_id" ref="tax_code_1_14"/>
+      <field name="ref_base_sign">-1.0</field>
+      <field name="ref_tax_code_id" ref="tax_code_1_92"/>
+      <field name="ref_tax_sign">-1.00</field>
+      <field name="company_id" ref="base.main_company"/>
+      <field name="type_tax_use">sale</field>
+      <field name="active" eval="True"/>
+      <field name="python_applicable"/>
+      <field name="name">Облагаеми доставки с нулева ставка (глава 3)</field>
+      <field name="amount">0.0</field>
+      <field name="python_compute"># price_unit # or False # product: product.product object or None # partner: res.partner object or None  result = price_unit * 0.10</field>
+    </record>
+
+    <record model="account.tax.template" id="tax_purchase_without">
+      <field name="chart_template_id" ref="l10_bg_chart_template"/>
+      <field name="sequence">50</field>
+      <field name="base_code_id" ref="tax_code_2_30_1"/>
+      <field name="base_sign">1.0</field>
+      <field name="account_paid_id" ref="pcg_4531"/>
+      <field name="applicable_type">true</field>
+      <field name="account_collected_id" ref="pcg_4531"/>
+      <field name="python_compute_inv"># price_unit # product: product.product object or False  result = price_unit * 0.10</field>
+      <field name="ref_tax_sign">-1.0</field>
+      <field name="type">percent</field>
+<!--
+      <field name="tax_credit_payable">taxcredit</field>
+-->
+      <field name="ref_base_code_id" ref="tax_code_2_30_1"/>
+      <field name="ref_base_sign">-1.0</field>
+      <field name="company_id" ref="base.main_company"/>
+      <field name="type_tax_use">purchase</field>
+      <field name="active" eval="True"/>
+      <field name="python_applicable"/>
+      <field name="account_analytic_collected_id" eval="False"/>
+      <field name="name">Необлагаеми сделки и без право на ДК</field>
+      <field name="amount">0.0</field>
+      <field name="python_compute"># price_unit # or False # product: product.product object or None # partner: res.partner object or None  result = price_unit * 0.10</field>
+    </record>
+
+    <record model="account.tax.template" id="tax_purchase">
+      <field name="chart_template_id" ref="l10_bg_chart_template"/>
+      <field name="sequence">2</field>
+      <field name="base_code_id" ref="tax_code_2_31"/>
+      <field name="base_sign">1.0</field>
+      <field name="tax_code_id" ref="tax_code_2_41"/>
+      <field name="tax_sign">1.00</field>
+      <field name="account_paid_id" ref="pcg_4531"/>
+      <field name="applicable_type">true</field>
+      <field name="account_collected_id" ref="pcg_4531"/>
+      <field name="python_compute_inv"># price_unit # product: product.product object or False  result = price_unit * 0.10</field>
+      <field name="type">percent</field>
+<!--
+      <field name="tax_credit_payable">taxcredit</field>
+-->
+      <field name="ref_base_code_id" ref="tax_code_2_31"/>
+      <field name="ref_base_sign">-1.0</field>
+      <field name="ref_tax_code_id" ref="tax_code_2_31"/>
+      <field name="ref_tax_sign">-1.00</field>
+      <field name="company_id" ref="base.main_company"/>
+      <field name="type_tax_use">purchase</field>
+      <field name="active" eval="True"/>
+      <field name="python_applicable"/>
+      <field name="name">ДДС на покупките пълен ДК 20.00%</field>
+      <field name="amount">0.2</field>
+      <field name="python_compute"># price_unit # or False # product: product.product object or None # partner: res.partner object or None  result = price_unit * 0.10</field>
+    </record>
+
+    <record model="account.tax.template" id="tax_nonec">
+      <field name="chart_template_id" ref="l10_bg_chart_template"/>
+      <field name="sequence">80</field>
+      <field name="child_depend" eval="True"/>
+      <field name="applicable_type">true</field>
+      <field name="python_compute_inv"># price_unit
+# product: product.product object or False
+
+result = price_unit * 0.10</field>
+      <field name="type">balance</field>
+<!--
+      <field name="type">separate</field>
+      <field name="tax_credit_payable">taxadvpay</field>
+      <field name="account_separate" eval="True"/>
+-->
+      <field name="company_id" ref="base.main_company"/>
+      <field name="type_tax_use">purchase</field>
+      <field name="active" eval="True"/>
+      <field name="python_applicable"/>
+      <field name="account_analytic_collected_id" eval="False"/>
+      <field name="name">Внос от държави извън ЕС</field>
+      <field name="amount">0.0</field>
+      <field name="python_compute"># price_unit
+# or False
+# product: product.product object or None
+# partner: res.partner object or None
+
+result = price_unit * 0.10</field>
+    </record>
+
+    <record model="account.tax.template" id="tax_nonec-0">
+      <field name="chart_template_id" ref="l10_bg_chart_template"/>
+      <field name="sequence">801</field>
+      <field name="include_base_amount" eval="True"/>
+      <field name="account_paid_id" ref="pcg_457"/>
+      <field name="account_collected_id" ref="pcg_457"/>
+      <field name="python_compute_inv"># price_unit
+# product: product.product object or False
+
+result = price_unit * 0.10</field>
+      <field name="type">percent</field>
+<!-- 
+      <field name="tax_parent_sign">1.0</field> 
+      <field name="tax_credit_payable">taxadvpay</field>
+      <field name="account_separate" eval="True"/>
+-->
+      <field name="company_id" ref="base.main_company"/>
+      <field name="type_tax_use">purchase</field>
+      <field name="python_applicable"/>
+      <field name="name">Митнически сборове начислени при внос</field>
+      <field name="amount">0.1</field>
+      <field name="python_compute"># price_unit
+# or False
+# product: product.product object or None
+# partner: res.partner object or None
+
+result = price_unit * 0.10</field>
+      <field name="parent_id" ref="tax_nonec"/>
+    </record>
+
+    <record model="account.tax.template" id="tax_nonec-1">
+      <field name="chart_template_id" ref="l10_bg_chart_template"/>
+      <field name="sequence">802</field>
+      <field name="base_code_id" ref="tax_code_2_31"/>
+      <field name="base_sign">1.0</field>
+      <field name="tax_code_id" ref="tax_code_2_41"/>
+      <field name="tax_sign">1.00</field>
+      <field name="account_paid_id" ref="pcg_4531"/>
+      <field name="account_collected_id" ref="pcg_4531"/>
+      <field name="python_compute_inv"># price_unit
+# product: product.product object or False
+
+result = price_unit * 0.10</field>
+      <field name="type">percent</field>
+<!--
+      <field name="tax_parent_sign">1.0</field>
+      <field name="tax_credit_payable">taxadvpay</field>
+      <field name="account_separate" eval="True"/>
+-->
+      <field name="ref_base_sign">-1.0</field>
+      <field name="company_id" ref="base.main_company"/>
+      <field name="type_tax_use">purchase</field>
+      <field name="python_applicable"/>
+      <field name="name">ДДС на покупките 20% начислен при внос</field>
+      <field name="amount">0.2</field>
+      <field name="python_compute"># price_unit
+# or False
+# product: product.product object or None
+# partner: res.partner object or None
+
+result = price_unit * 0.10</field>
+      <field name="parent_id" ref="tax_nonec"/>
+    </record>
+
+    <record model="account.tax.template" id="tax_nonec-2">
+      <field name="chart_template_id" ref="l10_bg_chart_template"/>
+      <field name="sequence">803</field>
+      <field name="base_sign">1.0</field>
+      <field name="account_paid_id" ref="pcg_499"/>
+      <field name="account_collected_id" ref="pcg_498"/>
+      <field name="python_compute_inv"># price_unit
+# product: product.product object or False
+
+result = price_unit * 0.10</field>
+      <field name="type">balance</field>
+<!--
+      <field name="tax_parent_sign">-1.0</field>
+      <field name="tax_credit_payable">taxbalance</field>
+      <field name="account_separate" eval="True"/>
+-->
+      <field name="ref_base_code_id" ref="tax_code_2_31"/>
+      <field name="ref_base_sign">-1.0</field>
+      <field name="ref_tax_code_id" ref="tax_code_2_31"/>
+      <field name="ref_tax_sign">-1.00</field>
+      <field name="company_id" ref="base.main_company"/>
+      <field name="type_tax_use">all</field>
+      <field name="python_applicable"/>
+      <field name="name">ДДС на продажбите 20% начислен при внос</field>
+      <field name="amount">0.0</field>
+      <field name="python_compute"># price_unit
+# or False
+# product: product.product object or None
+# partner: res.partner object or None
+
+result = price_unit * 0.10</field>
+      <field name="tax_sign">1.0</field>
+      <field name="parent_id" ref="tax_nonec"/>
+    </record>
+  </data>
+</openerp>
