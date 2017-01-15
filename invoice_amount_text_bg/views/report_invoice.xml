@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+ <data>
+  <template id="report_invoice_text" inherit_id="account.report_invoice_document">
+        <xpath expr="//table[@class='table table-condensed']/following-sibling::div[1]" position="after">
+                <p><strong >Verbally: </strong><span t-esc="o.amount_in_word"/></p>
+        </xpath>
+  </template>
+ </data>
+</openerp>
