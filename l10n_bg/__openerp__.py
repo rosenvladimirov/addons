@@ -39,6 +39,7 @@ Bulgarian accounting chart and localization.
         'base_iban',
         'account_chart',
         'l10n_multilang',
+        'report_qweb_element_page_visibility',
     ],
     "demo" : [],
     "data" : [
@@ -57,4 +58,3 @@ Bulgarian accounting chart and localization.
     "installable": True,
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-
