@@ -22,7 +22,7 @@
     'name': 'Multi Language for Base Fields',
     'version': '8.0.2.0.1',
     'author': 'Prodax Ltd., Vassil Toumbev',
-    'category': 'Custom',
+    'category': 'Multi lang fields/Bulgarian locales',
     'summary': 'Idea from Rosen Vladimirov',
     'website': 'http://www.openerp.bg',
     'data': [],
