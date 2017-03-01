@@ -113,7 +113,8 @@ def amount_to_text_bg(val, currency):
     ret = s.join((_convert_big_bg(abs(int(num[0]))), exlusion_bg[3], abs(int(num[0])) == 1 and units_names[0] or units_names[1], syllable, _convert_nn_bg(abs(int(num[1])), False), exlusion_bg[3], units_names[2]))
     return ret[0].upper()+ret[1:]
 
-add_amount_to_text_function('bg', amount_to_text_bg)
+def add_lang_bg():
+    add_amount_to_text_function('bg', amount_to_text_bg)
 
 if __name__=='__main__':
     from sys import argv

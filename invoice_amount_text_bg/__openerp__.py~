@@ -26,7 +26,7 @@
     'version': '8.0.3',
     'author': 'BENSIDHOUM Kheireddine Yacine, Prodax Ltd. - Odoo Bulgaria - Vassil Toumbev, Rosen Vladimirov',
     'website': 'http://www.openerp.bg',
-    'category': 'Accounting & Finance/Bulgarian locales',
+    'category': 'Bulgarian locales/Accounting & Finance',
     'depends': [
         'account',
     ],

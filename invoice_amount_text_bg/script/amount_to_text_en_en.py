@@ -33,5 +33,6 @@ def amount_to_text_en(number, currency):
 
     return ' '.join(filter(None, [start_word, units_name, (start_word or units_name) and (end_word or cents_name) and 'and', end_word, cents_name]))
 
-add_amount_to_text_function('en', amount_to_text_en)
+def add_lang_en():
+    add_amount_to_text_function('en_EN', amount_to_text_en)
 
