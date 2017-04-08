@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data noupdate="1">
+    <report
+        string="Customer Card Sheet"
+        id="action_customer_card_sheet"
+        model="res.partner"
+        report_type="glabels"
+        name="customers.glabels"
+    />
+    <record id="action_customer_card_sheet" model="ir.actions.report.xml">
+        <field name="glabels_template" type="base64" file="customer_card/customers.glabels"/>
+        <field name="csv_template" type="base64" file="customer_card/partner.csv"/>
+    </record>
+  </data>
+</openerp>

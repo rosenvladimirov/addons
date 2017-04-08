@@ -63,14 +63,14 @@ class ProductTemplate(models.Model):
             classification = template.margin_classification_id
             if classification:
                 multi = 1 + (classification.margin / 100)
-                temp_vat = template.taxes_id.compute_all(template.standard_price * multi, 1)['total_included']
+                temp_vat = template.taxes_id.compute_all(template.standard_price * multi, 1, inverce=False)['total_included']
                 temp_price = tools.float_round(
                     temp_vat,
                     precision_rounding=classification.price_round) +\
                     classification.price_surcharge
-                # _logger.info("New price with VAT %s:%s:%s:%s" % (multi,template.standard_price,temp_price,temp_vat))
+                _logger.info("New price with VAT %s:%s:%s:%s" % (multi,template.standard_price,temp_price,temp_vat))
             else:
-                temp_price = template.list_price
+                temp_price = template.taxes_id.compute_all(template.list_price, 1, inverce=False)['total_included']
             difference = (template.list_price - template.taxes_id.compute_all(temp_price, 1, inverce=True)['total_included'])
             if max(difference, -difference) < 10 ** -9:
                 difference = 0
@@ -88,3 +88,8 @@ class ProductTemplate(models.Model):
     def use_theoretical_price(self):
         for template in self:
             template.list_price = template.taxes_id.compute_all(template.theoretical_price, 1, inverce=True)['total_included']
+
+    @api.multi
+    def recalculate_theoretical_price(self):
+        for template in self:
+            template._compute_theoretical_multi()

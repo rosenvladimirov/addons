@@ -36,16 +36,9 @@ class ProductPricelist(models.Model):
         return query, query_arg
 
     @api.v7
-    def _price_rule_get_multi_ex_rule(self, cr, uid, rule, products, context=None):
-        mc_ids = {}
-        for p in products:
-            if (p.margin_classification_id.id):
-                mc_ids[p.margin_classification_id.id] = True
-        mc_ids = mc_ids.keys()
-        #_logger.info("Ex rule %s:%s" % (mc_ids, rule))
-        if not mc_ids:
-            return False
-        if (mc_ids[0] != rule.margin_classification_id.id):
+    def _price_rule_get_multi_ex_rule(self, cr, uid, rule, product, context=None):
+        #_logger.info("Ex rule %s:%s" % (product, rule))
+        if rule.margin_classification_id and product[0].margin_classification_id.id != rule.margin_classification_id.id:
             return True
         return False
 

@@ -111,6 +111,21 @@ class ProductMarginClassification(models.Model):
 
     # Custom Section
     @api.multi
+    def _recalculate_theoretical_price(self):
+        template_obj = self.env['product.template']
+        for classification in self:
+            templates = template_obj.search([
+                ('margin_classification_id', '=', classification.id)
+                ])
+            _logger.info("Show template %s" % templates)
+            #for template in template_obj.browse([templates]):
+            templates.recalculate_theoretical_price()
+
+    @api.multi
+    def recalculate_tp(self):
+        self._recalculate_theoretical_price()
+
+    @api.multi
     def _apply_theoretical_price(self, state_list):
         template_obj = self.env['product.template']
         for classification in self:

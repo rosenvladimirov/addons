@@ -1,0 +1,72 @@
+/******************************************************************************
+*    Point Of Sale - Pricelist for POS Odoo
+*    @author Rosen Vladimirov <vladimirov.rosen@gmail.com>
+*
+*    This program is free software: you can redistribute it and/or modify
+*    it under the terms of the GNU Affero General Public License as
+*    published by the Free Software Foundation, either version 3 of the
+*    License, or (at your option) any later version.
+*    This program is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*    GNU Affero General Public License for more details.
+*    You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*
+******************************************************************************/
+function pos_loyalty_bg_widgets(instance, module) {
+  module.LoyaltyButton = module.PosBaseWidget.extend({
+        template: 'LoyaltyButton',
+
+        renderElement: function() {
+            var self = this;
+            this._super();
+            this.$el.click(function(){
+                return this.pos.loyalty && this.pos.loyalty.rewards.length;
+            });
+    },
+  });
+
+  module.OrderWidget.include({
+    update_summary: function(){
+        this._super();
+
+        var order = this.pos.get_order('selectedOrder');
+
+        var $loypoints = $(this.el).find('.summary .loyalty-points');
+
+        if(this.pos.loyalty && order.get_client()){
+            var points_won      = order.get_won_points();
+            var points_spent    = order.get_spent_points();
+            var points_total    = order.get_new_total_points();
+            $loypoints.replaceWith($(QWeb.render('LoyaltyPoints',{
+                widget: this,
+                rounding: this.pos.loyalty.rounding,
+                points_won: points_won,
+                points_spent: points_spent,
+                points_total: points_total,
+            })));
+            $loypoints = $(this.el).find('.summary .loyalty-points');
+            $loypoints.removeClass('oe_hidden');
+
+            if(points_total < 0){
+                $loypoints.addClass('negative');
+            }else{
+                $loypoints.removeClass('negative');
+            }
+        }else{
+            $loypoints.empty();
+            $loypoints.addClass('oe_hidden');
+        }
+
+        if (this.pos.loyalty &&
+            order.get_client() &&
+            this.getParent().action_buttons &&
+            this.getParent().action_buttons.loyalty) {
+
+            var rewards = order.get_available_rewards();
+            this.getParent().action_buttons.loyalty.highlight(!!rewards.length);
+        }
+    },
+  });
+}

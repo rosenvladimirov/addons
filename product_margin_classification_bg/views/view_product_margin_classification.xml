@@ -27,6 +27,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <button name="recalculate_tp" type="object" string="Force recalculate"/>
                     <button name="apply_theoretical_price" type="object" string="Apply Theoretical Price"/>
                     <button name="apply_theoretical_price_cheap" type="object" string="Up to Theoretical Price"/>
                     <button name="apply_theoretical_price_expensive" type="object" string="Down to Theoretical Price"/>
