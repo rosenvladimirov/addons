@@ -97,6 +97,7 @@ Copyright, Author and Licence :
         'views/view.xml',
         'views/menu.xml',
         'views/res_config_view.xml',
+        'views/partner_view.xml',
     ],
     'installable': True,
 }

@@ -1,0 +1,25 @@
+<openerp>
+    <data>
+    <record id="action_compute_order_list_button" model="ir.actions.act_window">
+        <field name="res_model">computed.purchase.order</field>
+          <field name="view_type">form</field>
+          <field name="name">Compute Order</field>
+          <field name="view_mode">tree,form</field>
+          <field name="context">{'search_default_partner_id': active_id, 'default_partner_id': active_id}</field>
+        </record>
+        <record model="ir.ui.view" id="view_partner_form_compute_order">
+            <field name="name">Compute order</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+            <xpath expr="//div[@name='buttons']" position="inside">
+                <button class="oe_inline oe_stat_button" name="%(purchase_compute_order_bg.action_compute_order_list_button)d" type="action"
+                    icon="fa-truck"
+                    attrs="{'invisible': [('supplier', '=', False)]}"
+                    string="Compute order"
+                    help="Open The Compute order now"/>
+            </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
