@@ -1,0 +1,6 @@
+[submodule "hw_datecs/shtrihm-fr"]
+	path = hw_datecs/shtrihm-fr
+	url = ../../rosix-ru/shtrihm-fr.git
+[submodule "hw_datecs_bg/shtrihm-fr"]
+	path = hw_datecs_bg/shtrihm-fr
+	url = ../../rosix-ru/shtrihm-fr.git
