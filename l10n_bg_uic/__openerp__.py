@@ -16,6 +16,9 @@
         'views/res_partner_view.xml',
         'data/res_partner_category_id.xml',
     ],
+    'depends': [
+        'partner_identification_bg',
+    ],
     'author': 'Odoo Community Association (OCA), '
               'Rosen Vladimirov',
     'website': 'https://odoo-community.org/',
