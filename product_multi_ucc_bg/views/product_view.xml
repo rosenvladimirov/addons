@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="product_normal_form_view_multi_ucc" model="ir.ui.view">
+            <field name="name">product.normal.form.multi.ucc</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='default_code']" position="before">
+                    <field name="ucc_ids">
+                        <tree string="UCC/EAN128" editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                        </tree>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+        <record id="product_search_form_view_multi_ucc" model="ir.ui.view">
+            <field name="name">product.product.search.multi.ucc</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_search_form_view"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                   <field name="ucc" string="UCC/EAN128"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

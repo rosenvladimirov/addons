@@ -32,6 +32,7 @@ class sale_order_line(models.Model):
     @api.one
     @api.depends('product_id', 'product_uom_qty', 'price_subtotal', 'order_id.loyalty_program_id')
     def _loyalty_points(self):
+        _logger.info("Sale order lines %s" % self.order_id.loyalty_program_id)
         if self.order_id.loyalty_program_id:
             self.loyalty_points = self.order_id.loyalty_program_id.calculate_loyalty_points(self.product_id, self.product_uom_qty, self.price_subtotal)
     loyalty_points = fields.Integer(string='Loyalty Points', compute='_loyalty_points', store=True)
@@ -43,5 +44,6 @@ class sale_order(models.Model):
     @api.one
     @api.depends('order_line', 'order_line.product_id', 'order_line.product_uom_qty', 'order_line.price_subtotal')
     def _loyalty_points(self):
+        _logger.info("Sale order take %s" % self.order_line)
         self.loyalty_points = sum([l.loyalty_points for l in self.order_line])
     loyalty_points = fields.Integer(string='Loyalty Points', compute='_loyalty_points', store=True)

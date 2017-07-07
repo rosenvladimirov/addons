@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="pos_datecs_assets_backend"
+                  name="pos_datecs assets backend"
+                  inherit_id="point_of_sale.assets_backend">
+          <xpath expr="." position="inside">
+                <script src="/pos_datecs/static/src/js/models.js"
+                        type="text/javascript"></script>
+                <script src="/pos_datecs/static/src/js/widgets.js"
+                        type="text/javascript"></script>
+                <script src="/pos_datecs/static/src/js/main.js"
+                        type="text/javascript"></script>
+          </xpath>
+        </template>
+    </data>
+</openerp>

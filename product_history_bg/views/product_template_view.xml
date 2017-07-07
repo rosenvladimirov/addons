@@ -33,12 +33,10 @@
                 </page>
             </page>
             <field name="consumption_calculation_method" position="after">
-                <!-- <group name="ConsumptionHistory"> -->
                 <field name="number_of_periods" attrs="{'invisible': [('consumption_calculation_method','!=','history')]}"/>
                 <field name="total_consumption" attrs="{'invisible': [('consumption_calculation_method','!=','history')]}"/>
                 <field name="displayed_average_consumption" attrs="{'invisible': [('consumption_calculation_method','!=','history')]}"/>
                 <field name="display_range" attrs="{'invisible': [('consumption_calculation_method','!=','history')]}"/>
-                <!-- </group> -->
             </field>
         </field>
     </record>

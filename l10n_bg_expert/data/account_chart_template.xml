@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data noupdate="0">        
+        <!-- Chart template -->
+        <record id="l10_bg_chart_template" model="account.chart.template">
+            <field name="name">Bulgaria - Chart of Accounts</field>
+            <field name="account_root_id" ref="pcg_0"/>
+            <field name="tax_code_root_id" ref="vat_code_tax"/>
+            <field name="bank_account_view_id" ref="bg_pcg_cash"/>
+            <field name="property_account_receivable" ref="bg_pcg_recv"/> <!-- 411 -->
+            <field name="property_account_payable" ref="bg_pcg_pay"/> <!-- 401 -->
+            <field name="property_account_expense_categ" ref="bg_pcg_expense"/> <!-- 601 --> 
+            <field name="property_account_income_categ" ref="bg_pcg_sale"/> <!-- 701 -->
+            <field name="currency_id" ref="base.BGN"/>
+        </record>
+</data>
+</openerp>

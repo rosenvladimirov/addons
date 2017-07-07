@@ -11,7 +11,7 @@
                         <field name="default_consumption_calculation_method" widget="radio"/>
                         <field name="default_calculation_range" attrs="{'invisible': [('default_consumption_calculation_method','!=','moves')]}"/>
                         <field name="default_display_range"/>
-                        <field name="module_product_history"/>
+                        <field name="module_product_history_bg"/>
                     </group>
                 </xpath>
             </field>

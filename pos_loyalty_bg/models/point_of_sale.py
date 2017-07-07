@@ -45,9 +45,10 @@ class PosOrder(models.Model):
     _inherit = 'pos.order'
 
     @api.one
-    @api.depends('lines', 'lines.product_id', 'lines.qty', 'lines.price_subtotal')
+    @api.depends('lines', 'lines.product_id', 'lines.qty', 'lines.price_subtotal', 'lines.loyalty_points')
     def _loyalty_points(self):
-        self.loyalty_points = sum([l.loyalty_points for l in self.lines])
+        _logger.info("Get lines %s" % self)
+        self.loyalty_points_compute = sum([l.loyalty_points for l in self.lines])
     loyalty_points_compute = fields.Integer(string='Loyalty Points Computed', compute='_loyalty_points', store=False, help="The amount of Loyalty points the customer won or lost with this order")
     loyalty_points = fields.Integer(string='Loyalty Points', help="The amount of Loyalty points the customer won or lost with this order")
     loyalty_program_id = fields.Many2one(comodel_name='loyalty.program', string='Loyalty Program')
@@ -61,11 +62,26 @@ class PosOrder(models.Model):
 
     @api.model
     def create_from_ui(self, orders):
-        ids = super(PosOrder, self).create_from_ui(orders)
+        partner_id = -99
+        loyalty_points = 0
+        cr, uid = self.env.cr, self.env.uid
+        so_obj = self.pool.get('sale.order')
+        po_obj = self.pool.get('pos.order')
         for order in orders:
             _logger.info('orders: %s' % order)
+            if order['data']['partner_id'] and partner_id != order['data']['partner_id']:
+                partner_id = order['data']['partner_id']
+                # recalculate ponts
+                so_ids = so_obj.search(cr, uid, [('partner_id','=',partner_id)], self.env.context)
+                for so in so_obj.browse(cr, uid, so_ids, self.env.context):
+                    loyalty_points += so.loyalty_points
+                _logger.info("loaylty_points %s" % loyalty_points)
+                pos_ids = po_obj.search(cr, uid, [('partner_id', '=', partner_id)], self.env.context)
+                for po in po_obj.browse(cr, uid, pos_ids, self.env.context):
+                    loyalty_points += po.loyalty_points
+                _logger.info("loaylty_points %s" % loyalty_points)
+            partner = self.env['res.partner'].browse(partner_id)
             if order['data']['loyalty_points'] != 0 and order['data']['partner_id']:
-                partner = self.env['res.partner'].browse(order['data']['partner_id'])
-                loyalty_points = partner.sale_loyalty_points + partner.loyalty_points + order['data']['loyalty_points']
+                loyalty_points += order['data']['loyalty_points']
                 partner.write({'loyalty_points': loyalty_points})
-        return ids
+        return super(PosOrder, self).create_from_ui(orders)

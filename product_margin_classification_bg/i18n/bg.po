@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * product_margin_classification
+# * product_margin_classification_bg
 # 
 # Translators:
 # Kaloyan Naumov <kaloyan@lumnus.net>, 2016
@@ -19,156 +19,156 @@ msgstr ""
 "Language: bg\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. module: product_margin_classification
-#: view:product.template:product_margin_classification.view_product_template_form
+#. module: product_margin_classification_bg
+#: view:product.template:product_margin_classification_bg.view_product_template_form
 msgid "Apply Margin"
 msgstr "Приложи ценова разлика"
 
-#. module: product_margin_classification
-#: view:product.margin.classification:product_margin_classification.view_product_margin_classification_form
+#. module: product_margin_classification_bg
+#: view:product.margin.classification:product_margin_classification_bg.view_product_margin_classification_form
 msgid "Apply Theoretical Price"
 msgstr "Приложи теоретичната цена"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: selection:product.template,margin_state:0
 msgid "Cheaper"
 msgstr "Евтино"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: field:product.margin.classification,company_id:0
 msgid "Company"
 msgstr "Фирма"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: view:product.margin.classification:product_margin_classification.view_product_margin_classification_form
 msgid "Computation"
 msgstr "Преизчисление"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: selection:product.template,margin_state:0
 msgid "Correct Margin"
 msgstr "Коректна надценката"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: field:product.margin.classification,create_uid:0
 msgid "Created by"
 msgstr "Създадено от"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: field:product.margin.classification,create_date:0
 msgid "Created on"
 msgstr "Създадено на"
 
-#. module: product_margin_classification
-#: view:product.template:product_margin_classification.view_product_template_form
+#. module: product_margin_classification_bg
+#: view:product.template:product_margin_classification_bg.view_product_template_form
 msgid "Decrease the Sale Price down to Theoretical Price"
 msgstr "Намали продажната цена до теоретината"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: field:product.margin.classification,display_name:0
 msgid "Display Name"
 msgstr "Име за показване"
 
-#. module: product_margin_classification
-#: view:product.margin.classification:product_margin_classification.view_product_margin_classification_form
+#. module: product_margin_classification_bg
+#: view:product.margin.classification:product_margin_classification_bg.view_product_margin_classification_form
 msgid "Down to Theoretical Price"
 msgstr "Намали теоретичната цена"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: field:product.margin.classification,id:0
 msgid "ID"
 msgstr "ID"
 
-#. module: product_margin_classification
-#: view:product.template:product_margin_classification.view_product_template_form
+#. module: product_margin_classification_bg
+#: view:product.template:product_margin_classification_bg.view_product_template_form
 msgid "Increase the Sale Price up to Theoretical Price"
 msgstr "Увеличи продажната цена до теоретичната"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: field:product.margin.classification,__last_update:0
 msgid "Last Modified on"
 msgstr "Последно променено на"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: field:product.margin.classification,write_uid:0
 msgid "Last Updated by"
 msgstr "Последно обновено от"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: field:product.margin.classification,write_date:0
 msgid "Last Updated on"
 msgstr "Последно обновено на"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: field:product.margin.classification,margin:0
 msgid "Margin"
 msgstr "Ценова разлика(надценки)"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: field:product.template,margin_classification_id:0
 msgid "Margin Classification"
 msgstr "Класицикация на надценки"
 
-#. module: product_margin_classification
-#: model:ir.actions.act_window,name:product_margin_classification.action_product_margin_classification
-#: model:ir.ui.menu,name:product_margin_classification.menu_product_margin_classification
-#: view:product.template:product_margin_classification.view_product_template_search
+#. module: product_margin_classification_bg
+#: model:ir.actions.act_window,name:product_margin_classification_bg.action_product_margin_classification
+#: model:ir.ui.menu,name:product_margin_classification_bg.menu_product_margin_classification
+#: view:product.template:product_margin_classification_bg.view_product_template_search
 msgid "Margin Classifications"
 msgstr "Класификация на надценки"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: field:product.margin.classification,name:0
 msgid "Name"
 msgstr "Име"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: field:product.margin.classification,price_round:0
 msgid "Price Rounding"
 msgstr "Закръгление на цената"
 
-#. module: product_margin_classification
-#: code:addons/product_margin_classification/models/product_margin_classification.py:99
+#. module: product_margin_classification_bg
+#: code:addons/product_margin_classification_bg/models/product_margin_classification.py:99
 #, python-format
 msgid "Price Rounding can not be null."
 msgstr "Закръглението на цената не може да е нула."
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: field:product.margin.classification,price_surcharge:0
 msgid "Price Surcharge"
 msgstr "Цена надбавка"
 
-#. module: product_margin_classification
-#: model:ir.model,name:product_margin_classification.model_product_template
+#. module: product_margin_classification_bg
+#: model:ir.model,name:product_margin_classification_bg.model_product_template
 msgid "Product Template"
 msgstr "Шаблон на продукта"
 
-#. module: product_margin_classification
-#: view:product.margin.classification:product_margin_classification.view_product_margin_classification_form
+#. module: product_margin_classification_bg
+#: view:product.margin.classification:product_margin_classification_bg.view_product_margin_classification_form
 #: field:product.margin.classification,template_ids:0
 msgid "Products"
 msgstr "Продукти"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: field:product.margin.classification,template_cheap_qty:0
 msgid "Products Cheaper"
 msgstr "Продукта е по евтин"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: field:product.margin.classification,template_qty:0
 msgid "Products Quantity"
 msgstr "Количество продукти"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: field:product.margin.classification,template_expensive_qty:0
 msgid "Products Too Expensive"
 msgstr "Продукта е твърде скъп"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: field:product.margin.classification,template_different_price_qty:0
 msgid "Products With Different Price"
 msgstr "Продукти с разлики в цените спрямо теоретичните"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: help:product.margin.classification,price_round:0
 msgid ""
 "Sets the price so that it is a multiple of this value.\n"
@@ -179,7 +179,7 @@ msgstr ""
 "Закръгление след като се направи надценката и преди да се увеличи.\n"
 "За да имате цени които да изглеждат накрая така 9,99, установете закръгление 10, и увеличение -0.01"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: help:product.margin.classification,price_surcharge:0
 msgid ""
 "Specify the fixed amount to add or substract(if negative) to the amount "
@@ -188,33 +188,33 @@ msgstr ""
 "Специфична фиксирана стойност за да добавиш или извадиш(ако е отрицателно) от стойността"
 "пречислена с надценката."
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: field:product.template,theoretical_difference:0
 msgid "Theoretical Difference"
 msgstr "Теоретични разлики"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: field:product.template,theoretical_price:0
 msgid "Theoretical Price"
 msgstr "Теоретична цена"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: field:product.template,theoretical_price_vat:0
 msgid "Theoretical Price with VAT "
 msgstr "Теоретична цена без ДДС"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: field:product.template,margin_state:0
 msgid "Theoretical Price State"
 msgstr "Състояние на теоретичната цена"
 
-#. module: product_margin_classification
+#. module: product_margin_classification_bg
 #: selection:product.template,margin_state:0
 msgid "Too Expensive"
 msgstr "Твърде скъпо"
 
-#. module: product_margin_classification
-#: code:addons/product_margin_classification/models/product_template.py:53
+#. module: product_margin_classification_bg
+#: code:addons/product_margin_classification_bg/models/product_template.py:53
 #, python-format
 msgid ""
 "Unimplemented Feature\n"
@@ -223,12 +223,12 @@ msgstr ""
 "Невъзможно решение\n"
 "Днъкът %s не е коректно настроен за преизчисляване на цени с коефиценти за този продукт %s"
 
-#. module: product_margin_classification
-#: view:product.margin.classification:product_margin_classification.view_product_margin_classification_form
+#. module: product_margin_classification_bg
+#: view:product.margin.classification:product_margin_classification_bg.view_product_margin_classification_form
 msgid "Up to Theoretical Price"
 msgstr "Увеличи теоретичната цена"
 
-#. module: product_margin_classification
-#: view:product.margin.classification:product_margin_classification.view_product_margin_classification_form
+#. module: product_margin_classification_bg
+#: view:product.margin.classification:product_margin_classification_bg.view_product_margin_classification_form
 msgid "Use Theoretical Price"
 msgstr "Използвай теоретична цена"

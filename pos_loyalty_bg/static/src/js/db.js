@@ -10,6 +10,9 @@ function pos_loyalty_bg_db(instance, module) {
             this.loyalty.rules_by_category_id = {};
             this.loyalty.rewards = {};
             this.loyalty.rewards_by_id = {};
+            this.loyalty.product_by_reward_id = {};
+            this.loyalty.reward_ancestors = {};
+            this.loyalty.reward_all_product = {};
         },
         add_loyalty: function(loyalties){
             this.loyalty = loyalties[0] || {};
@@ -52,9 +55,64 @@ function pos_loyalty_bg_db(instance, module) {
         add_rewards: function(rewards) {
            this.loyalty.rewards = rewards || {};
            this.loyalty.rewards_by_id = {};
+           this.loyalty.product_by_reward_id = {};
+           this.loyalty.reward_ancestors = {};
+           this.loyalty.reward_all_product = {};
            for (var i = 0; i < rewards.length;i++) {
-                this.loyalty.rewards_by_id[rewards[i].id] = rewards[i];
+                var single_reward = rewards[i];
+                var product;
+                this.loyalty.rewards_by_id[single_reward.id] = single_reward;
+                if (!this.loyalty.product_by_reward_id[single_reward.id]){
+                    this.loyalty.product_by_reward_id[single_reward.id] = [];
+                }
+                if (!this.loyalty.reward_all_product['0']){
+                    this.loyalty.reward_all_product['0'] = [];
+                }
+                if (single_reward.type === 'discount'){
+                    this.loyalty.product_by_reward_id[single_reward.id].push(single_reward.discount_product_id[0]);
+                    this.loyalty.reward_all_product['0'].push(single_reward.discount_product_id[0]);
+                } else if (single_reward.type === 'gift'){
+                    this.loyalty.product_by_reward_id[single_reward.id].push(single_reward.gift_product_id[0]);
+                    this.loyalty.reward_all_product['0'].push(single_reward.gift_product_id[0]);
+                } else if (single_reward.type === 'resale') {
+                    this.loyalty.product_by_reward_id[single_reward.id].push(single_reward.point_product_id[0]);
+                    this.loyalty.reward_all_product['0'].push(single_reward.point_product_id[0]);
+                }
+                this.loyalty.reward_ancestors[single_reward.id] = [single_reward.id];
            }
+           this.loyalty.reward_all_product['0'] = this.loyalty.reward_all_product['0'].sort().filter(function(value, index, array) {
+                                                return (index === 0) || (value !== array[index-1]);
+                                                });
+        },
+        get_reward_by_id: function(id){
+            if (id <= this.loyalty.rewards_by_id.light){
+                return this.loyalty.rewards_by_id[id];
+            } else {
+                return [];
+            }
+        },
+        get_product_by_reward: function(reward_id) {
+            var product_ids  = this.loyalty.product_by_reward_id[reward_id];
+            var list = [];
+            if (product_ids) {
+                for (var i = 0, len = Math.min(product_ids.length, this.limit); i < len; i++) {
+                    list.push(this.product_by_id[product_ids[i]]);
+                }
+            }
+            return list;
+        },
+        get_product_by_allreward: function() {
+            var product_ids  = this.loyalty.reward_all_product['0'];
+            var list = [];
+            if (product_ids) {
+                for (var i = 0, len = Math.min(product_ids.length, this.limit); i < len; i++) {
+                    list.push(this.product_by_id[product_ids[i]]);
+                }
+            }
+            return list;
+        },
+        get_reward_ancestors_ids: function(reward_id){
+            return this.loyalty.reward_ancestors[reward_id] || [];
         },
     })
 

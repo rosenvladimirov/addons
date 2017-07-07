@@ -18,6 +18,6 @@ openerp.pos_loyalty_bg = function(instance) {
     var module = instance.point_of_sale;
     pos_loyalty_bg_db(instance, module);
     pos_loyalty_bg_models(instance, module);
-    //pos_loyalty_bg_screens(instance, module);
+    pos_loyalty_bg_screens(instance, module);
     pos_loyalty_bg_widgets(instance, module);
 };

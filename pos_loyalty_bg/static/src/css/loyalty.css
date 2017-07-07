@@ -1,3 +1,9 @@
+.screen .crearfix-info{
+    position: absolute;
+    left: 0px; top: 0px; right: 0px;
+    height: 64px;
+    text-align: center;
+}
 
 .pos .order .summary .loyalty-points{
     margin-left: 20px;

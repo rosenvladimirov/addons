@@ -10,16 +10,26 @@
             <field name="name">computed.purchase.order.form</field>
             <field name="model">computed.purchase.order</field>
             <field name="arch" type="xml">
-                <form name="Computed Purchase Order" version="7.0">
+                <form>
+                    <header>
+                        <button name="make_order" states="draft" string="Make Purchase Order" type="object" class="oe_highlight"/>
+                        <button name="%(action_view_update_products)d" string="Update Products" type="action" class="oe_highlight" attrs="{'invisible':[('products_updated','=',False)]}"/>
+                        <button name="compute_active_product_stock" 
+                                type="object"
+                                string="Get products and stocks" 
+                                help="Fetch all active products sold by selected supplier and calculate the available quantities. It ignores inactive products and products in state 'obsolete' or 'end'" 
+                                states="draft"/>
+                        <button name="compute_purchase_quantities" 
+                                type="object"
+                                string="Compute Purchase Quantities" 
+                                help="Compute the optimal purchase quantities of selected products according to the objective." 
+                                states="draft"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done,canceled" statusbar_colors='{"canceled":"red","done":"blue"}' readonly="1"/>
+                    </header>
                     <sheet>
-                        <header>
-                            <button name="make_order" states="draft" string="Make Purchase Order" type="object" class="oe_highlight"/>
-                            <button name="%(action_view_update_products)d" string="Update Products" type="action" class="oe_highlight" attrs="{'invisible':[('products_updated','=',False)]}"/>
-                            <field name="state" widget="statusbar" statusbar_visible="draft,done,canceled" statusbar_colors='{"canceled":"red","done":"blue"}' readonly="1"/>
-                        </header>
                         <group colspan="8" col="4">
                             <h1>
-                                <field name="name" class="oe_inline" nolabel="1"/>
+                            <field name="name" class="oe_inline" nolabel="1"/>
                             </h1>
                         </group>
                         <group col="7">
@@ -37,20 +47,10 @@
                         <group states="draft" col="8">
                             <group string="Get Products" colspan="3">
                                 <field name="compute_pending_quantity" />
-                                <button name="compute_active_product_stock" 
-                                    type="object"
-                                    string="Get products and stocks" 
-                                    help="Fetch all active products sold by selected supplier and calculate the available quantities. It ignores inactive products and products in state 'obsolete' or 'end'" 
-                                    states="draft"/>
                             </group>
                             <group string="Compute Order" colspan="3" col="3">
                                 <field name="purchase_target"/>
                                 <field name="target_type" nolabel="1"/>
-                                <button name="compute_purchase_quantities" 
-                                    type="object"
-                                    string="Compute Purchase Quantities" 
-                                    help="Compute the optimal purchase quantities of selected products according to the objective." 
-                                    states="draft"/>
                             </group>
                         </group>
                         <group string="Result" col="6">

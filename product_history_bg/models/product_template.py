@@ -23,7 +23,6 @@
 
 from openerp import models, fields, api
 
-
 HISTORY_RANGE = [
     ('days', 'Days'),
     ('weeks', 'Week'),
@@ -41,11 +40,9 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     def _get_consumption_calculation_method(self):
-        selection = super(ProductTemplate, self).\
-            _get_consumption_calculation_method()
+        selection = super(ProductTemplate, self)._get_consumption_calculation_method()
         selection.append(
-            ('history', 'History (calculate consumption based on the Product\
-            History)'),)
+            ('history', 'History (calculate consumption based on the Product History)'),)
         return selection
 
 # Columns section

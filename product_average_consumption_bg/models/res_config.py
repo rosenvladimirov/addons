@@ -29,18 +29,18 @@ class PurchaseConfigSettings(models.TransientModel):
         1 -> Average Consumption per days
         7 -> Average Consumption per week
         30 -> Average Consumption per month""")
-    module_product_history = fields.Boolean(
+    module_product_history_bg = fields.Boolean(
         "View product History",
         help="This will install product_history module")
 
     @api.onchange('default_consumption_calculation_method')
     def _onchange_default_consumption_calculation_method(self):
         if self.default_consumption_calculation_method == 'history':
-            self.module_product_history = True
+            self.module_product_history_bg = True
 
-    @api.onchange('module_product_history')
-    def _onchange_module_product_history(self):
-        if not self.module_product_history:
+    @api.onchange('module_product_history_bg')
+    def _onchange_module_product_history_bg(self):
+        if not self.module_product_history_bg:
             self.default_consumption_calculation_method = 'moves'
 
     @api.model

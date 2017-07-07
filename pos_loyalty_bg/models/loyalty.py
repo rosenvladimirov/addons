@@ -95,6 +95,22 @@ class loyalty_reward(models.Model):
     discount_product_id = fields.Many2one(string="Discount Product", comodel_name="product.product", help="The product used to apply discounts")
     discount = fields.Float(string="Discount", help="The discount percentage")
     point_product_id = fields.Many2one(string="Point Product", comodel_name="product.product", help="The product that represents a point that is sold by the customer")
+    image = fields.Binary(help='Show Image Category in Form View')
+    image_medium = fields.Binary(help='Show image category button in POS',
+                                 compute="_get_image",
+                                 inverse="_set_image",
+                                 store=True)
+
+    @api.multi
+    def _get_image(self):
+        return dict(
+            (rec.id, tools.image_get_resized_images(rec.image)) for rec in
+            self)
+
+    @api.one
+    def _set_image(self):
+        return self.write(
+            {'image': tools.image_resize_image_big(self.image_medium)})
 
     @api.multi
     @api.constrains("type", "gift_product_id")

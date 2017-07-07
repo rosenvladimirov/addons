@@ -1,0 +1,1558 @@
+<?xml version="1.0" ?>
+<openerp>
+        <data noupdate="0">
+                <!-- Account Templates -->
+                <record id="pcg_0" model="account.account.template">
+                        <field name="name">Пълен сметкоплан - моята фирма</field>
+                        <field name="code">0</field>
+                        <field name="type">view</field>
+                        <field name="user_type" ref="account.data_account_type_view"/>
+                </record>
+                <record id="pcg_1" model="account.account.template">
+                        <field name="code">1</field>
+                        <field name="name">СМЕТКИ ЗА КАПИТАЛ И ЗАЕМИ</field>
+                        <field name="user_type" ref="account.account_type_liability_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_0"/>
+                </record>
+                <record id="pcg_10" model="account.account.template">
+                        <field name="code">10</field>
+                        <field name="name">Капитал</field>
+                        <field name="user_type" ref="account.account_type_liability_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_1"/>
+                </record>
+                <record id="pcg_101" model="account.account.template">
+                        <field name="code">101</field>
+                        <field name="name">Основен капитал, изискващ регистрация</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_10"/>
+                </record>
+                <!-- Предприятия с нестопанска дейност
+                <record id="pcg_104" model="account.account.template">
+                        <field name="code">104</field>
+                        <field name="name">Капитал на предприятия с нестопанска дейност</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_10"/>
+                </record>
+                -->
+                <record id="pcg_12" model="account.account.template">
+                        <field name="code">12</field>
+                        <field name="name">Финансови Резултати</field>
+                        <field name="user_type" ref="account.account_type_liability_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_1"/>
+                </record>
+                <record id="pcg_121" model="account.account.template">
+                        <field name="code">121</field>
+                        <field name="name">Непокрита загуба от минали години</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_12"/>
+                </record>
+                <record id="pcg_122" model="account.account.template">
+                        <field name="code">122</field>
+                        <field name="name">Неразпределена печалба от минали години</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_12"/>
+                </record>
+                <record id="pcg_123" model="account.account.template">
+                        <field name="code">123</field>
+                        <field name="name">Печалби и загуби от текущата година</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_12"/>
+                </record>
+                <record id="pcg_15" model="account.account.template">
+                        <field name="code">15</field>
+                        <field name="name">Получени Заеми</field>
+                        <field name="user_type" ref="account.account_type_liability_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_1"/>
+                </record>
+                <record id="pcg_151" model="account.account.template">
+                        <field name="code">151</field>
+                        <field name="name">Получени краткосрочни заеми</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_15"/>
+                </record>
+                <record id="pcg_152" model="account.account.template">
+                        <field name="code">152</field>
+                        <field name="name">Получени дългосрочни заеми</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_15"/>
+                </record>
+                <record id="pcg_153" model="account.account.template">
+                        <field name="code">153</field>
+                        <field name="name">Кредитни карти</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_15"/>
+                </record>
+                <record id="pcg_154" model="account.account.template">
+                        <field name="code">154</field>
+                        <field name="name">Дългови инструменти</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_15"/>
+                </record>
+                <record id="pcg_159" model="account.account.template">
+                        <field name="code">159</field>
+                        <field name="name">Други заеми и дългове</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_15"/>
+                </record>
+                <record id="pcg_2" model="account.account.template">
+                        <field name="code">2</field>
+                        <field name="name">СМЕТКИ ЗА ДЪЛГОТРАЙНИ АКТИВИ</field>
+                        <field name="user_type" ref="account.account_type_asset_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_0"/>
+                </record>
+                <record id="pcg_20" model="account.account.template">
+                        <field name="code">20</field>
+                        <field name="name">Дълготрайни Материални Активи</field>
+                        <field name="user_type" ref="account.account_type_asset_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_2"/>
+                </record>
+                <record id="pcg_201" model="account.account.template">
+                        <field name="code">201</field>
+                        <field name="name">Земи (Терени)</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_20"/>
+                </record>
+                <record id="pcg_202" model="account.account.template">
+                        <field name="code">202</field>
+                        <field name="name">Сгради и конструкции</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_20"/>
+                </record>
+                <record id="pcg_203" model="account.account.template">
+                        <field name="code">203</field>
+                        <field name="name">Компютърна техника</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_20"/>
+                </record>
+                <record id="pcg_204" model="account.account.template">
+                        <field name="code">204</field>
+                        <field name="name">Съоръжения</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_20"/>
+                </record>
+                <record id="pcg_205" model="account.account.template">
+                        <field name="code">205</field>
+                        <field name="name">Машини и оборудване</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_20"/>
+                </record>
+                <record id="pcg_206" model="account.account.template">
+                        <field name="code">206</field>
+                        <field name="name">Транспортни средства</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_20"/>
+                </record>
+                <record id="pcg_207" model="account.account.template">
+                        <field name="code">207</field>
+                        <field name="name">Офис обзавеждане</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_20"/>
+                </record>
+                <record id="pcg_209" model="account.account.template">
+                        <field name="code">209</field>
+                        <field name="name">Други дълготрайни материални активи</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_20"/>
+                </record>
+                <record id="pcg_21" model="account.account.template">
+                        <field name="code">21</field>
+                        <field name="name">Дълготрайни Нематериални Активи</field>
+                        <field name="user_type" ref="account.account_type_asset_view1"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_2"/>
+                </record>
+                <record id="pcg_211" model="account.account.template">
+                        <field name="code">211</field>
+                        <field name="name">Продукти от развойна дейност</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_21"/>
+                </record>
+                <record id="pcg_212" model="account.account.template">
+                        <field name="code">212</field>
+                        <field name="name">Програмни продукти</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_21"/>
+                </record>
+                <record id="pcg_213" model="account.account.template">
+                        <field name="code">213</field>
+                        <field name="name">Права върху интелектуална собственост</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_21"/>
+                </record>
+                <record id="pcg_214" model="account.account.template">
+                        <field name="code">214</field>
+                        <field name="name">Права върху индустриална собственост</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_21"/>
+                </record>
+                <record id="pcg_219" model="account.account.template">
+                        <field name="code">219</field>
+                        <field name="name">Други дълготрайни нематериални активи</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_21"/>
+                </record>
+                <record id="pcg_22" model="account.account.template">
+                        <field name="code">22</field>
+                        <field name="name">Дългосрочни Финансови Активи</field>
+                        <field name="user_type" ref="account.account_type_asset_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_2"/>
+                </record>
+                <record id="pcg_221" model="account.account.template">
+                        <field name="code">221</field>
+                        <field name="name">Инвестиции в дъщерни предприятия</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_22"/>
+                </record>
+                <record id="pcg_222" model="account.account.template">
+                        <field name="code">222</field>
+                        <field name="name">Инвестиции в асоциирани предприятия</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_22"/>
+                </record>
+                <record id="pcg_223" model="account.account.template">
+                        <field name="code">223</field>
+                        <field name="name">Инвестиции в смесени предприятия</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_22"/>
+                </record>
+                <record id="pcg_224" model="account.account.template">
+                        <field name="code">224</field>
+                        <field name="name">Инвестиции в имоти (Инвестиционни имоти)</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_22"/>
+                </record>
+                <record id="pcg_225" model="account.account.template">
+                        <field name="code">225</field>
+                        <field name="name">Инвестиции във финансови активи, държани до настъпване на падеж</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_22"/>
+                </record>
+                <record id="pcg_226" model="account.account.template">
+                        <field name="code">226</field>
+                        <field name="name">Инвестиции във финансови активи, отчитани по справедлива стойност в печалбата или загубата</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_22"/>
+                </record>
+                <record id="pcg_227" model="account.account.template">
+                        <field name="code">227</field>
+                        <field name="name">Предоставени дългосрочни заеми и вземания</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_22"/>
+                </record>
+                <record id="pcg_228" model="account.account.template">
+                        <field name="code">228</field>
+                        <field name="name">Инвестиции във финансови активи на разположение за продажба</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_22"/>
+                </record>
+                <record id="pcg_229" model="account.account.template">
+                        <field name="code">229</field>
+                        <field name="name">Инвестиции в други дългосрочни финансови активи</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_22"/>
+                </record>
+                <record id="pcg_23" model="account.account.template">
+                        <field name="code">23</field>
+                        <field name="name">Търговска Репутация</field>
+                        <field name="user_type" ref="account.data_account_type_view"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_2"/>
+                </record>
+                <record id="pcg_231" model="account.account.template">
+                        <field name="code">231</field>
+                        <field name="name">Положителна търговска репутация</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_23"/>
+                </record>
+                <record id="pcg_232" model="account.account.template">
+                        <field name="code">232</field>
+                        <field name="name">Отрицателна търговска репутация</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_23"/>
+                </record>
+                <record id="pcg_24" model="account.account.template">
+                        <field name="code">24</field>
+                        <field name="name">Амортизации</field>
+                        <field name="user_type" ref="account.account_type_liability_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_2"/>
+                </record>
+                <record id="pcg_2412" model="account.account.template">
+                        <field name="code">2412</field>
+                        <field name="name">(Натрупана) Амортизация на сгради и конструкции</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_24"/>
+                </record>
+                <record id="pcg_2413" model="account.account.template">
+                        <field name="code">2413</field>
+                        <field name="name">(Натрупана) Амортизация на компютърна техника</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_24"/>
+                </record>
+                <record id="pcg_2414" model="account.account.template">
+                        <field name="code">2414</field>
+                        <field name="name">(Натрупана) Амортизация на съоръжения</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_24"/>
+                </record>
+                <record id="pcg_2415" model="account.account.template">
+                        <field name="code">2415</field>
+                        <field name="name">(Натрупана) Амортизация на машини и оборудване</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_24"/>
+                </record>
+                <record id="pcg_2416" model="account.account.template">
+                        <field name="code">2416</field>
+                        <field name="name">(Натрупана) Амортизация на транспортни средства</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_24"/>
+                </record>
+                <record id="pcg_2417" model="account.account.template">
+                        <field name="code">2417</field>
+                        <field name="name">(Натрупана) Амортизация на офис обзавеждане</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_24"/>
+                </record>
+                <record id="pcg_2419" model="account.account.template">
+                        <field name="code">2419</field>
+                        <field name="name">(Натрупана) Амортизация на други дълготрайни материални активи</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_24"/>
+                </record>
+                <record id="pcg_2421" model="account.account.template">
+                        <field name="code">2421</field>
+                        <field name="name">(Натрупана) Амортизация на продукти от развойна дейност</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_24"/>
+                </record>
+                <record id="pcg_2422" model="account.account.template">
+                        <field name="code">2422</field>
+                        <field name="name">(Натрупана) Амортизация на програмни продукти</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_24"/>
+                </record>
+                <record id="pcg_2429" model="account.account.template">
+                        <field name="code">2429</field>
+                        <field name="name">(Натрупана) Амортизация на други дълготрайни нематериални активи</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_24"/>
+                </record>
+                <record id="pcg_2431" model="account.account.template">
+                        <field name="code">2431</field>
+                        <field name="name">(Натрупана) Амортизация на инвестиции в имоти (Инвестиционни имоти)</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_24"/>
+                </record>
+                <!-- Предприятия със селскостопанска дейност
+                <record id="pcg_2432" model="account.account.template">
+                        <field name="code">2432</field>
+                        <field name="name">(Натрупана) Амортизация на биологични активи</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_24"/>
+                </record>
+                -->
+                <record id="pcg_2433" model="account.account.template">
+                        <field name="code">2433</field>
+                        <field name="name">(Натрупана) Амортизация на положителна репутация</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_24"/>
+                </record>
+                <record id="pcg_25" model="account.account.template">
+                        <field name="code">25</field>
+                        <field name="name">Корекции при обезценка</field>
+                        <field name="user_type" ref="account.account_type_liability_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_2"/>
+                </record>
+                <record id="pcg_251" model="account.account.template">
+                        <field name="code">251</field>
+                        <field name="name">Корекция при обезценка на вземания</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_24"/>
+                </record>
+                <record id="pcg_252" model="account.account.template">
+                        <field name="code">252</field>
+                        <field name="name">Корекция при обезценка на други активи</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_24"/>
+                </record>
+                <!-- Предприятия със селскостопанска дейност
+                <record id="pcg_27" model="account.account.template">
+                        <field name="code">27</field>
+                        <field name="name">Дълготрайни Биологични Активи</field>
+                        <field name="user_type" ref="account.account_type_asset_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_2"/>
+                </record>
+                <record id="pcg_271" model="account.account.template">
+                        <field name="code">271</field>
+                        <field name="name">Гори</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_27"/>
+                </record>
+                <record id="pcg_272" model="account.account.template">
+                        <field name="code">272</field>
+                        <field name="name">Трайни насаждения – плододаващи</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_27"/>
+                </record>
+                <record id="pcg_273" model="account.account.template">
+                        <field name="code">273</field>
+                        <field name="name">Трайни насаждения – неплододаващи</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_27"/>
+                </record>
+                <record id="pcg_274" model="account.account.template">
+                        <field name="code">274</field>
+                        <field name="name">Животни в основни стада</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_27"/>
+                </record>
+                <record id="pcg_279" model="account.account.template">
+                        <field name="code">279</field>
+                        <field name="name">Други дълготрайни биологични активи</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_27"/>
+                </record>
+                -->
+                <record id="pcg_3" model="account.account.template">
+                        <field name="code">3</field>
+                        <field name="name">СМЕТКИ ЗА СТОКОВО МАТЕРИАЛНИ ЗАПАСИ</field>
+                        <field name="user_type" ref="account.account_type_asset_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_0"/>
+                </record>
+                <record id="pcg_30" model="account.account.template">
+                        <field name="code">30</field>
+                        <field name="name">Суровини/Материали, Продукция и Стоки</field>
+                        <field name="user_type" ref="account.account_type_asset_view1"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_3"/>
+                </record>
+                <record id="pcg_301" model="account.account.template">
+                        <field name="code">301</field>
+                        <field name="name">Доставки</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_30"/>
+                </record>
+                <record id="pcg_302" model="account.account.template">
+                        <field name="code">302</field>
+                        <field name="name">Суровини/Материали</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_30"/>
+                </record>
+                <record id="pcg_303" model="account.account.template">
+                        <field name="code">303</field>
+                        <field name="name">Продукти</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_30"/>
+                </record>
+                <record id="pcg_304" model="account.account.template">
+                        <field name="code">304</field>
+                        <field name="name">Стоки</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_30"/>
+                </record>
+                <record id="pcg_4" model="account.account.template">
+                        <field name="code">4</field>
+                        <field name="name">СМЕТКИ ЗА РАЗЧЕТИ</field>
+                        <field name="user_type" ref="account.account_type_asset_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_0"/>
+                </record>
+                <record id="pcg_40" model="account.account.template">
+                        <field name="code">40</field>
+                        <field name="name">Доставчици и Свързани с Тях Сметки</field>
+                        <field name="user_type" ref="account.account_type_liability_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_4"/>
+                </record>
+                <record id="bg_pcg_pay" model="account.account.template">
+                        <field name="code">401</field>
+                        <field name="name">Задължения към доставчици</field>
+                        <field name="user_type" ref="account.data_account_type_payable"/>
+                        <field name="type">payable</field>
+                        <field name="parent_id" ref="pcg_40"/>
+                        <field eval="1" name="reconcile"/>
+                </record>
+                <record id="pcg_402" model="account.account.template">
+                        <field name="code">402</field>
+                        <field name="name">Вземания от доставчици по аванси</field>
+                        <field name="user_type" ref="account.data_account_type_receivable"/>
+                        <field name="type">receivable</field>
+                        <field name="parent_id" ref="pcg_40"/>
+                        <field eval="1" name="reconcile"/>
+                </record>
+                <record id="pcg_403" model="account.account.template">
+                        <field name="code">403</field>
+                        <field name="name">Задължения към доставчици по търговски кредити</field>
+                        <field name="user_type" ref="account.data_account_type_payable"/>
+                        <field name="type">payable</field>
+                        <field name="parent_id" ref="pcg_40"/>
+                        <field eval="1" name="reconcile"/>
+                </record>
+                <record id="pcg_404" model="account.account.template">
+                        <field name="code">404</field>
+                        <field name="name">Задължения към доставчици по доставки при определени условия</field>
+                        <field name="user_type" ref="account.data_account_type_payable"/>
+                        <field name="type">payable</field>
+                        <field name="parent_id" ref="pcg_40"/>
+                        <field eval="1" name="reconcile"/>
+                </record>
+                <record id="pcg_405" model="account.account.template">
+                        <field name="code">405</field>
+                        <field name="name">Задължения към доставчици свързани лица</field>
+                        <field name="user_type" ref="account.data_account_type_payable"/>
+                        <field name="type">payable</field>
+                        <field name="parent_id" ref="pcg_40"/>
+                        <field eval="1" name="reconcile"/>
+                </record>
+                <record id="pcg_409" model="account.account.template">
+                        <field name="code">409</field>
+                        <field name="name">Други задължения към доставчици</field>
+                        <field name="user_type" ref="account.data_account_type_payable"/>
+                        <field name="type">payable</field>
+                        <field name="parent_id" ref="pcg_40"/>
+                        <field eval="1" name="reconcile"/>
+                </record>
+                <record id="pcg_41" model="account.account.template">
+                        <field name="code">41</field>
+                        <field name="name">Клиенти и Свързани с Тях Сметки</field>
+                        <field name="user_type" ref="account.account_type_asset_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_4"/>
+                </record>
+                <record id="bg_pcg_recv" model="account.account.template">
+                        <field name="code">411</field>
+                        <field name="name">Вземания от клиенти</field>
+                        <field name="user_type" ref="account.data_account_type_receivable"/>
+                        <field name="type">receivable</field>
+                        <field name="parent_id" ref="pcg_41"/>
+                        <field eval="1" name="reconcile"/>
+                </record>
+                <record id="pcg_412" model="account.account.template">
+                        <field name="code">412</field>
+                        <field name="name">Задължения към клиенти по аванси</field>
+                        <field name="user_type" ref="account.data_account_type_payable"/>
+                        <field name="type">payable</field>
+                        <field name="parent_id" ref="pcg_41"/>
+                        <field eval="1" name="reconcile"/>
+                </record>
+                <record id="pcg_413" model="account.account.template">
+                        <field name="code">413</field>
+                        <field name="name">Вземания от клиенти по търговски кредити</field>
+                        <field name="user_type" ref="account.data_account_type_receivable"/>
+                        <field name="type">receivable</field>
+                        <field name="parent_id" ref="pcg_41"/>
+                        <field eval="1" name="reconcile"/>
+                </record>
+                <record id="pcg_414" model="account.account.template">
+                        <field name="code">414</field>
+                        <field name="name">Вземания от клиенти по продажби при определени условия</field>
+                        <field name="user_type" ref="account.data_account_type_receivable"/>
+                        <field name="type">receivable</field>
+                        <field name="parent_id" ref="pcg_41"/>
+                        <field eval="1" name="reconcile"/>
+                </record>
+                <record id="pcg_415" model="account.account.template">
+                        <field name="code">415</field>
+                        <field name="name">Вземания от клиенти свързани лица</field>
+                        <field name="user_type" ref="account.data_account_type_receivable"/>
+                        <field name="type">receivable</field>
+                        <field name="parent_id" ref="pcg_41"/>
+                        <field eval="1" name="reconcile"/>
+                </record>
+                <record id="pcg_419" model="account.account.template">
+                        <field name="code">419</field>
+                        <field name="name">Други вземания от клиенти</field>
+                        <field name="user_type" ref="account.data_account_type_receivable"/>
+                        <field name="type">receivable</field>
+                        <field name="parent_id" ref="pcg_41"/>
+                        <field eval="1" name="reconcile"/>
+                </record>
+                <record id="pcg_42" model="account.account.template">
+                        <field name="code">42</field>
+                        <field name="name">Персонал и Съдружници</field>
+                        <field name="user_type" ref="account.account_type_liability_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_4"/>
+                </record>
+                <record id="pcg_421" model="account.account.template">
+                        <field name="code">421</field>
+                        <field name="name">Задължения към персонал</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_42"/>
+                </record>
+                <record id="pcg_422" model="account.account.template">
+                        <field name="code">422</field>
+                        <field name="name">Разчети с подотчетни лица</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_42"/>
+                </record>
+                <record id="pcg_425" model="account.account.template">
+                        <field name="code">425</field>
+                        <field name="name">Задължения за съучастия</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_42"/>
+                </record>
+                <record id="pcg_44" model="account.account.template">
+                        <field name="code">44</field>
+                        <field name="name">Вземания по Липси, Начети и Съдебни Спорове</field>
+                        <field name="user_type" ref="account.account_type_asset_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_4"/>
+                </record>
+                <record id="pcg_441" model="account.account.template">
+                        <field name="code">441</field>
+                        <field name="name">Вземания по рекламации</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_44"/>
+                </record>
+                <record id="pcg_442" model="account.account.template">
+                        <field name="code">442</field>
+                        <field name="name">Вземания по липси и начети</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_44"/>
+                </record>
+                <record id="pcg_443" model="account.account.template">
+                        <field name="code">443</field>
+                        <field name="name">Ценови разлики по липси и начети</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_44"/>
+                </record>
+                <record id="pcg_444" model="account.account.template">
+                        <field name="code">444</field>
+                        <field name="name">Вземания по съдебни спорове</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_44"/>
+                </record>
+                <record id="pcg_445" model="account.account.template">
+                        <field name="code">445</field>
+                        <field name="name">Присъдени вземания</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_44"/>
+                </record>
+                <record id="pcg_45" model="account.account.template">
+                        <field name="code">45</field>
+                        <field name="name">Разчети с Бюджета и Ведомствата</field>
+                        <field name="user_type" ref="account.account_type_asset_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_4"/>
+                </record>
+                <record id="pcg_4521" model="account.account.template">
+                        <field name="code">4521</field>
+                        <field name="name">Разчети за Годишен корпоративен данък</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_45"/>
+                </record>
+                <record id="pcg_4522" model="account.account.template">
+                        <field name="code">4522</field>
+                        <field name="name">Разчети за Авансов корпоративен данък</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_45"/>
+                </record>
+                <record id="pcg_453" model="account.account.template">
+                        <field name="code">453</field>
+                        <field name="name">Данък върху добавената стойност</field>
+                        <field name="user_type" ref="account.account_type_liability_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_45"/>
+                </record>
+                <record id="pcg_4531" model="account.account.template">
+                        <field name="code">4531</field>
+                        <field name="name">Начислен данък върху добавената стойност за покупките</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_453"/>
+                </record>
+                <record id="pcg_4532" model="account.account.template">
+                        <field name="code">4532</field>
+                        <field name="name">Начислен данък върху добавената стойност за продажбите</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_453"/>
+                </record>
+                <record id="pcg_4536" model="account.account.template">
+                        <field name="code">4536</field>
+                        <field name="name">Отложен данъчен кредит</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_453"/>
+                </record>
+                <record id="pcg_4537" model="account.account.template">
+                        <field name="code">4537</field>
+                        <field name="name">Неизползван данъчен кредит</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_453"/>
+                </record>
+                <record id="pcg_4538" model="account.account.template">
+                        <field name="code">4538</field>
+                        <field name="name">Данък върху добавената стойност за възстановяване</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_453"/>
+                </record>
+                <record id="pcg_4539" model="account.account.template">
+                        <field name="code">4539</field>
+                        <field name="name">Данък върху добавената стойност за внасяне</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_453"/>
+                </record>
+                <record id="pcg_454" model="account.account.template">
+                        <field name="code">454</field>
+                        <field name="name">Разчети за данъци върху доходи на физически лица</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_45"/>
+                </record>
+                <record id="pcg_456" model="account.account.template">
+                        <field name="code">456</field>
+                        <field name="name">Разчети за акцизи</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_45"/>
+                </record>
+                <record id="pcg_457" model="account.account.template">
+                        <field name="code">457</field>
+                        <field name="name">Разчети с митници</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_45"/>
+                </record>
+                <record id="pcg_459" model="account.account.template">
+                        <field name="code">459</field>
+                        <field name="name">Данъчни разчети с бюджета</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_45"/>
+                </record>
+                <record id="pcg_46" model="account.account.template">
+                        <field name="code">46</field>
+                        <field name="name">Разчети с Осигурители</field>
+                        <field name="user_type" ref="account.account_type_liability_view1"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_4"/>
+                </record>
+                <record id="pcg_461" model="account.account.template">
+                        <field name="code">461</field>
+                        <field name="name">Разчети за задължително социално осигуряване</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_46"/>
+                </record>
+                <record id="pcg_462" model="account.account.template">
+                        <field name="code">462</field>
+                        <field name="name">Разчети за доброволно социално осигуряване</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_46"/>
+                </record>
+                <record id="pcg_463" model="account.account.template">
+                        <field name="code">463</field>
+                        <field name="name">Разчети за здравно осигуряване</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_46"/>
+                </record>
+                <record id="pcg_469" model="account.account.template">
+                        <field name="code">469</field>
+                        <field name="name">Други разчети с осигурители</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_46"/>
+                </record>
+                <record id="pcg_49" model="account.account.template">
+                        <field name="code">49</field>
+                        <field name="name"> Разни Дебитори и Кредитори</field>
+                        <field name="user_type" ref="account.data_account_type_view"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_4"/>
+                </record>
+                <record id="pcg_491" model="account.account.template">
+                        <field name="code">491</field>
+                        <field name="name">Разчети с доверители</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_49"/>
+                </record>
+                <record id="pcg_492" model="account.account.template">
+                        <field name="code">492</field>
+                        <field name="name">Разчети за гаранции</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_49"/>
+                </record>
+                <record id="pcg_493" model="account.account.template">
+                        <field name="code">493</field>
+                        <field name="name">Разчети със собственици</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_49"/>
+                </record>
+                <record id="pcg_494" model="account.account.template">
+                        <field name="code">494</field>
+                        <field name="name">Разчети по отсрочени данъци</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_49"/>
+                </record>
+                <record id="pcg_495" model="account.account.template">
+                        <field name="code">495</field>
+                        <field name="name">Разчети по застраховане</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_49"/>
+                </record>
+                <record id="pcg_496" model="account.account.template">
+                        <field name="code">496</field>
+                        <field name="name">Разчети по лихви</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_49"/>
+                </record>
+                <record id="pcg_497" model="account.account.template">
+                        <field name="code">497</field>
+                        <field name="name">Провизии</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_49"/>
+                </record>
+                <record id="pcg_498" model="account.account.template">
+                        <field name="code">498</field>
+                        <field name="name">Други дебитори</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_49"/>
+                </record>
+                <record id="pcg_499" model="account.account.template">
+                        <field name="code">499</field>
+                        <field name="name">Други кредитори</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_49"/>
+                </record>
+                <record id="pcg_5" model="account.account.template">
+                        <field name="code">5</field>
+                        <field name="name">СМЕТКИ ЗА ФИНАНСОВИ СРЕДСТВА</field>
+                        <field name="user_type" ref="account.account_type_asset_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_0"/>
+                </record>
+                <record id="pcg_50" model="account.account.template">
+                        <field name="code">50</field>
+                        <field name="name">Парични Средства</field>
+                        <field name="user_type" ref="account.account_type_asset_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_5"/>
+                </record>
+                <record id="bg_pcg_cash" model="account.account.template">
+                        <field name="code">501</field>
+                        <field name="name">Каса в левове</field>
+                        <field name="user_type" ref="account.data_account_type_cash"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_50"/>
+                </record>
+                <record id="pcg_502" model="account.account.template">
+                        <field name="code">502</field>
+                        <field name="name">Каса във валута</field>
+                        <field name="user_type" ref="account.data_account_type_cash"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_50"/>
+                </record>
+                <record id="pcg_503" model="account.account.template">
+                        <field name="code">503</field>
+                        <field name="name">Разплащателна сметки в левове</field>
+                        <field name="user_type" ref="account.data_account_type_bank"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_50"/>
+                </record>
+                <record id="pcg_504" model="account.account.template">
+                        <field name="code">504</field>
+                        <field name="name">Разплащателна сметка във валута</field>
+                        <field name="user_type" ref="account.data_account_type_bank"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_50"/>
+                </record>
+                <record id="pcg_505" model="account.account.template">
+                        <field name="code">505</field>
+                        <field name="name">Акредитиви</field>
+                        <field name="user_type" ref="account.data_account_type_bank"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_50"/>
+                </record>
+                <record id="pcg_506" model="account.account.template">
+                        <field name="code">506</field>
+                        <field name="name">Предоставени депозити</field>
+                        <field name="user_type" ref="account.data_account_type_bank"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_50"/>
+                </record>
+                <record id="pcg_507" model="account.account.template">
+                        <field name="code">507</field>
+                        <field name="name">Парични средства, заложени като обезпечение</field>
+                        <field name="user_type" ref="account.data_account_type_bank"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_50"/>
+                </record>
+                <record id="pcg_509" model="account.account.template">
+                        <field name="code">509</field>
+                        <field name="name">Други парични средства (в т.ч. ваучери и чекове)</field>
+                        <field name="user_type" ref="account.data_account_type_cash"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_50"/>
+                </record>
+                <record id="pcg_51" model="account.account.template">
+                        <field name="code">51</field>
+                        <field name="name">Краткосрочни Финансови Активи</field>
+                        <field name="user_type" ref="account.account_type_asset_view1"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_5"/>
+                </record>
+                <record id="pcg_511" model="account.account.template">
+                        <field name="code">511</field>
+                        <field name="name">Финансови активи, отчитани по справедлива стойност в печалбата или загубата</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_51"/>
+                </record>
+                <record id="pcg_512" model="account.account.template">
+                        <field name="code">512</field>
+                        <field name="name">Финансови активи, държани до настъпване на падеж</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_51"/>
+                </record>
+                <record id="pcg_513" model="account.account.template">
+                        <field name="code">513</field>
+                        <field name="name">Краткосрочни заеми и вземания</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_51"/>
+                </record>
+                <record id="pcg_514" model="account.account.template">
+                        <field name="code">514</field>
+                        <field name="name">Финансови активи на разположение за продажба</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_51"/>
+                </record>
+                <record id="pcg_519" model="account.account.template">
+                        <field name="code">519</field>
+                        <field name="name">Други краткосрочни финансови активи (в т.ч. благородни метали)</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_51"/>
+                </record>
+                <record id="pcg_6" model="account.account.template">
+                        <field name="code">6</field>
+                        <field name="name">СМЕТКИ ЗА РАЗХОДИ</field>
+                        <field name="user_type" ref="account.data_account_type_view"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_0"/>
+                </record>
+                <record id="pcg_60" model="account.account.template">
+                        <field name="code">60</field>
+                        <field name="name">Разходи по Икономически Елементи</field>
+                        <field name="user_type" ref="account.data_account_type_view"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_6"/>
+                </record>
+                <record id="bg_pcg_expense" model="account.account.template">
+                        <field name="code">601</field>
+                        <field name="name">Разходи за материали</field>
+                        <field name="user_type" ref="account.data_account_type_expense"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_60"/>
+                </record>
+                <record id="pcg_602" model="account.account.template">
+                        <field name="code">602</field>
+                        <field name="name">Разходи за външни услуги</field>
+                        <field name="user_type" ref="account.data_account_type_expense"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_60"/>
+                </record>
+                <record id="pcg_603" model="account.account.template">
+                        <field name="code">603</field>
+                        <field name="name">Разходи за амортизация</field>
+                        <field name="user_type" ref="account.data_account_type_expense"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_60"/>
+                </record>
+                <record id="pcg_604" model="account.account.template">
+                        <field name="code">604</field>
+                        <field name="name">Разходи за заплати (възнаграждения)</field>
+                        <field name="user_type" ref="account.data_account_type_expense"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_60"/>
+                </record>
+                <record id="pcg_605" model="account.account.template">
+                        <field name="code">605</field>
+                        <field name="name">Разходи за осигуровки</field>
+                        <field name="user_type" ref="account.data_account_type_expense"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_60"/>
+                </record>
+                <record id="pcg_606" model="account.account.template">
+                        <field name="code">606</field>
+                        <field name="name">Разходи за данъци, такси и други подобни плащания</field>
+                        <field name="user_type" ref="account.data_account_type_expense"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_60"/>
+                </record>
+                <record id="pcg_607" model="account.account.template">
+                        <field name="code">607</field>
+                        <field name="name">Разходи за провизии</field>
+                        <field name="user_type" ref="account.data_account_type_expense"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_60"/>
+                </record>
+                <record id="pcg_608" model="account.account.template">
+                        <field name="code">608</field>
+                        <field name="name">Разходи от последващи оценки на активи</field>
+                        <field name="user_type" ref="account.data_account_type_expense"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_60"/>
+                </record>
+                <record id="pcg_609" model="account.account.template">
+                        <field name="code">609</field>
+                        <field name="name">Други разходи</field>
+                        <field name="user_type" ref="account.data_account_type_expense"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_60"/>
+                </record>
+                <record id="pcg_61" model="account.account.template">
+                        <field name="code">61</field>
+                        <field name="name">Разходи за Дейността</field>
+                        <field name="user_type" ref="account.account_type_asset_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_6"/>
+                </record>
+                <record id="pcg_611" model="account.account.template">
+                        <field name="code">611</field>
+                        <field name="name">Разходи за основна дейност</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_61"/>
+                </record>
+                <record id="pcg_612" model="account.account.template">
+                        <field name="code">612</field>
+                        <field name="name">Разходи за спомагателна дейност</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_61"/>
+                </record>
+                <record id="pcg_613" model="account.account.template">
+                        <field name="code">613</field>
+                        <field name="name">Разходи за придобиване на дълготрайни активи</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_61"/>
+                </record>
+                <record id="pcg_614" model="account.account.template">
+                        <field name="code">614</field>
+                        <field name="name">Административни разходи</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_61"/>
+                </record>
+                <record id="pcg_615" model="account.account.template">
+                        <field name="code">615</field>
+                        <field name="name">Разходи за продажби</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_61"/>
+                </record>
+                <record id="pcg_62" model="account.account.template">
+                        <field name="code">62</field>
+                        <field name="name">Финансови Разходи</field>
+                        <field name="user_type" ref="account.account_type_asset_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_6"/>
+                </record>
+                <record id="pcg_621" model="account.account.template">
+                        <field name="code">621</field>
+                        <field name="name">Разходи за лихви</field>
+                        <field name="user_type" ref="account.data_account_type_expense"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_62"/>
+                </record>
+                <record id="pcg_623" model="account.account.template">
+                        <field name="code">623</field>
+                        <field name="name">Разходи по операции с финансови активи и инструменти</field>
+                         <field name="user_type" ref="account.data_account_type_expense"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_62"/>
+                </record>
+                <record id="pcg_624" model="account.account.template">
+                        <field name="code">624</field>
+                        <field name="name">Разходи по валутни операции</field>
+                         <field name="user_type" ref="account.data_account_type_expense"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_62"/>
+                </record>
+                <record id="pcg_625" model="account.account.template">
+                        <field name="code">625</field>
+                        <field name="name">Разходи от последващи оценки на финансови активи и инструменти</field>
+                         <field name="user_type" ref="account.data_account_type_expense"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_62"/>
+                </record>
+                <record id="pcg_629" model="account.account.template">
+                        <field name="code">629</field>
+                        <field name="name">Други финансови разходи</field>
+                         <field name="user_type" ref="account.data_account_type_expense"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_62"/>
+                </record>
+                <record id="pcg_65" model="account.account.template">
+                        <field name="code">65</field>
+                        <field name="name">Разходи за Бъдещи Периоди</field>
+                        <field name="user_type" ref="account.account_type_asset_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_6"/>
+                </record>
+                <record id="pcg_651" model="account.account.template">
+                        <field name="code">651</field>
+                        <field name="name">Нефинансови разходи за бъдещи периоди</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_65"/>
+                </record>
+                <record id="pcg_652" model="account.account.template">
+                        <field name="code">652</field>
+                        <field name="name">Финансови разходи за бъдещи периоди</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_65"/>
+                </record>
+                <record id="pcg_69" model="account.account.template">
+                        <field name="code">69</field>
+                        <field name="name">Извънредни Разходи</field>
+                        <field name="user_type" ref="account.data_account_type_view"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_6"/>
+                </record>
+                <record id="pcg_691" model="account.account.template">
+                        <field name="code">691</field>
+                        <field name="name">Извънредни разходи</field>
+                        <field name="user_type" ref="account.data_account_type_expense"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_69"/>
+                </record>
+                <record id="pcg_7" model="account.account.template">
+                        <field name="code">7</field>
+                        <field name="name">СМЕТКИ ЗА ПРИХОДИ</field>
+                        <field name="user_type" ref="account.data_account_type_view"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_0"/>
+                </record>
+                <record id="pcg_70" model="account.account.template">
+                        <field name="code">70</field>
+                        <field name="name">Приходи от Продажби</field>
+                        <field name="user_type" ref="account.data_account_type_view"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_7"/>
+                </record>
+                <record id="bg_pcg_sale" model="account.account.template">
+                        <field name="code">701</field>
+                        <field name="name">Приходи от продажби на продукти</field>
+                        <field name="user_type" ref="account.data_account_type_income"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_70"/>
+                </record>
+                <record id="pcg_702" model="account.account.template">
+                        <field name="code">702</field>
+                        <field name="name">Приходи от продажби на стоки</field>
+                        <field name="user_type" ref="account.data_account_type_income"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_70"/>
+                </record>
+                <record id="pcg_703" model="account.account.template">
+                        <field name="code">703</field>
+                        <field name="name">Приходи от продажби на услуги</field>
+                        <field name="user_type" ref="account.data_account_type_income"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_70"/>
+                </record>
+                <record id="pcg_704" model="account.account.template">
+                        <field name="code">704</field>
+                        <field name="name">Приходи от наеми</field>
+                        <field name="user_type" ref="account.data_account_type_income"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_70"/>
+                </record>
+                <record id="pcg_705" model="account.account.template">
+                        <field name="code">705</field>
+                        <field name="name">Приходи от продажби на дълготрайни активи</field>
+                        <field name="user_type" ref="account.data_account_type_income"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_70"/>
+                </record>
+                <record id="pcg_706" model="account.account.template">
+                        <field name="code">706</field>
+                        <field name="name">Приходи от продажба на суровини/материали</field>
+                        <field name="user_type" ref="account.data_account_type_income"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_70"/>
+                </record>
+                <record id="pcg_707" model="account.account.template">
+                        <field name="code">707</field>
+                        <field name="name">Приходи от последваща оценка на активи</field>
+                        <field name="user_type" ref="account.data_account_type_income"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_70"/>
+                </record>
+                <record id="pcg_708" model="account.account.template">
+                        <field name="code">708</field>
+                        <field name="name">Приходи от финансирания</field>
+                        <field name="user_type" ref="account.data_account_type_income"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_70"/>
+                </record>
+                <record id="pcg_709" model="account.account.template">
+                        <field name="code">709</field>
+                        <field name="name">Други приходи от дейността</field>
+                        <field name="user_type" ref="account.data_account_type_income"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_70"/>
+                </record>
+                <!-- Предприятия с нестопанска дейност
+                <record id="pcg_71" model="account.account.template">
+                        <field name="code">71</field>
+                        <field name="name">Приходи в Предприятия с Нестопанска Дейност</field>
+                        <field name="user_type" ref="account.data_account_type_view"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_7"/>
+                </record>
+                <record id="pcg_711" model="account.account.template">
+                        <field name="code">711</field>
+                        <field name="name">Приходи от регламентирана дейност</field>
+                        <field name="user_type" ref="account.data_account_type_income"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_71"/>
+                </record>
+                <record id="pcg_712" model="account.account.template">
+                        <field name="code">712</field>
+                        <field name="name">Приходи от членски внос</field>
+                        <field name="user_type" ref="account.data_account_type_income"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_71"/>
+                </record>
+                <record id="pcg_713" model="account.account.template">
+                        <field name="code">713</field>
+                        <field name="name">Приходи от финансирания и дарения</field>
+                        <field name="user_type" ref="account.data_account_type_income"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_71"/>
+                </record>
+                <record id="pcg_719" model="account.account.template">
+                        <field name="code">719</field>
+                        <field name="name">Други приходи</field>
+                        <field name="user_type" ref="account.data_account_type_income"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_71"/>
+                </record>
+                -->
+                <record id="pcg_72" model="account.account.template">
+                        <field name="code">72</field>
+                        <field name="name">Финансови Приходи</field>
+                        <field name="user_type" ref="account.data_account_type_view"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_7"/>
+                </record>
+                <record id="pcg_721" model="account.account.template">
+                        <field name="code">721</field>
+                        <field name="name">Приходи от лихви</field>
+                        <field name="user_type" ref="account.data_account_type_income"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_72"/>
+                </record>
+                <record id="pcg_722" model="account.account.template">
+                        <field name="code">722</field>
+                        <field name="name">Приходи от съучастия</field>
+                        <field name="user_type" ref="account.data_account_type_income"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_72"/>
+                </record>
+                <record id="pcg_722" model="account.account.template">
+                        <field name="code">723</field>
+                        <field name="name">Приходи от операции с финансови активи и инструменти</field>
+                        <field name="user_type" ref="account.data_account_type_income"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_72"/>
+                </record>
+                <record id="pcg_724" model="account.account.template">
+                        <field name="code">724</field>
+                        <field name="name">Приходи от валутни операции</field>
+                        <field name="user_type" ref="account.data_account_type_income"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_72"/>
+                </record>
+                <record id="pcg_725" model="account.account.template">
+                        <field name="code">725</field>
+                        <field name="name">Приходи от последващи оценки на финансови активи и инструменти</field>
+                        <field name="user_type" ref="account.data_account_type_income"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_72"/>
+                </record>
+                <record id="pcg_729" model="account.account.template">
+                        <field name="code">729</field>
+                        <field name="name">Други финансови приходи</field>
+                        <field name="user_type" ref="account.data_account_type_income"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_72"/>
+                </record>
+                <record id="pcg_75" model="account.account.template">
+                        <field name="code">75</field>
+                        <field name="name">Приходи за Бъдещи Периоди и Финансирания</field>
+                        <field name="user_type" ref="account.account_type_liability_view1"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_7"/>
+                </record>
+                <record id="pcg_751" model="account.account.template">
+                        <field name="code">751</field>
+                        <field name="name">Нефинансови приходи за бъдещи периоди</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_75"/>
+                </record>
+                <record id="pcg_752" model="account.account.template">
+                        <field name="code">752</field>
+                        <field name="name">Финансови приходи за бъдещи периоди</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_75"/>
+                </record>
+                <record id="pcg_753" model="account.account.template">
+                        <field name="code">753</field>
+                        <field name="name">Финансиране за дълготрайни активи</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_75"/>
+                </record>
+                <record id="pcg_754" model="account.account.template">
+                        <field name="code">754</field>
+                        <field name="name">Финансиране на текущата дейност</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_75"/>
+                </record>
+                <record id="pcg_79" model="account.account.template">
+                        <field name="code">79</field>
+                        <field name="name">Извънредни Приходи</field>
+                        <field name="user_type" ref="account.data_account_type_view"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_7"/>
+                </record>
+                <record id="pcg_791" model="account.account.template">
+                        <field name="code">791</field>
+                        <field name="name">Извънредни приходи</field>
+                        <field name="user_type" ref="account.data_account_type_income"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_72"/>
+                </record>
+                <record id="pcg_9" model="account.account.template">
+                        <field name="code">9</field>
+                        <field name="name">СМЕТКИ ЗА УСЛОВНИ АКТИВИ И ПАСИВИ</field>
+                        <field name="user_type" ref="account.data_account_type_view"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_0"/>
+                </record>
+                <record id="pcg_91" model="account.account.template">
+                        <field name="code">91</field>
+                        <field name="name">Чужди Материални, Нематериални и Финансови Активи на Съхранение</field>
+                        <field name="user_type" ref="account.data_account_type_view"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_9"/>
+                </record>
+                <record id="pcg_911" model="account.account.template">
+                        <field name="code">911</field>
+                        <field name="name">Наети чужди активи</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_91"/>
+                </record>
+                <record id="pcg_912" model="account.account.template">
+                        <field name="code">912</field>
+                        <field name="name">Чужди материални активи, получени по консигнационен договор</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_91"/>
+                </record>
+                <record id="pcg_913" model="account.account.template">
+                        <field name="code">913</field>
+                        <field name="name">Други материални и нематериални активи, приети на съхранение</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_91"/>
+                </record>
+                <record id="pcg_914" model="account.account.template">
+                        <field name="code">914</field>
+                        <field name="name">Финансови активи или парични средства, приети на за съхранение</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_91"/>
+                </record>
+                <record id="pcg_98" model="account.account.template">
+                        <field name="code">98</field>
+                        <field name="name">Други Условни Активи</field>
+                        <field name="user_type" ref="account.data_account_type_view"/>
+                        <field name="type">view</field>
+                        <field name="parent_id" ref="pcg_9"/>
+                </record>
+                <record id="pcg_981" model="account.account.template">
+                        <field name="code">981</field>
+                        <field name="name">Чужди материални и нематериални активи, получени като обезпечение</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_98"/>
+                </record>
+                <record id="pcg_982" model="account.account.template">
+                        <field name="code">982</field>
+                        <field name="name">Чужди финансови активи, получени като обезпечение</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_98"/>
+                </record>
+                <record id="pcg_983" model="account.account.template">
+                        <field name="code">983</field>
+                        <field name="name">Полици или записи на заповед, получени като обезпечение</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_98"/>
+                </record>
+                <record id="pcg_984" model="account.account.template">
+                        <field name="code">984</field>
+                        <field name="name">Други условни активи</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_98"/>
+                </record>
+                <record id="pcg_989" model="account.account.template">
+                        <field name="code">989</field>
+                        <field name="name">Кореспондираща сметка за условни активи</field>
+                        <field name="user_type" ref="account.data_account_type_asset"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_98"/>
+                </record>
+                <record id="pcg_99" model="account.account.template">
+                        <field name="code">99</field>
+                        <field name="name">Други Условни Пасиви</field>
+                        <field name="user_type" ref="account.data_account_type_view"/>
+                        <field name="type">other</field>                        
+                        <field name="parent_id" ref="pcg_9"/>
+                </record>
+                <record id="pcg_991" model="account.account.template">
+                        <field name="code">991</field>
+                        <field name="name">Собствени материални и нематериални активи, предоставени като обезпечение</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_99"/>
+                </record>
+                <record id="pcg_992" model="account.account.template">
+                        <field name="code">992</field>
+                        <field name="name">Собствени финансови активи, предоставени като обезпечение</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_99"/>
+                </record>
+                <record id="pcg_993" model="account.account.template">
+                        <field name="code">993</field>
+                        <field name="name">Полици или записи на заповед, предоставени като обезпечение</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_99"/>
+                </record>
+                <record id="pcg_994" model="account.account.template">
+                        <field name="code">994</field>
+                        <field name="name">Други условни пасиви</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_99"/>
+                </record>
+                <record id="pcg_999" model="account.account.template">
+                        <field name="code">999</field>
+                        <field name="name">Кореспондираща сметка за условни пасиви</field>
+                        <field name="user_type" ref="account.data_account_type_liability"/>
+                        <field name="type">other</field>
+                        <field name="parent_id" ref="pcg_99"/>
+                </record>
+        </data>
+</openerp>

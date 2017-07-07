@@ -94,9 +94,9 @@ function pos_loyalty_bg_models(instance, module) {
         export_as_JSON: function(){
             var json = _super_Orderline.prototype.export_as_JSON.apply(this,arguments);
             new_val = {
-                reward_id: this.reward_id;
-                loyalty_points: this.loyalty_points;
-            }
+                reward_id: this.reward_id,
+                loyalty_points: this.loyalty_points,
+                }
             $.extend(json, new_val);
             return json;
         },
@@ -117,6 +117,18 @@ function pos_loyalty_bg_models(instance, module) {
         /* The total of points won, excluding the points spent on rewards */
         set_loyalty_program: function(program_id){
             this.loyalty_program_id = program_id;
+        },
+        get_total_with_tax: function(){
+            var total = 0;
+            var orderLines = [];
+            if (this.get('orderLines').models !== undefined) {
+                orderLines = this.get('orderLines').models;
+            }
+            for (var i = 0; i < orderLines.length; i++) {
+                var line = orderLines[i];
+                total += line.get_price_with_tax();
+            }
+            return total;
         },
         get_won_points: function(){
             console.log("Won points start", this.pos.db.loyalty);
@@ -214,7 +226,7 @@ function pos_loyalty_bg_models(instance, module) {
                     var reward = line.get_reward();
                     if (reward) {
                         if (reward.type === 'gift') {
-                            points += round_pr(line.get_quantity() * reward.point_cost, rounding);
+                            points += round_pr(-line.get_quantity() * reward.point_cost, rounding);
                         } else if (reward.type === 'discount') {
                             points += round_pr(-line.get_display_price() * reward.point_cost, rounding);
                         } else if (reward.type === 'resale') {
@@ -222,7 +234,7 @@ function pos_loyalty_bg_models(instance, module) {
                         }
                     }
                 }
-                if (points != 0){this.set_loyalty_program(this.pos.db.loyalty.id);}; // decorate lines with loyalty program id
+                //if (points != 0){this.set_loyalty_program(this.pos.db.loyalty.id);}; // decorate lines with loyalty program id
                 return points;
             }
         },
@@ -282,54 +294,60 @@ function pos_loyalty_bg_models(instance, module) {
 
         apply_reward: function(reward){
             var client = this.get_client();
+            var current_order = this.pos.get('selectedOrder');
+            var self = this;
             if (!client) {
                 return;
             } else if (reward.type === 'gift') {
-                var product = this.db.get_product_by_id(reward.gift_product_id[0]);
+                var product = self.pos.db.get_product_by_id(reward.gift_product_id[0]);
 
                 if (!product) {
                     return;
                 }
 
-                var line = this.add_product(product, {
+                var line = current_order.addProduct(product, {
                     price: 0,
                     quantity: 1,
                     merge: false,
+                    loyalty_points: -reward.point_value,
                     extras: { reward_id: reward.id },
                 });
 
             } else if (reward.type === 'discount') {
 
-                var lrounding = this.pos.db.loyalty.rounding;
-                var crounding = this.pos.currency.rounding;
-                var spendable = this.get_spendable_points();
-                var order_total = this.get_total_with_tax();
+                var lrounding = self.pos.db.loyalty.rounding;
+                var crounding = self.pos.currency.rounding;
+                var spendable = self.get_spendable_points();
+                var order_total = self.get_total_with_tax();
                 var discount    = round_pr(order_total * reward.discount,crounding);
 
                 if ( round_pr(discount * reward.point_cost,lrounding) > spendable ) {
                     discount = round_pr(Math.floor( spendable / reward.point_cost ), crounding);
                 }
-
-                var product   = this.pos.get_product_by_id(reward.discount_product_id[0]);
+                console.log("spendable", spendable)
+                console.log("order_total", order_total)
+                console.log("discount", discount)
+                var product   = self.pos.db.get_product_by_id(reward.discount_product_id[0]);
 
                 if (!product) {
                     return;
                 }
 
-                var line = this.add_product(product, {
+                var line = current_order.addProduct(product, {
                     price: -discount,
                     quantity: 1,
                     merge: false,
+                    loyalty_points: -spendable,
                     extras: { reward_id: reward.id },
                 });
 
             } else if (reward.type === 'resale') {
 
-                var lrounding = this.pos.db.loyalty.rounding;
-                var crounding = this.pos.currency.rounding;
-                var spendable = this.get_spendable_points();
-                var order_total = this.get_total_with_tax();
-                var product = this.db.get_product_by_id(reward.point_product_id[0]);
+                var lrounding = self.pos.db.loyalty.rounding;
+                var crounding = self.pos.currency.rounding;
+                var spendable = self.get_spendable_points();
+                var order_total = self.get_total_with_tax();
+                var product = self.db.get_product_by_id(reward.point_product_id[0]);
 
                 if (!product) {
                     return;
@@ -343,9 +361,10 @@ function pos_loyalty_bg_models(instance, module) {
                     return;
                 }
 
-                var line = this.add_product(product, {
+                var line = current_order.addProduct(product, {
                     quantity: -spendable,
                     merge: false,
+                    loyalty_points: -spendable,
                     extras: { reward_id: reward.id },
                 });
             }
@@ -368,9 +387,9 @@ function pos_loyalty_bg_models(instance, module) {
         export_as_JSON: function(){
             var json = _super.prototype.export_as_JSON.apply(this,arguments);
             new_val = {
-                loyalty_points: this.get_new_points();
-                loyalty_program_id: this.loyalty_program_id;
-            }
+                loyalty_points: this.get_new_points(),
+                loyalty_program_id: this.loyalty_program_id,
+                };
             $.extend(json, new_val);
             //json.loyalty_program_id = self.pos.loyalty.id;
             console.log('Parce order', json);

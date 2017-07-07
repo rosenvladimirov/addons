@@ -126,6 +126,11 @@ class glabels_report(object):
                 labelwriter.writeheader()
             for k, v in p.items():
                 _logger.info("Items %s:%s" % (k, v))
+                # set print counter ++
+                if isinstance(v, (int, float)):
+                    if k == 'print_count':
+                        pool.get(self.model).write(cr,uid,ids,{'print_count': v + 1},context=context)
+                        continue
                 if isinstance(v, tuple):
                     if k+'/id' in fields:
                         res.update({k+'/id':str(v[0])})

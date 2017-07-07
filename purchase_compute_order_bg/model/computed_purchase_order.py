@@ -435,15 +435,15 @@ class ComputedPurchaseOrder(models.Model):
                 'partner_id': cpo.partner_id.id,
                 'fiscal_position': cpo.fiscal_position.id,
                 'pricelist_id': cpo.pricelist_id.id,
-                'currency_id': cpo.currency_id and cpo.currency_id or self.env['product.pricelist'].browse(cpo.pricelist_id.id).currency_id.id,
+                'currency_id': cpo.currency_id and cpo.currency_id.id or self.env['product.pricelist'].browse(cpo.pricelist_id.id).currency_id.id,
                 'location_id': self.env['res.users'].browse(
                     self.env.uid).company_id.partner_id
                 .property_stock_customer.id,
                 'order_line': po_lines,
-                'date_planned': (
+                'date_approve': (
                     cpo.incoming_date or fields.Date.context_today(self)),
             }
-            _logger.debug("New order %s:%s:%s:%s" % (po_values, cpo.partner_id.property_product_pricelist_purchase.id, cpo.pricelist_id, self.env['product.pricelist'].browse(cpo.pricelist_id.id).currency_id))
+            #_logger.debug("New order %s:%s:%s:%s:%s" % (po_values, cpo.partner_id.property_product_pricelist_purchase.id, cpo.pricelist_id, cpo.currency_id.id, self.env['product.pricelist'].browse(cpo.pricelist_id.id).currency_id.id))
             po_id = po_obj.create(po_values)
             cpo.state = 'done'
             cpo.purchase_order_id = po_id

@@ -143,7 +143,7 @@ class ProductProduct(models.Model):
     def _average_consumption_moves(self):
         location_obj = self.pool.get('stock.location')
         warehouse_obj = self.pool.get('stock.warehouse')
-        consumption_obj = self.env['product.consumption']
+        consumption_obj = self.pool.get('product.consumption')
         cr, uid = self.env.cr, self.env.uid
         ctx = dict(self.env.context).copy()
         location_ids = []
@@ -194,7 +194,7 @@ class ProductProduct(models.Model):
             moves_out = dict(map(
                 lambda x: (x['product_id'][0], x['product_qty']), moves_out))
             product_ids = [k for k in moves_out.keys()]
-            #_logger.info("Compute %s:%s:%s" % (moves_out, product_ids, location.id))
+            _logger.info("Compute %s:%s:%s" % (moves_out, product_ids, location.id))
             for product in self.browse(product_ids):
                 begin_date = (
                     datetime.datetime.today() -
@@ -209,9 +209,10 @@ class ProductProduct(models.Model):
                     datetime.datetime.strptime(first_date, '%Y-%m-%d')
                     ).days
                 for move in filter(lambda k: k == product.id, moves_out.keys()):
-                    consumption_ids = consumption_obj.search([('product_id', '=', product.id), ('location_id', '=', location.id)])
+                    consumption_ids = consumption_obj.search(cr, uid, [('product_id', '=', product.id), ('location_id', '=', location.id)], context=self.env.context)
                     if len(consumption_ids):
-                        for consumption in consumption_obj.browse(consumption_ids):
+                        for consumption in consumption_obj.browse(cr, uid, consumption_ids, context=self.env.context):
+                            _logger.info("Teka %s" % consumption)
                             #consumption.product_id = product.id
                             #consumption.location_id = location.id
                             consumption.outgoing_qty = moves_out[move]
@@ -225,7 +226,7 @@ class ProductProduct(models.Model):
                                 'outgoing_qty': moves_out[move],
                                 'nb_days': nb_days,
                             }
-                        consumption_obj.create(vals)
+                        consumption_obj.create(cr, uid, vals, context=self.env.context)
 
     @api.onchange('display_range', 'average_consumption')
     def _displayed_average_consumption(self):

@@ -30,7 +30,10 @@
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
     'depends': ['base', 'report_glabels_bg'],
-    'data': ['product_label_report.xml'],
+    'data': [
+            'product_label_report.xml', 
+            'product_view.xml',
+            ],
     'application': False,
     'installable': True,
 }

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_invoice_document">
+<t t-name="account.report_invoice_document">
+<t t-call="report.external_layout">
+<div class="page">
+    <div class="row" style="padding-left:15px; padding-right:15px; ">
+    <table style="width:100%;">
+        <tr>
+            <td style="width:85%;">
+                <h2>
+                    <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">Invoice<span> N° </span></span>
+                    <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA<span> N° </span></span>
+                    <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
+                    <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
+                    <span t-if="o.type == 'out_refund'">Refund</span>
+                    <span t-if="o.type == 'in_refund'">Supplier Refund<span> N° </span></span>
+                    <span t-if="o.type == 'in_invoice'">Supplier Invoice<span> N° </span></span>
+                    <span t-field="o.number"/>
+                    <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'"><span t-field="o.origin"/></span>
+                    <span style="font-size:16px;">
+                        <span t-if="o.date_invoice"> from <span t-field="o.date_invoice"/></span>
+                        <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'"> from <span t-usertime="%d.%m.%Y"/></span>
+                    </span>
+                </h2>
+            </td>
+            <td style="text-align:right; width:15%;"> 
+                <h2><span style="text-align:right;" t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')"> ORIGINAL</span></h2>
+            </td>
+        </tr>
+    </table>
+    <div class="row" style="font-size:9px;">
+    <div class="col-xs-2">
+        <strong>Deal place:</strong>
+        <p t-field="o.user_id.city"/>
+    </div> 
+    <div class="col-xs-2">
+        <strong>Due date for taxes:</strong>
+        <p t-field="o.date_invoice"/>
+    </div>
+    <div class="col-xs-2" t-if="o.payment_term.note">
+        <strong>Payment Term:</strong>
+        <p t-field="o.payment_term.note"/>
+    </div>
+    <div class="col-xs-2">
+        <strong>Term of payment:</strong>
+        <p t-field="o.date_due"/>
+    </div>
+    <div class="col-xs-2">
+        <strong>Source:</strong>
+        <p t-field="o.origin"/>
+    </div>
+    <div class="col-xs-2" t-if="o.partner_id.ref">
+        <strong>Customer Code:</strong>
+        <p t-field="o.partner_id.ref"/>
+    </div>
+    <div class="col-xs-2" t-if="o.reference">
+        <strong>Reference:</strong>
+        <p t-field="o.reference"/>
+    </div>
+    </div>
+    <p> </p>
+    <table style="width:100%;">
+        <thead style="border-top: 1px solid black; padding-top:5px; padding-bottom:5px;border-bottom: 1px solid black; padding-top:5px; padding-bottom:5px;">
+            <tr style="padding-left:0px;">
+                <td style="width:13%;"><strong>CUSTOMER</strong></td>
+                <td style="width:36%;"/>
+                <td style="width:13%;"><strong>SUPPLIER</strong></td>
+                <td style="width:36%;"/>
+            </tr>
+        </thead>
+        <br />
+        <tbody>
+            <tr>
+                <td><strong style="font-size:10px;">Company/Person Name: </strong></td>
+                <td><span t-field="o.partner_id.name"/></td>
+                <td><strong style="font-size:10px;">Company/Person Name: </strong></td>
+                <td><span t-field="o.company_id.name"/></td>
+            </tr>
+            <tr>
+                <td><strong style="font-size:10px;">Address: </strong></td>
+                <td><span t-field="o.partner_id.zip"/> <span t-field="o.partner_id.city"/><span t-if="o.partner_id.country_id">, <span t-field="o.partner_id.country_id"/></span></td>
+                <td><strong style="font-size:10px;">Address: </strong></td>
+                <td><span t-field="o.company_id.zip"/> <span t-field="o.company_id.city"/><span t-if="o.company_id.country_id">, <span t-field="o.company_id.country_id"/></span></td>   
+            </tr>
+            <tr>
+                <td><strong style="font-size:10px;">Str.: </strong></td>
+                <td><span t-field="o.partner_id.street"/></td>
+                <td><strong style="font-size:10px;">Str.: </strong></td>
+                <td><span t-field="o.company_id.street"/></td>
+            </tr>
+            <tr>
+                <td/>
+                <td><span t-field="o.partner_id.street2"/></td>
+                <td/>
+                <td><span t-field="o.company_id.street2"/></td>
+            </tr>
+            <tr>
+                <td><strong style="font-size:10px;">Representer: </strong></td>
+                <td><span t-field="o.partner_id.street3"/></td>
+                <td><strong style="font-size:10px;">Representer: </strong></td>
+                <td><span t-field="o.company_id.partner_id.street3"/></td>
+            </tr>
+            <tr>
+                <td><strong style="font-size:10px;">UIC: </strong></td>
+                <td><span t-field="o.partner_id.uic"/></td>
+                <td><strong style="font-size:10px;">UIC: </strong></td>
+                <td><span t-field="o.company_id.uic"/></td> 
+            </tr>
+            <tr>
+                <td><strong style="font-size:10px;">VAT ID:</strong> </td>
+                <td><span t-field="o.partner_id.vat"/></td>
+                <td><strong style="font-size:10px;">VAT ID:</strong> </td> 
+                <td><span t-if="o.company_id.vat"><span t-field="o.company_id.vat"/></span></td>
+            </tr>
+        </tbody>
+        </table>
+        </div>
+        <br/>
+        <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th class="text-right">Unit Price</th>
+                <th class="text-right" groups="sale.group_discount_per_so_line">Discount (%)</th>
+                <th class="text-right">Amount</th>
+            </tr>
+        </thead>
+        <tbody class="invoice_tbody">
+            <tr t-foreach="o.invoice_line" t-as="l">
+                <td>
+                    <span t-if="l.pricelist_discount==0.0">    
+                        <span t-field="l.name"/>
+                    </span>
+                    <span t-if="l.pricelist_discount &lt; 0.0">   
+                        <span t-field="l.name"/>   (<span t-esc="l.pricelist_discount * 100"/><span>%)</span>
+                    </span>
+                </td>
+                <td>
+                    <span t-field="l.quantity"/>
+                    <span t-field="l.uos_id" groups="product.group_uom"/>
+                </td>
+                <td class="text-right">
+                    <span t-field="l.price_unit"/>
+                </td>
+                 <td class="text-right">
+                    <span t-esc="', '.join(map(lambda x: x.name, l.invoice_line_tax_id))"/>
+                </td>
+                <td class="text-right">
+                    <span t-field="l.price_subtotal" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+        <div class="row">
+        <div class="col-xs-4 pull-right">
+        <table class="table table-condensed">
+            <tr class="border-black">
+                <td><strong>Total Without Taxes</strong></td>
+                <td class="text-right">
+                    <span t-field="o.amount_untaxed" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Taxes</td>
+                <td class="text-right">
+                    <span t-field="o.amount_tax" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
+                </td>
+            </tr>
+            <tr class="border-black">
+                <td><strong>Total</strong></td>
+                <td class="text-right">
+                     <span t-field="o.amount_total" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
+                </td>
+            </tr>
+        </table>
+        </div>
+    </div>
+    <p t-if="o.fiscal_position.note">
+        <strong>Fiscal Position Remark:</strong>
+        <span t-field="o.fiscal_position.note"/>
+    </p>
+    <p t-if="o.comment">
+        <strong>Comment:</strong>
+        <span t-field="o.comment"/>
+    </p>
+    <div class="row" style="padding-left:15px; ">
+    <p> </p>
+    <p> </p>
+    <table border="0" cellpadding="1" cellspacing="1" style="width:100%">
+        <tbody>
+            <tr>
+                <td style="width:10%"><strong>Receiver:</strong></td>
+                <td style="width:40%"><span t-field="o.partner_id.street3"/></td>
+                <td style="width:10%"><strong>Writer: </strong></td>
+                <td style="width:40%"><span t-field="o.user_id.name"/> </td>
+            </tr>
+            <tr>
+                <td><br/></td>
+                <td><br/></td>
+                <td><br/></td>
+                <td><br/></td>
+            </tr>
+            <tr>
+                <td><strong>Signature: </strong></td>
+                <td> </td>
+                <td><strong>Signature: </strong></td>
+                <td>(ID <span t-field="o.user_id.id"/>)</td>
+            </tr>
+        </tbody>
+    </table>
+    <p> </p>
+    <div style="font-size:10px;"><p><center> Pursuant to Article 7, paragraph 1 of the Accountancy Act, Art. 114 of the VAT Act and Art. 78 of the Public Offering of Securities Act, the stamp and the signature are not obligatory requisites of the invoice.</center></p></div>
+    </div>
+</div>
+</t>
+</t>
+</template>
+</data>
+</openerp>

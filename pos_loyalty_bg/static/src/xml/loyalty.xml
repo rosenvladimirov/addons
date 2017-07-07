@@ -1,5 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
+    <t t-name="RewardsLine">
+        <tr class='rewards-line' t-att-data-id='code'>
+            <td><t t-esc='label' /></td>
+        </tr>
+    </t>
+
+    <t t-name="RewardButton">
+        <span class='category-button js-category-switch' t-att-data-reward-id="reward.id" >
+            <div class="reward-img">
+                <img t-att-src="image_url" />
+            </div>
+            <div class="reward-name">
+                <t t-esc="reward.name"/>
+            </div>
+        </span>
+    </t>
+
+    <t t-name="RewardSimpleButton">
+        <span class='category-simple-button js-category-switch' t-att-data-reward-id="reward.id" >
+            <t t-esc="reward.name"/>
+        </span>
+    </t>
+
+    <t t-name="RewardCategoriesWidget">
+        <div>
+        <header class='rightpane-header'>
+            <div class="breadcrumbs">
+                <span class="breadcrumb">
+                    <span class=" breadcrumb-button js-category-switch">
+                        <img src="/point_of_sale/static/src/img/home.png" class="breadcrumb-homeimg" />
+                    </span>
+                </span>
+                <t t-foreach="widget.breadcrumb" t-as="reward">
+                    <span class="breadcrumb">
+                        <img src="/point_of_sale/static/src/img/bc-arrow-big.png" class="breadcrumb-arrow" />
+                        <span class="breadcrumb-button js-category-switch" t-att-data-reward-id="reward.id">
+                            <t t-esc="reward.name"/>
+                        </span>
+                    </span>
+                </t>
+            </div>
+        </header>
+        </div>
+    </t>
+
+    <t t-name="RewardsSelectionPopupWidget">
+        <div class="modal-dialog">
+            <div class="popup popup-error" >
+                <p class="message">Rewards</p>
+                <div class='subwindow-container'>
+                    <div class='subwindow-container-fix touch-scrollable scrollable-y'>
+                        <span class="placeholder-ProductScreenWidget" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
 
     <t t-name="LoyaltyPoints">
         <div class='loyalty-points'>
@@ -21,17 +78,19 @@
     </t>
 
     <t t-name="LoyaltyButton">
-        <div class='control-button'>
-            <i class='fa fa-star' /> Rewards
+        <div class='rewards-button control-button oe_hidden'>
+            <i class='fa fa-star' />Reward
         </div>
     </t>
-<!--
+
     <t t-extend="OrderWidget">
         <t t-jquery='.summary' t-operation='prepend'>
-            <div class='.summary .loyalty-points oe_hidden'>.</div>
+            <div class='clearfix-info'>
+                <div class='div-loyalty-points oe_hidden'>.</div>
+            </div>
         </t>
     </t>
--->
+
     <t t-extend='ClientLine'>
         <t t-jquery='.client-line' t-operation='append'>
             <td>

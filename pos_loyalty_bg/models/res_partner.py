@@ -27,9 +27,9 @@ from openerp.tools.translate import _
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    @api.one
-    def _loyalty_points(self):
-        self.loyalty_points = sum([o.loyalty_points for o in self.sale_order_ids.filtered(lambda o: o.state == 'done' and o.date_order > (datetime.today() - relativedelta(years=1)).strftime('%Y%m%d'))])
-        self.loyalty_points += sum([child.loyalty_points for child in self.child_ids])
-    sale_loyalty_points = fields.Integer(string='Loyalty Points',compute="_loyalty_points", store=False, help="The loyalty points the user won as part of a Loyalty Program")
+    #@api.one
+    #def _loyalty_points(self):
+    #    self.loyalty_points = sum([o.loyalty_points for o in self.sale_order_ids.filtered(lambda o: o.state == 'done' and o.date_order > (datetime.today() - relativedelta(years=1)).strftime('%Y%m%d'))])
+    #    self.loyalty_points += sum([child.loyalty_points for child in self.child_ids])
+    #sale_loyalty_points = fields.Integer(string='Loyalty Points',compute="_loyalty_points", store=False, help="The loyalty points the user won as part of a Loyalty Program")
     loyalty_points = fields.Integer('Loyalty Points', help='The loyalty points the user won as part of a Loyalty Program')

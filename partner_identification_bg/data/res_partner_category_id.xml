@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="res_partner_id_category" model="res.partner.id_category">
+            <field name="id">1</field>
+            <field name="code">tarade_number</field>
+            <field name="name">Trade Agency register number</field>
+            <field name="validation_model">other</field>
+            <field name="validation_model_base">other</field>
+            <field name="active">1</field>
+            <field name="commercial_field">1</field>
+        </record>
+        <record id="res_partner_id_category" model="res.partner.id_category">
+            <field name="id">2</field>
+            <field name="code">vat_vies</field>
+            <field name="name">VAT number checked in EU-VIES</field>
+            <field name="validation_model">eu.vat</field>
+            <field name="validation_model_base">eu.vat</field>
+            <field name="active">1</field>
+            <field name="commercial_field">1</field>
+        </record>
+    </data>
+</openerp>

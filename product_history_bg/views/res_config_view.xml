@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-
         <record id="view_history_bg_config_settings" model="ir.ui.view">
             <field name="name">Product History settings</field>
             <field name="model">stock.config.settings</field>
