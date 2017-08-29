@@ -57,7 +57,7 @@ class website(osv.osv):
         for lang in langs:
             if shorts.count(lang['short']) == 1:
                 lang['hreflang'] = lang['short']
-        _logger.info("Langs %s" % langs)
+        _logger.debug("Langs %s" % langs)
         return langs
 
 website()

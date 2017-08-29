@@ -72,8 +72,8 @@ class ProductPricelistItem(models.Model):
     @api.multi
     @api.depends('price_max_margin', 'price_discount','margin_classification_discount')
     def update_margin_mc(self, margin):
-        _logger.info("Recive a new margin %s:%s" % (margin,self))
+        #_logger.info("Recive a new margin %s:%s" % (margin,self))
         for item in self:
             item.price_max_margin = (margin/100)
             item.price_discount = ((margin)*(item.margin_classification_discount/100)*-1)/100
-            _logger.info("Update new margin %s:%s"% (item.price_max_margin, item.price_discount))
+            #_logger.info("Update new margin %s:%s"% (item.price_max_margin, item.price_discount))

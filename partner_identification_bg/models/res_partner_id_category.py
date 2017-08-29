@@ -191,10 +191,10 @@ class ResPartnerIdCategory(models.Model):
     def default_create(self, fieldname):
         record = self.search([('fieldname', '=', fieldname)], limit=1)
         cat_default = self._default_fld().get(fieldname)
-        _logger.info("Default Category 1: %s:%s" % (record, cat_default))
+        _logger.debug("Default Category 1: %s:%s" % (record, cat_default))
         if not record and cat_default:
             record = self.create(cat_default)
-        _logger.info("Default Category 1: %s" % record)
+        _logger.debug("Default Category 1: %s" % record)
         return record
 
     @api.one

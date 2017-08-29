@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<record id="res_partner_id_function_form_view" model="ir.ui.view">
+    <field name="name">Conatact function form</field>
+    <field name="model">res.partner.id_function</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+        <form string="Contact person function of Partner">
+            <group>
+                <field name="name" />
+                <field name="fieldname" />
+            </group>
+        </form>
+    </field>
+</record>
+
+<record id="view_partner_id_function_tree" model="ir.ui.view">
+    <field name="name">res.partner.id_function.tree</field>
+    <field name="model">res.partner.id_function</field>
+    <field name="type">tree</field>
+    <field name="arch" type="xml">
+        <tree string="Partner Function in Company">
+            <field name="name"/>
+        </tree>
+    </field>
+</record>
+
+<record id="action_partner_id_function" model="ir.actions.act_window">
+    <field name="name">Contact person function</field>
+    <field name="res_model">res.partner.id_function</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<menuitem action="action_partner_id_function"
+          id="menu_partner_id_function"
+          parent="base.menu_config_address_book"/>
+
+</data>
+</openerp>

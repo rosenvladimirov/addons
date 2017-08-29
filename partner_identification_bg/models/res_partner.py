@@ -30,6 +30,7 @@ class ResPartner(models.Model):
         inverse='_inverse_vat')
     company_registry = fields.Char(string='Company Registry', size=64, compute='_compute_reg', store=True,
         inverse='_inverse_reg')
+    numbers_pos = fields.Char(string='Partner Registers')
 
     def _auto_init(self, cr, context=None):
         """ normalise all vat fields in the database """
@@ -49,18 +50,20 @@ class ResPartner(models.Model):
     @api.depends('id_numbers')
     def _compute_vat(self):
         for partner in self:
-            vat_ids = partner.id_numbers.filtered(lambda r: (r.category_id.fieldname == 'vat'))
-            _logger.info("Categori by vat: %s:%s" % (vat_ids.name, vat_ids.category_id))
+            vat_ids = partner.id_numbers.filtered(lambda r: (r.category_id.fieldname == 'vat' and r.category_id.is_company == partner.is_company))
+            _logger.debug("Categori by vat: %s:%s" % (vat_ids.name, vat_ids.category_id))
             if vat_ids:
                 partner.vat = vat_ids.name
 
     @api.multi
     def _inverse_vat(self):
         for partner in self:
-            vat_ids = partner.id_numbers.filtered(lambda r: (r.category_id.fieldname == 'vat'))
+            vat_ids = partner.id_numbers.filtered(lambda r: (r.category_id.fieldname == 'vat' and r.category_id.is_company == partner.is_company))
             _logger.info("inverse vat %s:%s:%s" % (partner.id_numbers, vat_ids.name, partner.vat))
-            if vat_ids and (vat_ids.name != partner.vat):
+            if vat_ids and partner.vat and (vat_ids.name != partner.vat):
                 vat_ids.write({'name': partner.vat})
+            elif vat_ids and not partner.vat and (vat_ids.name != partner.vat):
+                partner.vat = vat_ids.name
             elif not vat_ids:
                 cat_id = self.env['res.partner.id_category'].default_create('vat')
                 if partner.vat and cat_id:
@@ -70,18 +73,20 @@ class ResPartner(models.Model):
     @api.depends('id_numbers')
     def _compute_reg(self):
         for partner in self:
-            reg_ids = partner.id_numbers.search([('category_id.fieldname', '=', 'company_registry')], limit=1)
-            _logger.info("Categori by reg: %s:%s" % (reg_ids.name, reg_ids.category_id))
+            reg_ids = partner.id_numbers.filtered(lambda r: (r.category_id.fieldname == 'company_registry' and r.category_id.is_company == partner.is_company))
+            _logger.debug("Categori by reg: %s:%s" % (reg_ids.name, reg_ids.category_id))
             if reg_ids:
                 partner.company_registry = reg_ids.name
 
     @api.multi
     def _inverse_reg(self):
         for partner in self:
-            reg_ids = partner.id_numbers.search([('category_id.fieldname', '=', 'company_registry')], limit=1)
-            _logger.info("inverse reg %s:%s:%s" % (partner.id_numbers, reg_ids.name, partner.company_registry))
-            if reg_ids and (reg_ids.name != partner.company_registry):
+            reg_ids = partner.id_numbers.filtered(lambda r: (r.category_id.fieldname == 'company_registry' and r.category_id.is_company == partner.is_company))
+            _logger.debug("inverse reg %s:%s:%s" % (partner.id_numbers, reg_ids.name, partner.company_registry))
+            if reg_ids and partner.company_registry and (reg_ids.name != partner.company_registry):
                 reg_ids.write({'name': partner.company_registry})
+            elif reg_ids and not partner.company_registry and (reg_ids.name != partner.company_registry):
+                partner.company_registry = reg_ids.name
             elif not reg_ids:
                 cat_id = self.env['res.partner.id_category'].default_create('company_registry')
                 if partner.company_registry and cat_id:
@@ -91,10 +96,11 @@ class ResPartner(models.Model):
         vat = vat.replace(' ', '').replace('.', '').upper()
         if not vat:
             return True
+        _logger.debug("find VAT %s" % vat)
         vat_id = self.id_numbers.search([["name", "=", vat]], limit=1)
         if not vat_id:
             return True
-        _logger.info("Get objects category %s:%s:%s" % (vat, vat_id, vat_id.category_id.get_category()))
+        _logger.debug("Get objects category %s:%s:%s" % (vat, vat_id, vat_id.category_id.get_category()))
         online = False
         if not self._context.get('simple_vat_check'):
             online = self.env.user.company_id.vat_check_vies
@@ -135,11 +141,15 @@ class ResPartner(models.Model):
     def _parce_fileds(self, vals):
         if vals.get('id_numbers'):
             for id_number in vals['id_numbers']:
-                _logger.info("Parce fields ids %s" % id_number)
+                _logger.debug("Parce fields ids %s" % id_number)
                 fldname = self.env['res.partner.id_number'].search([('id', '=', id_number[1])]).category_id.fieldname
-                if (fldname and fldname != '') and id_number[2].get('name'):
+                if (fldname and fldname != '') and (id_number[2] and id_number[2].get('name')):
                     vals[fldname] = id_number[2]['name']
-        _logger.info("Parce fields %s" % vals)
+                    # Parce for fast search in pos
+                    vals['numbers_pos'] = vals.get('numbers_pos','') + vals[fldname] + '|'
+            if vals.get('numbers_pos'):
+                vals['numbers_pos'] = vals['numbers_pos'][:-1]
+        _logger.debug("Parce fields %s" % vals)
         return vals
 
     @api.model
@@ -162,14 +172,14 @@ class ResPartner(models.Model):
         _logger.info("Write %s" % vals)
         for partner in self:
             if vals.get('vat'):
-                if not self.with_context(
+                if not partner.with_context(
                         {'simple_vat_check': True})._check_vat(vals['vat']):
                     partner_name = vals.get('name') or partner.name
-                    msg = self._vat_check_errmsg(vals['vat'], partner_name)
+                    msg = partner._vat_check_errmsg(vals['vat'], partner_name)
                     raise UserError(msg)
                 vals['vat'] = vals['vat'].\
                     replace(' ', '').replace('.', '').upper()
-            vals = self._parce_fileds(vals)
+            vals = partner._parce_fileds(vals)
         return super(ResPartner, self).write(vals)
 
 

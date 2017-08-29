@@ -32,7 +32,8 @@ class StockMove(models.Model):
                                                      location_from,
                                                      location_to)
         #fix by rosen
-        workflow = self.env['procurement.order'].search([('group_id', '=', procurement_group)]).workflow_process_id
+        workflow = self.env['procurement.order'].search([('group_id', '=', procurement_group)], limit=1).workflow_process_id
+        _logger.info("Stok move procurement %s:%s" % (workflow, self))
         if workflow:
             pickings = self.mapped('picking_id')
             pickings.write({'workflow_process_id': workflow.id})

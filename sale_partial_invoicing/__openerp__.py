@@ -22,18 +22,18 @@
 {
     'name': "Sales partial invoicing",
     'version': '8.0.0.1.2',
-    'category': 'Purchase Management',
-    'author': "Agile Business Group,"
-              "ACSONE SA/NV,"
+    'category': 'Sale Management',
+    'author': "Rosen Vladimirov,"
               "Odoo Community Association (OCA)",
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
-    "depends": ['purchase',
+    "depends": ['sale',
                 'base_suspend_security'],
     "data": [
         'wizard/so_line_invoice_view.xml',
         'wizard/so_line_cancel_quantity_view.xml',
-        'sale_view.xml',
+        'views/sale_view.xml',
+        'views/account_invoice_view.xml',
     ],
     "demo": [],
     "active": False,

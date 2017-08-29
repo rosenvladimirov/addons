@@ -44,6 +44,8 @@ Bulgarian accounting chart and localization.
         'l10n_multilang',
         'base_bg',
         'report_qweb_element_page_visibility',
+        'partner_identification_bg',
+        'partner_fr_person'
     ],
     "demo" : [],
     "data" : [
@@ -54,10 +56,12 @@ Bulgarian accounting chart and localization.
               'data/account_tax_template.xml',
               'data/account_view.xml',
               'data/fiscal_position_template.xml',
-              'wizard/l10n_chart_bg_wizard.xml',
               'data/res.country.state.csv',
               'data/res.bank.csv',
+              'views/report_invoice.xml',
+              'views/account_view.xml',
               'security/ir.model.access.csv',
+              'wizard/l10n_chart_bg_wizard.xml'
               ],
     "license": "AGPL-3",
     "installable": True,

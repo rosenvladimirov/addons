@@ -44,7 +44,7 @@ class ResPartner(models.Model):
     @api.depends('id_numbers')
     def _compute_uic(self):
         for partner in self:
-            uic_ids = partner.id_numbers.filtered(lambda r: (r.category_id.fieldname == 'uic'))
+            uic_ids = partner.id_numbers.filtered(lambda r: (r.category_id.fieldname == 'uic' and r.category_id.is_company == partner.is_company))
             _logger.info("Categori by uic: %s:%s" % (uic_ids.name, uic_ids.category_id))
             if uic_ids:
                 partner.uic = uic_ids.name
@@ -52,14 +52,19 @@ class ResPartner(models.Model):
     @api.multi
     def _inverse_uic(self):
         for partner in self:
-            uic_ids = partner.id_numbers.filtered(lambda r: (r.category_id.fieldname == 'uic'))
+            uic_ids = partner.id_numbers.filtered(lambda r: (r.category_id.fieldname == 'uic' and r.category_id.is_company == partner.is_company))
             _logger.info("inverse vat %s:%s:%s" % (partner.id_numbers, uic_ids.name, partner.uic))
-            if uic_ids and (uic_ids.name != partner.uic):
+            if uic_ids and partner.vat and (uic_ids.name != partner.uic):
                 uic_ids.write({'name': partner.vat})
+            elif uic_ids and not partner.vat and (uic_ids.name != partner.uic):
+                partner.vat = uic_ids.name
             elif not uic_ids:
                 cat_id = self.env['res.partner.id_category'].default_create('uic')
                 if partner.vat and cat_id:
-                    self.env['res.partner.id_number'].create({'partner_id': partner.id, 'name': partner.uic, 'category_id': cat_id['id'], 'active': True, 'comment': 'UIC number registred by Taxadmin agency', 'status': 'open', })
+                    self.env['res.partner.id_number'].create({'partner_id': partner.id, 'name': partner.vat, 'category_id': cat_id['id'], 'active': True, 'comment': 'UIC number registred by Taxadmin agency', 'status': 'open', })
+
+    def _commercial_fields(self, cr, uid, context=None):
+        return super(ResPartner, self)._commercial_fields(cr, uid, context=context) + ['uic']
 
     @api.model
     def search(self, domain, *args, **kwargs):

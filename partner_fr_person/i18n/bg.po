@@ -1,0 +1,109 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* partner_fr_person
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0-20170205\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-03 06:10+0000\n"
+"PO-Revision-Date: 2017-08-03 06:10+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: partner_fr_person
+#: code:addons/partner_fr_person/models/res_partner.py:56
+#, python-format
+msgid "'s"
+msgstr "/и"
+
+#. module: partner_fr_person
+#: field:res.partner.id_function,attachment_ids:0
+msgid "Attachments"
+msgstr "Прикачени файлове"
+
+#. module: partner_fr_person
+#: field:res.partner.id_function,fieldname:0
+msgid "Choice field name to fill"
+msgstr "Избери полето за попълване"
+
+#. module: partner_fr_person
+#: model:ir.actions.act_window,name:partner_fr_person.action_partner_id_function
+#: model:ir.ui.menu,name:partner_fr_person.menu_partner_id_function
+msgid "Contact person function"
+msgstr "Функция на лицето за контакт"
+
+#. module: partner_fr_person
+#: view:res.partner.id_function:partner_fr_person.res_partner_id_function_form_view
+msgid "Contact person function of Partner"
+msgstr "Функция на лицето за контакт във фирмата"
+
+#. module: partner_fr_person
+#: field:res.partner.id_function,create_uid:0
+msgid "Created by"
+msgstr "Създадено от"
+
+#. module: partner_fr_person
+#: field:res.partner.id_function,create_date:0
+msgid "Created on"
+msgstr "Създадено на"
+
+#. module: partner_fr_person
+#: field:res.partner.id_function,display_name:0
+msgid "Display Name"
+msgstr "Име за екрана"
+
+#. module: partner_fr_person
+#: field:res.partner,fr_person_display:0
+msgid "FR Person"
+msgstr "Представляващ"
+
+#. module: partner_fr_person
+#: field:res.partner.id_function,name:0
+msgid "Fucntion name"
+msgstr "Име на функцията"
+
+#. module: partner_fr_person
+#: field:res.partner.id_function,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: partner_fr_person
+#: field:res.partner.id_function,__last_update:0
+msgid "Last Modified on"
+msgstr "Последно променено на"
+
+#. module: partner_fr_person
+#: field:res.partner.id_function,write_uid:0
+msgid "Last Updated by"
+msgstr "Последно актуализирано от"
+
+#. module: partner_fr_person
+#: field:res.partner.id_function,write_date:0
+msgid "Last Updated on"
+msgstr "Последно актуализирано на"
+
+#. module: partner_fr_person
+#: help:res.partner.id_function,name:0
+msgid "Name of function on contact person. For example, 'Manager'"
+msgstr "Наименование на функцията на лицето за контакт. Например, 'Управител'"
+
+#. module: partner_fr_person
+#: model:ir.model,name:partner_fr_person.model_res_partner
+msgid "Partner"
+msgstr "Партньор"
+
+#. module: partner_fr_person
+#: view:res.partner.id_function:partner_fr_person.view_partner_id_function_tree
+msgid "Partner Function in Company"
+msgstr "Функция в фирмата"
+
+#. module: partner_fr_person
+#: help:res.partner,fr_person_display:0
+msgid "Representer ot The Company. For example, Company manager."
+msgstr "Представляващ на фирмата. Например, 'Управител на фирма'"
+

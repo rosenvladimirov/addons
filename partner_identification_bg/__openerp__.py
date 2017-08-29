@@ -12,6 +12,9 @@
     'name': 'Partner Identification Numbers fix',
     'category': 'Customer Relationship Management',
     'version': '8.0.1.0.0',
+    'depends': [
+        'account',
+    ],
     'data': [
         'views/res_partner_id_category_view.xml',
         'views/res_partner_id_number_view.xml',

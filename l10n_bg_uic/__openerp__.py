@@ -13,10 +13,12 @@
     'category': 'Customer Relationship Management',
     'version': '8.0.1.0.0',
     'data': [
+        'views/res_company_view.xml',
         'views/res_partner_view.xml',
         'data/res_partner_category_id.xml',
     ],
     'depends': [
+        'account',
         'partner_identification_bg',
     ],
     'author': 'Odoo Community Association (OCA), '

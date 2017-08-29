@@ -20,4 +20,4 @@
 #
 ##############################################################################
 
-from . import test_purchase_partial_invoicing
+from . import test_sale_partial_invoicing

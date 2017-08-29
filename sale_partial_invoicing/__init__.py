@@ -19,4 +19,4 @@
 #
 ##############################################################################
 from . import wizard
-from . import purchase
+from . import modules

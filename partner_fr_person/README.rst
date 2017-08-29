@@ -2,21 +2,19 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-====================
-Partner job position
-====================
+====================================
+Contact person's function of Partner
+====================================
 
-This module extends the functionality of partners job position to support
-having them categorized in tree form and allow you to choose a categorized job
-position for your contacts in addition to the current custom string for job
-position.
+This module extends the functionality of partners when add contact person function
+and configuration of representer and wharehause manager.
 
 Configuration
 =============
 
 To configure job positions, you need to:
 
-* Go to *Sales > Configuration > Address Book > Job Positions*.
+* Go to *Sales > Configuration > Address Book > Contact person function*.
 
 Usage
 =====
@@ -24,11 +22,9 @@ Usage
 To use this module, you need to:
 
 * Go to any partner's form.
-* Use the new *Categorized job position* field.
+* Use the new *Contact person function* field.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
-   :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/134/8.0
 
 Bug Tracker
 ===========
@@ -53,10 +49,7 @@ Images
 Contributors
 ------------
 
-* Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
-* Antonio Espinosa <antonioea@antiun.com>
-* Rafael Blasco <rafabn@antiun.com>
-* Jairo Llopis <yajo.sk8@gmail.com>
+* Rosen Vladimirov <vladimirov.rosen@gmail.com>
 
 Maintainer
 ----------

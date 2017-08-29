@@ -18,5 +18,5 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import po_line_invoice
-from . import po_line_cancel_quantity
+from . import so_line_invoice
+from . import so_line_cancel_quantity
