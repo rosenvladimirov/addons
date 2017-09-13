@@ -44,9 +44,9 @@ class TestPartnerCategoryValidation(common.TransactionCase):
             'code': 'id_code',
             'name': 'id_name',
             'validation_code': """
-if id_number.name != '1234':
-    failed = True
-"""
+                if id_number.name != '1234':
+                failed = True
+                """
         })
         partner_1 = self.env.ref('base.res_partner_1')
         with self.assertRaises(ValidationError), self.cr.savepoint():

@@ -213,16 +213,21 @@ class ResPartner(models.Model):
                         j += 1
             else:
                 domain_old_vat = []
-            catg_ids = self.env['res_partner_id_category'].search(
-                               [('"vat"', 'iLike', validation_model)])
+            models = "vat"
+            catg_obj = self.env['res.partner.id_category']
+            catg_ids = catg_obj.search_read(
+                               [('validation_model', 'ilike', 'vat')], ['name'])
+            _logger.info("catd %s" % catg_ids)
+            catg_ids = [o['id'] for o in catg_ids]
             part_code_operator = filter(lambda x: x[0] == 'vat', domain)[0][1]
             part_code_value = filter(lambda x: x[0] == 'vat', domain)[0][2]
             part_code_value = part_code_value.replace(' ', '').replace('.', '').upper()
-            id_numbers = self.env['res_partner_id_number'].search(
-                               [('name', part_code_operator, part_code_value), ('category_id','=',catg_ids)])
+            id_numbers = self.env['res.partner.id_number'].search_read(
+                               [('name', part_code_operator, part_code_value), ('category_id','in',catg_ids)], ['name'])
+            id_numbers = [o['id'] for o in id_numbers]
             domain = filter(lambda x: x[0] != '', domain)
             _logger.info("Filter %s" % domain)
-            domain_old_vat.append(('id_numbers', 'in', [id_numbers]))
+            domain_old_vat.append(('id_numbers', 'in', id_numbers))
             domain += [domain_old_vat[-1]]
             _logger.info("After Filter %s:%s" % (domain, domain_old_vat))
         return super(ResPartner, self).search(domain, *args, **kwargs)
