@@ -8,7 +8,7 @@
     'license': 'AGPL-3',
     'depends': ['account'],
     'conflicts': ['account_asset'],
-    'author': "Noviat,Odoo Community Association (OCA)",
+    'author': "Rosen Vladimirov,Noviat,Odoo Community Association (OCA)",
     'website': 'http://www.noviat.com',
     'category': 'Accounting & Finance',
     'sequence': 32,
