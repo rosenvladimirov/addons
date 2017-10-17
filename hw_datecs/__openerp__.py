@@ -36,6 +36,7 @@ that would need such functionality. Work with file-mode program FPrint from Date
 
 """,
     "author": "Rosen Vladimirov, Terrabit, Dorin Hongu",
+    'images': ['images/datecs.png'],
     'depends': ['hw_proxy'],
     'external_dependencies': {
         'python' : ['usb.core','serial','qrcode'],
