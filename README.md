@@ -11,7 +11,12 @@ Passwords
 * user/password: admin/admin
 * point of sale cashier password: 123456
 
-# Fallow me in Tweeter
+Fallow me in Tweeter
+====================
+
 <a class="twitter-follow-button" href="https://twitter.com/vlrosen"> Follow @vlrosen</a>
-# Donate
+
+Donate
+======
+
 https://www.paypal.me/RosenVladimirov
