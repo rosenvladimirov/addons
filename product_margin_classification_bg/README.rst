@@ -63,12 +63,14 @@ Usage
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.openerp.bg
-   
+   :target: https://runbot.openerp.bg 
+
+Passwords
+=========
+
    user/password: admin/admin
    point of sale cashier password: 123456
-
-
+   
 Bug Tracker
 ===========
 
