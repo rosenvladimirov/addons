@@ -5,16 +5,18 @@
 
 
 {
-    'name': 'Purchase landed costs - Alternative option',
+    'name': 'Purchase landed costs - Alternative option Fix',
     'version': '8.0.2.4.0',
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Tecnativa,"
               "Joaquín Gutierrez",
+              "Rosen Vladimirov",
     'category': 'Purchase Management',
     'website': 'http://www.odoomrp.com',
     'summary': 'Purchase cost distribution',
-    'depends': [
+        'conflicts': ['purchase_landed_cost'],
+        'depends': [
         'stock',
         'purchase',
     ],

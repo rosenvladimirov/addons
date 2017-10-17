@@ -21,7 +21,7 @@
 
 
 {
-    'name': 'Datecs Hardware Driver',
+    'name': 'Datecs Hardware Driver fix',
     'version': '1.0',
     'category': 'Hardware Drivers',
     'sequence': 6,

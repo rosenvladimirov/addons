@@ -1,6 +1,8 @@
 This module manages your purchase expenses
 ==========================================
 
+Fixed to work on specific import transactions - vat price, or under defined 
+rules by law.
 The functionality of this module is to provide a way to manage your purchase
 costs more easily than the official module (*stock_landed_cost*) and allow to
 distribute them with a lot of methods.
