@@ -32,10 +32,10 @@ Datecs ECR Hardware Driver
 =======================
 
 This module allows odoo to print with Datecs ECR  in the point of sale and other modules
-that would need such functionality.
+that would need such functionality. Work with file-mode program FPrint from Datecs.
 
 """,
-    "author": "Terrabit, Dorin Hongu",
+    "author": "Rosen Vladimirov, Terrabit, Dorin Hongu",
     'depends': ['hw_proxy'],
     'external_dependencies': {
         'python' : ['usb.core','serial','qrcode'],
