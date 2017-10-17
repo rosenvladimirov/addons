@@ -22,12 +22,12 @@
         'security/ir.model.access.csv',
         'data/res_partner_category_id.xml',
     ],
-    'author': 'ChriCar Beteiligungs- und Beratungs- GmbH, '
+    'author': 'Rosen Vladimirov, '
+              'ChriCar Beteiligungs- und Beratungs- GmbH, '
               'Antiun Ingeniería S.L.',
               'Camptocamp,'
               'ACSONE SA/NV,'
               'Odoo Community Association (OCA),'
-              'Rosen Vladimirov'
     'website': 'https://odoo-community.org/',
     'license': 'AGPL-3',
     'installable': True,
