@@ -19,7 +19,7 @@ Passwords
 Fallow me in Tweeter
 ====================
 
-<a class="twitter-follow-button" href="https://twitter.com/vlrosen"> Follow @vlrosen</a>
+Follow me on `twitter <https://twitter.com/vlrosen>`__ :)
 
 Donate
 ======
