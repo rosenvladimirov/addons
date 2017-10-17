@@ -68,8 +68,8 @@ Usage
 Passwords
 =========
 
-   user/password: admin/admin
-   point of sale cashier password: 123456
+* user/password: admin/admin
+* point of sale cashier password: 123456
    
 Bug Tracker
 ===========
