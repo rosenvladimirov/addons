@@ -2,6 +2,10 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
+Info
+====
+Follow me on `twitter <https://twitter.com/vlrosen>`__ :)
+
 Usage
 =====
 
@@ -15,11 +19,6 @@ Passwords
 
 * user/password: admin/admin
 * point of sale cashier password: 123456
-
-Fallow me in Tweeter
-====================
-
-Follow me on `twitter <https://twitter.com/vlrosen>`__ :)
 
 Donate
 ======
