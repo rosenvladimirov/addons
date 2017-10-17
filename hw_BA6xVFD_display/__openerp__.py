@@ -21,6 +21,8 @@
 ##############################################################################
 
 
+
+
 {
     'name': 'Hardware Customer Display BA6X',
     'version': '8.0.0.1.0',
@@ -35,6 +37,10 @@ language support, like cyrrilic and more. Work only with fixed version of
 Point Of Sale from my repository.
     """,
     'author': "Rosen Vladimirov",
+<<<<<<< b7f1e534947cde051352d79ba1acaca518925d28
+=======
+    'images': ['images/ba6x.png'],
+>>>>>>> a05eb8c01c51e5774ac4c232f73c048a521e87cd
     'depends': ['hw_proxy'],
     'external_dependencies': {
         'python': ['unidecode'],
