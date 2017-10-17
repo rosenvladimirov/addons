@@ -10,7 +10,7 @@
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Tecnativa,"
-              "Joaquín Gutierrez",
+              "Joaquín Gutierrez,"
               "Rosen Vladimirov",
     'category': 'Purchase Management',
     'website': 'http://www.odoomrp.com',
