@@ -7,6 +7,8 @@
 Product Margin Classification
 =============================
 
+Fixes all prices to calculate and work with VAT.
+
 This module is designed to extend Sale Price computation in Odoo.
 
 This module add a new model 'Margin Classifications' linked to Product Templates.
@@ -61,7 +63,11 @@ Usage
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/167/8.0
+   :target: https://runbot.openerp.bg
+   
+   user/password: admin/admin
+   point of sale cashier password: 123456
+
 
 Bug Tracker
 ===========
