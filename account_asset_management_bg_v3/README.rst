@@ -20,8 +20,6 @@ Excel based reporting is available via the 'account_asset_management_xls' module
 The module contains a large number of functional enhancements compared to
 the standard account_asset module from Odoo.
 
-And now work with taxadmin rates of depreciation.
-
 Configuration
 =============
 

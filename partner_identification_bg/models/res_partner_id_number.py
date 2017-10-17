@@ -70,7 +70,7 @@ class ResPartnerIdNumber(models.Model):
 
     @api.model
     def create(self, vals):
-        _logger.info("Create %s" % vals)
+        #_logger.info("Create %s" % vals)
         """ add vat check to create """
         if vals.get('name') and vals.get('category_id'):
             category = self.env['res.partner.id_category'].search([('id','=',vals.get('category_id'))])
@@ -81,7 +81,7 @@ class ResPartnerIdNumber(models.Model):
     @api.multi
     def write(self, vals):
         """ add vat check to write """
-        _logger.info("Write %s" % vals)
+        #_logger.info("Write %s" % vals)
         for partner in self:
             if vals.get('category_id'):
                 category = self.env['res.partner.id_category'].search([('id','=',vals.get('category_id'))])

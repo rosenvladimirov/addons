@@ -18,15 +18,17 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     uic = fields.Char(
-        string='Main UIC', compute='_compute_uic', store=True,
+        string='Main UIC', compute='_compute_uic', store=False,
         inverse='_inverse_uic')
 
     @api.model
     def create(self, vals):
         """ add vat check to create """
+        _logger.info("Create %s" % vals)
         if vals.get('uic'):
-            if vals['uic'] == '' and vals.get('vat'):
-                vals['uic'] = vals['vat'].\
+            if vals.get('uic') and (vals.get('vat') and vals.get('vat').upper().find('BG', 0, 2) != -1):
+                vat = vals['vat']
+                vals['uic'] = vat.\
                     replace('BG', '').replace('.', '')
         return super(ResPartner, self).create(vals)
 
@@ -35,8 +37,9 @@ class ResPartner(models.Model):
         """ add vat check to write """
         _logger.info("Write %s" % vals)
         for partner in self:
-            if vals.get('vat') and 'BG' in vals['vat'] and partner.uic == '':
-                vals['uic'] = vals['vat'].\
+            if vals.get('uic') and (vals.get('vat') and vals.get('vat').upper().find('BG', 0, 2) != -1):
+                vat = vals['vat']
+                vals['uic'] = vat.\
                     replace('BG', '').replace('.', '')
         return super(ResPartner, self).write(vals)
 
@@ -45,7 +48,7 @@ class ResPartner(models.Model):
     def _compute_uic(self):
         for partner in self:
             uic_ids = partner.id_numbers.filtered(lambda r: (r.category_id.fieldname == 'uic' and r.category_id.is_company == partner.is_company))
-            _logger.info("Categori by uic: %s:%s" % (uic_ids.name, uic_ids.category_id))
+            #_logger.info("Categori by uic: %s:%s" % (uic_ids.name, uic_ids.category_id))
             if uic_ids:
                 partner.uic = uic_ids.name
 
@@ -53,15 +56,17 @@ class ResPartner(models.Model):
     def _inverse_uic(self):
         for partner in self:
             uic_ids = partner.id_numbers.filtered(lambda r: (r.category_id.fieldname == 'uic' and r.category_id.is_company == partner.is_company))
-            _logger.info("inverse vat %s:%s:%s" % (partner.id_numbers, uic_ids.name, partner.uic))
-            if uic_ids and partner.vat and (uic_ids.name != partner.uic):
-                uic_ids.write({'name': partner.vat})
-            elif uic_ids and not partner.vat and (uic_ids.name != partner.uic):
-                partner.vat = uic_ids.name
-            elif not uic_ids:
+            if partner.vat and partner.vat.upper().find('BG', 0, 2) != -1:
+                _logger.info("inverse uic %s:%s:%s" % (partner.id_numbers, uic_ids.name, partner.uic))
+            if uic_ids and (uic_ids.name != partner.uic):
+                uic_ids.write({'name': partner.uic})
+            elif not uic_ids and (partner.vat and partner.vat.upper().find('BG', 0, 2) != -1) or partner.uic:
                 cat_id = self.env['res.partner.id_category'].default_create('uic')
-                if partner.vat and cat_id:
-                    self.env['res.partner.id_number'].create({'partner_id': partner.id, 'name': partner.vat, 'category_id': cat_id['id'], 'active': True, 'comment': 'UIC number registred by Taxadmin agency', 'status': 'open', })
+                if cat_id and (partner.vat and partner.vat.upper().find('BG', 0, 2) != -1):
+                    vat = partner.vat
+                    self.env['res.partner.id_number'].create({'partner_id': partner.id, 'name': vat.replace('BG', ''), 'category_id': cat_id['id'], 'active': True, 'comment': 'UIC number registred by Taxadmin agency', 'status': 'open', })
+                elif cat_id and partner.uic:
+                    self.env['res.partner.id_number'].create({'partner_id': partner.id, 'name': partner.uic, 'category_id': cat_id['id'], 'active': True, 'comment': 'UIC number registred by Taxadmin agency', 'status': 'open', })
 
     def _commercial_fields(self, cr, uid, context=None):
         return super(ResPartner, self)._commercial_fields(cr, uid, context=context) + ['uic']

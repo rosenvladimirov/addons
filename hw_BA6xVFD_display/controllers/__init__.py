@@ -1,8 +1,9 @@
-# -*- coding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    POS Fiscal Printer module for Odoo
-#    Copyright (C) 2017 Rosen Vladimirov
+#    Hardware Customer Display module for Odoo
+#    Copyright (C) 2014 Akretion (http://www.akretion.com)
+#    @author Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,11 +20,5 @@
 #
 ##############################################################################
 
-from openerp import models, fields
 
-class PosConfig(models.Model):
-    _inherit = 'pos.config'
-
-    iface_fprint_via_proxy = fields.Boolean(
-        'Fiscal Printer',
-        help="A Fiscal printer is available on the Proxy")
+from . import main

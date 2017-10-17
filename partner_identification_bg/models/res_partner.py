@@ -74,7 +74,7 @@ class ResPartner(models.Model):
     def _compute_reg(self):
         for partner in self:
             reg_ids = partner.id_numbers.filtered(lambda r: (r.category_id.fieldname == 'company_registry' and r.category_id.is_company == partner.is_company))
-            _logger.debug("Categori by reg: %s:%s" % (reg_ids.name, reg_ids.category_id))
+            #_logger.debug("Categori by reg: %s:%s" % (reg_ids.name, reg_ids.category_id))
             if reg_ids:
                 partner.company_registry = reg_ids.name
 
@@ -82,7 +82,7 @@ class ResPartner(models.Model):
     def _inverse_reg(self):
         for partner in self:
             reg_ids = partner.id_numbers.filtered(lambda r: (r.category_id.fieldname == 'company_registry' and r.category_id.is_company == partner.is_company))
-            _logger.debug("inverse reg %s:%s:%s" % (partner.id_numbers, reg_ids.name, partner.company_registry))
+            #_logger.debug("inverse reg %s:%s:%s" % (partner.id_numbers, reg_ids.name, partner.company_registry))
             if reg_ids and partner.company_registry and (reg_ids.name != partner.company_registry):
                 reg_ids.write({'name': partner.company_registry})
             elif reg_ids and not partner.company_registry and (reg_ids.name != partner.company_registry):
@@ -96,11 +96,11 @@ class ResPartner(models.Model):
         vat = vat.replace(' ', '').replace('.', '').upper()
         if not vat:
             return True
-        _logger.debug("find VAT %s" % vat)
+        #_logger.debug("find VAT %s" % vat)
         vat_id = self.id_numbers.search([["name", "=", vat]], limit=1)
         if not vat_id:
             return True
-        _logger.debug("Get objects category %s:%s:%s" % (vat, vat_id, vat_id.category_id.get_category()))
+        #_logger.debug("Get objects category %s:%s:%s" % (vat, vat_id, vat_id.category_id.get_category()))
         online = False
         if not self._context.get('simple_vat_check'):
             online = self.env.user.company_id.vat_check_vies
@@ -141,7 +141,7 @@ class ResPartner(models.Model):
     def _parce_fileds(self, vals):
         if vals.get('id_numbers'):
             for id_number in vals['id_numbers']:
-                _logger.debug("Parce fields ids %s" % id_number)
+                #_logger.debug("Parce fields ids %s" % id_number)
                 fldname = self.env['res.partner.id_number'].search([('id', '=', id_number[1])]).category_id.fieldname
                 if (fldname and fldname != '') and (id_number[2] and id_number[2].get('name')):
                     vals[fldname] = id_number[2]['name']
@@ -149,12 +149,12 @@ class ResPartner(models.Model):
                     vals['numbers_pos'] = vals.get('numbers_pos','') + vals[fldname] + '|'
             if vals.get('numbers_pos'):
                 vals['numbers_pos'] = vals['numbers_pos'][:-1]
-        _logger.debug("Parce fields %s" % vals)
+        #_logger.debug("Parce fields %s" % vals)
         return vals
 
     @api.model
     def create(self, vals):
-        _logger.info("Create %s" % vals)
+        #_logger.info("Create %s" % vals)
         """ add vat check to create """
         if vals.get('vat'):
             if not self._check_vat(vals['vat']):
@@ -169,7 +169,7 @@ class ResPartner(models.Model):
     @api.multi
     def write(self, vals):
         """ add vat check to write """
-        _logger.info("Write %s" % vals)
+        #_logger.info("Write %s" % vals)
         for partner in self:
             if vals.get('vat'):
                 if not partner.with_context(
@@ -217,7 +217,7 @@ class ResPartner(models.Model):
             catg_obj = self.env['res.partner.id_category']
             catg_ids = catg_obj.search_read(
                                [('validation_model', 'ilike', 'vat')], ['name'])
-            _logger.info("catd %s" % catg_ids)
+            #_logger.info("catd %s" % catg_ids)
             catg_ids = [o['id'] for o in catg_ids]
             part_code_operator = filter(lambda x: x[0] == 'vat', domain)[0][1]
             part_code_value = filter(lambda x: x[0] == 'vat', domain)[0][2]
@@ -226,8 +226,8 @@ class ResPartner(models.Model):
                                [('name', part_code_operator, part_code_value), ('category_id','in',catg_ids)], ['name'])
             id_numbers = [o['id'] for o in id_numbers]
             domain = filter(lambda x: x[0] != '', domain)
-            _logger.info("Filter %s" % domain)
+            #_logger.info("Filter %s" % domain)
             domain_old_vat.append(('id_numbers', 'in', id_numbers))
             domain += [domain_old_vat[-1]]
-            _logger.info("After Filter %s:%s" % (domain, domain_old_vat))
+            #_logger.info("After Filter %s:%s" % (domain, domain_old_vat))
         return super(ResPartner, self).search(domain, *args, **kwargs)

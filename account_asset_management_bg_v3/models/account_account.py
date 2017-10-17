@@ -12,6 +12,7 @@ class AccountAccount(models.Model):
     asset_profile_id = fields.Many2one(
         comodel_name='account.asset.profile',
         string='Asset Profile',
+        domain=[('type', '=', 'normal')],
         help="Default Asset Profile when creating invoice lines "
              "with this account.")
 

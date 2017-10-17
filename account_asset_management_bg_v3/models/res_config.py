@@ -8,10 +8,10 @@ from openerp import models, fields
 class Config(models.TransientModel):
     _inherit = 'account.config.settings'
 
-    module_account_asset_management = fields.Boolean(
-        string='Assets management (OCA)',
+    module_account_asset_management_bg_v3 = fields.Boolean(
+        string='Assets management (OCA) with taxadmin',
         help="""This allows you to manage the assets owned by a company
                 or a person. It keeps track of the depreciation occurred
                 on those assets, and creates account move for those
                 depreciation lines.
-                This installs the module account_asset_management.""")
+                This installs the module account_asset_management_bg_v3.""")

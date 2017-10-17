@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    POS Fiscal Printer module for Odoo
-#    Copyright (C) 2017 Rosen Vladimirov
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,5 +19,31 @@
 #
 ##############################################################################
 
-from . import point_of_sale
-from . import account
+
+{
+    'name': 'Datecs Hardware Driver',
+    'version': '1.0',
+    'category': 'Hardware Drivers',
+    'sequence': 6,
+    'website': 'https://www.odoo.com/page/point-of-sale',
+    'summary': 'Hardware Driver for Datecs ECR',
+    'description': """
+Datecs ECR Hardware Driver
+=======================
+
+This module allows odoo to print with Datecs ECR  in the point of sale and other modules
+that would need such functionality.
+
+""",
+    "author": "Terrabit, Dorin Hongu",
+    'depends': ['hw_proxy'],
+    'external_dependencies': {
+        'python' : ['usb.core','serial','qrcode'],
+    },
+    'test': [
+    ],
+    'installable': True,
+    'auto_install': False,
+}
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

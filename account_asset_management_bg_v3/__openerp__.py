@@ -3,12 +3,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name': 'Assets Management fix',
-    'version': '8.0.3.0.1',
+    'name': 'Assets Management',
+    'version': '8.0.3.0.0',
     'license': 'AGPL-3',
     'depends': ['account'],
     'conflicts': ['account_asset'],
-    'author': "Rosen Vladimirov,Noviat,Odoo Community Association (OCA)",
+    'author': "Noviat,Odoo Community Association (OCA)",
     'website': 'http://www.noviat.com',
     'category': 'Accounting & Finance',
     'sequence': 32,

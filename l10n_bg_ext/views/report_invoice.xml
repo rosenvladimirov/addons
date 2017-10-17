@@ -141,9 +141,11 @@
                 <td class="text-right">
                     <span t-field="l.price_unit"/>
                 </td>
+                <!--
                  <td class="text-right">
                     <span t-esc="', '.join(map(lambda x: x.name, l.invoice_line_tax_id))"/>
                 </td>
+                -->
                 <td class="text-right">
                     <span t-field="l.price_subtotal" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
                 </td>

@@ -191,7 +191,7 @@ class ResPartnerIdCategory(models.Model):
     def default_create(self, fieldname):
         record = self.search([('fieldname', '=', fieldname)], limit=1)
         cat_default = self._default_fld().get(fieldname)
-        _logger.debug("Default Category 1: %s:%s" % (record, cat_default))
+        #_logger.debug("Default Category 1: %s:%s" % (record, cat_default))
         if not record and cat_default:
             record = self.create(cat_default)
         _logger.debug("Default Category 1: %s" % record)
@@ -200,7 +200,7 @@ class ResPartnerIdCategory(models.Model):
     @api.one
     def get_category(self):
         #for cat in self:
-        _logger.info("Category 1: %s" % self)
+        #_logger.info("Category 1: %s" % self)
         return self.validation_model
 
     @api.multi

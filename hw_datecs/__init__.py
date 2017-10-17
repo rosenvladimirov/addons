@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#
+#    
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,25 +15,12 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
 #
 ##############################################################################
 
-{
-    'name': 'POS Datecs Fiscal printer',
-    'version': '8.0.0.1.0',
-    'category': 'Point Of Sale',
-    'summary': 'Manage Fiscal Printer device from POS front end',
-    "depends" : ['account'],
-    'author': "Rosen Vladimirov <vladimirov.rosen(at)gmail(.)com>",
-    'license': 'AGPL-3',
-    'depends': ['point_of_sale'],
-    "data" : [
-            'views/point_of_sale_view.xml',
-            'views/templates.xml',
-            'views/account_tax.xml',
-            ],
-    "active": False,
-    "installable": True,
-    'application': False,
-}
+import controllers
+import datecs
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

@@ -44,6 +44,7 @@ Copyright, Author and Licence :
     'depends': [
         'product',
         'stock',
+        #'sales_team_default_warehouse',
         'default_warehouse_from_sale_team',
     ],
     'data': [
