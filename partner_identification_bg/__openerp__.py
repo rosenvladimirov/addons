@@ -27,7 +27,7 @@
               'Antiun Ingeniería S.L.',
               'Camptocamp,'
               'ACSONE SA/NV,'
-              'Odoo Community Association (OCA),'
+              'Odoo Community Association (OCA)'
     'website': 'https://odoo-community.org/',
     'license': 'AGPL-3',
     'installable': True,
