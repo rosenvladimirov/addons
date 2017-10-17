@@ -31,7 +31,8 @@
 Hardware Customer Display - Wincor Nixdorf 
 =========================
 This module support hardware display from  Wincor Nixdorf models BA6x, full
-language support, like cyrrilic and more.
+language support, like cyrrilic and more. Work only with fixed version of 
+Point Of Sale from my repository.
     """,
     'author': "Rosen Vladimirov",
     'depends': ['hw_proxy'],
