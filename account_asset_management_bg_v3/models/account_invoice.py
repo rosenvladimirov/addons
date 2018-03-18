@@ -68,10 +68,10 @@ class AccountInvoiceLine(models.Model):
              "asset 'Removal' button")
 
     @api.multi
-    def onchange_account_id(self, product_id, partner_id, inv_type,
-                            fposition_id, account_id):
-        res = super(AccountInvoiceLine, self).onchange_account_id(
-            product_id, partner_id, inv_type, fposition_id, account_id)
+    def onchange_account_id(self, pricelist, product_id, partner_id, inv_type,
+                            fposition_id, account_id, date_inv):
+        res = super(AccountInvoiceLine, self).onchange_account_id(pricelist,
+            product_id, partner_id, inv_type, fposition_id, account_id, date_inv)
         if account_id:
             account = self.env['account.account'].browse(account_id)
             asset_profile = account.asset_profile_id

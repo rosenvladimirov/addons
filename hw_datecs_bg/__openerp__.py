@@ -21,22 +21,22 @@
 
 
 {
-    'name': 'Datecs Hardware Driver fix',
+    'name': 'FP/POS Hardware Driver',
     'version': '1.0',
     'category': 'Hardware Drivers',
     'sequence': 6,
     'website': 'https://www.odoo.com/page/point-of-sale',
-    'summary': 'Hardware Driver for Datecs ECR',
+    'summary': 'Hardware Driver for FP/POS Printers and Cashdrawers from Datecs (ICL)',
     'description': """
-Datecs ECR Hardware Driver
+FP/POS Hardware Driver
 =======================
 
-This module allows odoo to print with Datecs ECR  in the point of sale and other modules
-that would need such functionality. Work with file-mode program FPrint from Datecs.
+This module allows openerp to print with FP/POS compatible printers and
+to open FP/POS controlled cashdrawers in the point of sale and other modules
+that would need such functionality.
 
 """,
-    "author": "Rosen Vladimirov, Terrabit, Dorin Hongu",
-    'images': ['images/datecs.png'],
+    'author': 'Rosen Vladimirov',
     'depends': ['hw_proxy'],
     'external_dependencies': {
         'python' : ['usb.core','serial','qrcode'],

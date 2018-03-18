@@ -14,7 +14,7 @@
     "application": False,
     "installable": True,
     "data": [
-        'views/res_partner_id_function_view.xml',
-        'views/res_partner_view.xml',
+        #'views/res_partner_id_function_view.xml',
+        #'views/res_partner_view.xml',
     ],
 }

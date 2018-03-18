@@ -18,6 +18,13 @@
         <field name="function" position="replace">
             <field name="function" attrs="{'invisible': '1'}"/>
         </field>
+        <xpath expr="//group[@name='contactperson']//field[@name='function']" position="after">
+            <field name="id_function"
+                   options='{"no_open": False}'/>
+        </xpath>
+        <xpath expr="//group[@name='contactperson']//field[@name='function']" position="replace">
+            <field name="function" attrs="{'invisible': '1'}"/>
+        </xpath>
     </field>
 </record>
 <record id="view_partner_simple_form_fr_wh_person" model="ir.ui.view">

@@ -170,7 +170,3 @@ def password_prapare(password):
 
     return int4.pack(password)
 
-
-
-
-

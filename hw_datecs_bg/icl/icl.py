@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#  Copyright 2013 Grigoriy Kramarenko <root@rosix.ru>
+#  Copyright 2013 Rosen Vladimirov <vladimirov.rosen@gmail.com>
 #  
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -29,11 +29,17 @@ from .protocol import *
 from .utils import *
 
 # ASCII
-ENQ = chr(0x05) # Enquire. Прошу подтверждения.
-STX = chr(0x02) # Start of Text, начало текста. 
+#ENQ = chr(0x05) # Enquire. Прошу подтверждения.
+#STX = chr(0x02) # Start of Text, начало текста. 
+
+
+STX = chr(0x01)
+ARGS_SEPARATOR = chr(0x04)
+ARGS_END = chr(0x05)
+END = chr(0x3)
 ACK = chr(0x06) # Acknowledgement. Подтверждаю.
 NAK = chr(0x15) # Negative Acknowledgment, не подтверждаю.
-
+SYN = chr(0x16) # Slave send need time to finish
 
 class ICLError(Exception):
 
@@ -51,30 +57,27 @@ class ICLError(Exception):
             except UnicodeError:
                 pass
 
-        super(KktError, self).__init__(msg)
+        super(ICLError, self).__init__(msg)
 
 
-class ConnectionError(KktError):
+class ConnectionError(ICLError):
     pass
 
 
 class BaseICL(object):
     """
-    Базовият клас включва в себе си методи за непосредствена
-    връзка с устройството.
+    Базовый класс включает методы непосредственного общения с
+    устройством.
 
-    Обща информация:
+    Общие положения.
 
-    При обмяната на данни между Комютъра и фискалното устроиство
-    компютъра се явава като главен, а фискалното устройство се 
-    смята за подчинено. Затова изпращането на данните се определя
-    от главния. Физичческия интерфейс за връзка Компютър-Фискално 
-    устройство е последователен интерфейс RS-232Ц, без линия за 
-    апаратно квинтироване.
-    Скоростта на обмена през интерфейса RS-232C - 2400, 4800, 9600
-                                                  19200, 38400, 
-                                                  57600, 115200
-
+    В информационном обмене «Хост – ККТ» хост является главным 
+    устройством, а ККТ – подчиненным. Поэтому направление 
+    передачи данных определяется хостом. Физический интерфейс 
+    «Хост – ККТ» – последовательный интерфейс RS-232С, без линий 
+    аппаратного квитирования.
+    Скорость обмена по интерфейсу RS-232С – 2400, 4800, 9600, 19200,
+                                            38400, 57600, 115200.
     При обмене хост и ККТ оперируют сообщениями. Сообщение может 
     содержать команду (от хоста) или ответ на команду (от ККТ). 
     Формат сообщения:
@@ -132,6 +135,7 @@ class BaseICL(object):
     stopbits       = serial.STOPBITS_ONE
     timeout        = 0.7
     writeTimeout   = 0.7
+    frameSeqNumber = 0x20
 
     def __init__(self, **kwargs):
         """ Пароли можно передавать в виде набора шестнадцатеричных
@@ -171,7 +175,7 @@ class BaseICL(object):
                 writeTimeout=self.writeTimeout
             )
         except serial.SerialException:
-            raise ConnectionError('Невозможно соединиться с ККМ (порт=%s)' % self.port)
+            raise ConnectionError('Невозможно соединиться с FP (порт=%s)' % self.port)
 
         return self.check_port()
 
@@ -191,12 +195,12 @@ class BaseICL(object):
     def check_state(self):
         """ Проверка на ожидание команды """
         self.check_port()
-        self._write(ENQ)
+        #self._write(ENQ)
         answer = self._read(1)
         if not answer:
             time.sleep(MIN_TIMEOUT)
             answer = self._read(1)
-        if answer in (NAK, ACK):
+        if answer in (SYN, ASK):
             return answer
         elif not answer:
             raise ConnectionError('Нет связи с устройством')
@@ -219,6 +223,13 @@ class BaseICL(object):
         else:
             raise ConnectionError('Нет связи с устройством')
 
+    def check_SYN(self):
+        """ Проверка на ожидание команды """
+        answer = self.check_state()
+        if answer == SYN:
+            return True
+        return False
+
     def check_NAK(self):
         """ Проверка на ожидание команды """
         answer = self.check_state()
@@ -226,10 +237,10 @@ class BaseICL(object):
             return True
         return False
 
-    def check_ACK(self):
+    def check_ASK(self):
         """ Проверка на подготовку ответа """
         answer = self.check_state()
-        if answer == ACK:
+        if answer == ASK:
             return True
         return False
 
@@ -265,7 +276,7 @@ class BaseICL(object):
     def read(self):
         """ Считывает весь ответ ККМ """
         answer = self.check_state()
-        if answer == NAK :
+        if answer == SYN or answer == ACK:
             i = 0
             while i < MAX_ATTEMPT and not self.check_ACK():
                 i += 1
@@ -281,25 +292,28 @@ class BaseICL(object):
         if j >= MAX_ATTEMPT:
             self.disconnect()
             raise ConnectionError('Нет связи с устройством')
-
+        #<01><LEN><SEQ><CMD><DATA><04><STATUS><05><BCC><03>
         length  = ord(self._read(1))
+        sqn     = self._read(1)
         command = self._read(1)
-        error   = self._read(1)
-        data    = self._read(length-2)
-        if length-2 != len(data):
+        data    = self._read(length-4-32)
+        args_sp = self._read(1)
+        error   = self._read(6)
+        args_en = self._read(1)
+        if length-4-32 != len(data):
             self._write(NAK)
             self.disconnect()
             msg = 'Длина ответа (%i) не равна длине полученных данных (%i)' % (length, len(data))
-            raise KktError(msg)
+            raise ICLError(msg)
 
-        control_read = self._read(1)
-        control_summ = get_control_summ(chr(length) + command \
-                                        + error + data)
+        control_read = self._read(1)+4+32
+        control_summ = get_control_summ(STX + chr(length) + chr(sqn) + command + data + args_sp + error + args_en)
+
         if control_read != control_summ:
             self._write(NAK)
             self.disconnect()
             msg = "Контрольная сумма %i должна быть равна %i " % (ord(control_summ), ord(control_read))
-            raise KktError(msg)
+            raise ICLError(msg)
 
         self._write(ACK)
         self._flush()
@@ -314,18 +328,20 @@ class BaseICL(object):
         """ Стандартная обработка команды """
 
         #~ self.clear()
-
         if not quick:
             self._flush()
-        data    = chr(command)
-        length  = 1
+        data = ''
+        length  = 4+32 # 4 = <Preamble> + <LEN> + <SEQ> + <CMD> 32 = 0x20,
         if not params is None:
-            data   += params
+            data   = params
             length += len(params)
-        content = chr(length) + data
+        #<01><LEN><SEQ><CMD><DATA><05><BCC><03>
+        content = STX
+        content += "%s%s%s%s" % (chr(length),chr(self.frameSeqNumber),chr(command),data)
+        content += ARGS_END
         control_summ = get_control_summ(content)
 
-        self._write(STX + content + control_summ)
+        self._write(content + control_summ + END)
         self._flush()
 
         return True
@@ -356,7 +372,7 @@ class BaseICL(object):
         if disconnect:
             self.disconnect()
         if error:
-            raise KktError(error)
+            raise ICLError(error)
 
         return answer, error, command
 

@@ -21,27 +21,27 @@ class ResPartner(models.Model):
         string='Main UIC', compute='_compute_uic', store=False,
         inverse='_inverse_uic')
 
-    @api.model
-    def create(self, vals):
-        """ add vat check to create """
-        _logger.info("Create %s" % vals)
-        if vals.get('uic'):
-            if vals.get('uic') and (vals.get('vat') and vals.get('vat').upper().find('BG', 0, 2) != -1):
-                vat = vals['vat']
-                vals['uic'] = vat.\
-                    replace('BG', '').replace('.', '')
-        return super(ResPartner, self).create(vals)
+    #@api.model
+    #def create(self, vals):
+    #    """ add vat check to create """
+    #    #_logger.info("Create %s" % vals)
+    #    if vals.get('vat') and not vals.get('uic', False):
+    #        if vals['vat'].upper().find('BG', 0, 2) != -1:
+    #            vat = vals['vat']
+    #            vals['uic'] = vat.\
+    #                replace('BG', '').replace('.', '')
+    #    return super(ResPartner, self).create(vals)
 
-    @api.multi
-    def write(self, vals):
-        """ add vat check to write """
-        _logger.info("Write %s" % vals)
-        for partner in self:
-            if vals.get('uic') and (vals.get('vat') and vals.get('vat').upper().find('BG', 0, 2) != -1):
-                vat = vals['vat']
-                vals['uic'] = vat.\
-                    replace('BG', '').replace('.', '')
-        return super(ResPartner, self).write(vals)
+    #@api.multi
+    #def write(self, vals):
+    #    """ add vat check to write """
+    #    _logger.info("Write %s" % vals)
+    #    for partner in self:
+    #        if vals.get('uic') and (vals.get('vat') and vals.get('vat').upper().find('BG', 0, 2) != -1):
+    #            vat = vals['vat']
+    #            vals['uic'] = vat.\
+    #                replace('BG', '').replace('.', '')
+    #    return super(ResPartner, self).write(vals)
 
     @api.multi
     @api.depends('id_numbers')
@@ -56,16 +56,11 @@ class ResPartner(models.Model):
     def _inverse_uic(self):
         for partner in self:
             uic_ids = partner.id_numbers.filtered(lambda r: (r.category_id.fieldname == 'uic' and r.category_id.is_company == partner.is_company))
-            if partner.vat and partner.vat.upper().find('BG', 0, 2) != -1:
-                _logger.info("inverse uic %s:%s:%s" % (partner.id_numbers, uic_ids.name, partner.uic))
-            if uic_ids and (uic_ids.name != partner.uic):
-                uic_ids.write({'name': partner.uic})
-            elif not uic_ids and (partner.vat and partner.vat.upper().find('BG', 0, 2) != -1) or partner.uic:
+            #if (partner.vat and partner.vat.upper().find('BG', 0, 2) != -1 and len([x.id for x in uic_ids if x.uic != partner.vat.replace('BG', '')]) == 0):
+            #    partner.uic = partner.vat.replace('BG', '')
+            if not uic_ids and partner.uic:
                 cat_id = self.env['res.partner.id_category'].default_create('uic')
-                if cat_id and (partner.vat and partner.vat.upper().find('BG', 0, 2) != -1):
-                    vat = partner.vat
-                    self.env['res.partner.id_number'].create({'partner_id': partner.id, 'name': vat.replace('BG', ''), 'category_id': cat_id['id'], 'active': True, 'comment': 'UIC number registred by Taxadmin agency', 'status': 'open', })
-                elif cat_id and partner.uic:
+                if cat_id and partner.uic:
                     self.env['res.partner.id_number'].create({'partner_id': partner.id, 'name': partner.uic, 'category_id': cat_id['id'], 'active': True, 'comment': 'UIC number registred by Taxadmin agency', 'status': 'open', })
 
     def _commercial_fields(self, cr, uid, context=None):
