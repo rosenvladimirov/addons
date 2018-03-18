@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record id="credit_control_agree_form" model="ir.ui.view">
+      <field name="name">credit.control.agree.form</field>
+      <field name="model">credit.control.agree</field>
+      <field name="arch" type="xml">
+        <form version="7.0" string="Agree new temporary permit">
+            <separator string="Change the credit limit temporary permit" colspan="4"/>
+            <label string="This wizard will let you set teh temporary permit for level of the credit limit"/>
+            <newline/>
+            <group colspan="4" col="4">
+                <group colspan="2">
+                    <field name="policy_id"/>
+                    <field name="partner_id" readonly="1"/>
+                    <field name="currency_id" readonly="1"/>
+                    <field name="last_credit_control_date" readonly="1"/>
+                </group>
+                <group colspan="2">
+                    <field name="total_invoiced" readonly="1"/>
+                    <field name="total_due" readonly="1"/>
+                    <field name="credit_limit_due" readonly="1"/>
+                    <field name="amount_due"/>
+                </group>
+            </group>
+            <notebook colspan="4">
+                <page string="Credit lines to affect">
+                    <field name="credit_control_line_ids" domain="[('last_date', '=', last_credit_control_date)]">
+                        <tree>
+                            <field name="last_date"/>
+                            <field name="partner_id"/>
+                            <field name="amount_due"/>
+                            <field name="balance_due"/>
+                            <field name="currency_id"/>
+                            <field name="policy_id"/>
+                            <field name="level"/>
+                        </tree>
+                    </field>
+                </page>
+            </notebook>
+            <footer>
+                <button class="oe_highlight"
+                        name="action_next"
+                        string="Set limit"
+                        context="{'dafault_partner_id': partner_id, 'default_date': last_credit_control_date, 'default_amount_due': amount_due}"
+                        type="object"/>
+                or
+                <button class="oe_link"
+                        special="cancel"
+                        string="Cancel"/>
+            </footer>
+        </form>
+      </field>
+    </record>
+  </data>
+</openerp>

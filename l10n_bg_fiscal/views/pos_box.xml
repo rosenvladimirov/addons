@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+       <record model="ir.ui.view" id="cash_box_in_form">
+            <field name="name">cash.box.in.form</field>
+            <field name="model">cash.box.in</field>
+            <field name="inherit_id" ref="account.cash_box_in_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="before">
+                    <field name="product_id" required="1" class="oe_inline" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="cash_box_out_form">
+            <field name="name">cash.box.out.form</field>
+            <field name="model">cash.box.out</field>
+            <field name="inherit_id" ref="account.cash_box_out_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="before">
+                    <field name="product_id" required="1" class="oe_inline" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="cash_box_report1_form">
+            <field name="name">cash_box_report1</field>
+            <field name="model">cash.box.creport</field>
+            <field name="arch" type="xml">
+                <form string="Print reports">
+                    <separator string="Fill fields to make fiscal reports:" colspan="4"/>
+                    <group>
+                        <field name="mode"/>
+                        <field name="date_start"/>
+                        <field name="date_end"/>
+                        <field name="print_it"/>
+                        <field name="file_name" attrs="{'invisible': [('print_it','=',True)], 'required': [('print_it', '=', False)]}"/>
+                    </group>
+                    <footer>
+                        <button name="print_ctrl" string="print report" type="object" class="oe_highlight"/>
+                         or
+                        <button special="cancel" string="Cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <act_window 
+            name="Control report"
+            res_model="cash.box.creport"
+            src_model="pos.session"
+            view_mode="form"
+            target="new"
+            key2="client_action_multi"
+            id="action_pos_box_report1" />
+
+        <record model="ir.ui.view" id="cash_box_report2_form">
+            <field name="name">cash_box_report2</field>
+            <field name="model">cash.box.zreport</field>
+            <field name="arch" type="xml">
+                <form string="Print reports">
+                    <separator string="Fill fields to make fiscal reports:" colspan="4" />
+                    <group>
+                        <field name="type"/>
+                        <field name="type_report" attrs="{'invisible': [('type','in',['X','Z'])]}"/>
+                        <field name="month" attrs="{'invisible': [('type','in',['X','Z'])], 'required': [('type', 'in', ['P','D'])]}"/>
+                        <field name="year" attrs="{'invisible': [('type','in',['X','Z'])], 'required': [('type', 'in', ['P','D'])]}"/>
+                    </group>
+                    <footer>
+                        <button name="print_daily" string="print report" type="object" class="oe_highlight"/>
+                         or
+                        <button special="cancel" string="Cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <act_window 
+            name="Z-Report"
+            res_model="cash.box.zreport"
+            src_model="pos.session"
+            view_mode="form"
+            target="new"
+            key2="client_action_multi"
+            id="action_pos_box_report2" />
+
+    </data>
+</openerp>

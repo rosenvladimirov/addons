@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="view_sessionpos_form" model="ir.ui.view">
+            <field name="name">sessionpos_inherit</field>
+            <field name="model">pos.session</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_session_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_right oe_button_box']" position="inside">
+                    <button class="oe_stat_button" name="%(action_pos_box_report2)d"
+                        type="action" states="opened,closing_control" icon="fa-print">
+                        <div>Print<br/>Deily reports</div>
+                    </button>
+                    <button class="oe_stat_button" name="%(action_pos_box_report1)d"
+                        type="action" states="opened,closing_control" icon="fa-print">
+                        <div>Print<br/>Ctrl reports</div>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

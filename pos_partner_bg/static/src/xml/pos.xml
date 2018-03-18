@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <t t-extend="ClientDetailsEdit">
+        <t t-jquery=".client-email" t-operation="after">
+            <input type="hidden" class="detail" name="post_customer" value="1"/>
+        </t>
+    </t>
+</template>
+
+

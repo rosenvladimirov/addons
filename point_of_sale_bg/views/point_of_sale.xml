@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- vim:fdn=3:
+-->
+<openerp>
+    <data>
+        <!-- <template id="assets_backend" name="point_of_sale_bg assets" inherit_id="web.assets_backend"> -->
+        <template id="assets_frontend" name="Point of sale assets">
+                <script type="text/javascript" src="/point_of_sale_bg/static/lib/jquery.mobile-1.4.5.js"></script>
+                <script type="text/javascript" src="/point_of_sale_bg/static/lib/fastclick.js"></script>
+                <script type="text/javascript" src="/point_of_sale_bg/static/lib/waitfont.js"></script>
+                <script type="text/javascript" src="/point_of_sale_bg/static/src/js/db.js"></script>
+                <script type="text/javascript" src="/point_of_sale_bg/static/src/js/models.js"></script>
+                <script type="text/javascript" src="/point_of_sale_bg/static/src/js/widget_base.js"></script>
+                <script type="text/javascript" src="/point_of_sale_bg/static/src/js/widget_keyboard.js"></script>
+                <script type="text/javascript" src="/point_of_sale_bg/static/src/js/widgets.js"></script>
+                <script type="text/javascript" src="/point_of_sale_bg/static/src/js/devices.js"></script>
+                <script type="text/javascript" src="/point_of_sale_bg/static/src/js/screens.js"></script>
+                <script type="text/javascript" src="/point_of_sale_bg/static/src/js/errors.js"></script>
+                <script type="text/javascript" src="/point_of_sale_bg/static/src/js/popups.js"></script>
+                <script type="text/javascript" src="/point_of_sale_bg/static/src/js/tests.js"></script>
+                <script type="text/javascript" src="/point_of_sale_bg/static/src/js/main.js"></script>
+        </template>
+    </data>
+</openerp>

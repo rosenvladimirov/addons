@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_order_revalidate_form" model="ir.ui.view">
+            <field name="name">pos.order.form - Re-validate</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+                <button name="action_progress" states="draft" position="after">
+                    <button name="action_re_validate" string="Re-validate" type="object" states="draft,progress,paid" groups="base.group_user"/>
+                </button>
+            </field>
+        </record>
+        <record id="action_revalidate_action" model="ir.actions.server">
+            <field name="name">Re-validate PO</field>
+            <field name="model_id" ref="model_pos_order"/>
+            <field name="state">code</field>
+            <field name="code">
+                if context.get('active_model') == 'pos.order' and context.get('active_ids'):
+                    self.action_re_validate(cr, uid, context['active_ids'], context=context)
+            </field>
+        </record>
+
+        <record id="ir_order_process_now" model="ir.values">
+            <field eval="'client_action_multi'" name="key2"/>
+            <field eval="'pos.order'" name="model"/>
+            <field name="name">Re-validate PO</field>
+            <field eval="'ir.actions.server,%d'%action_revalidate_action" name="value"/>
+        </record>
+    </data>
+</openerp>

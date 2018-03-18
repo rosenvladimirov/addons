@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    <record id="view_product_template_mc_check_form" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <notebook>
+                    <page string="Products">
+                        <group>
+                            <field name="template_ids" nolabel="1" nocreate="1">
+                                <tree colors="black: margin_state == 'expensive'; red: margin_state == 'cheap'; gray: margin_state == 'ok'">
+                                    <field name="product_id"/>
+                                    <field name="margin_classification_id"/>
+                                    <field name="default_code" />
+                                    <field name="name" />
+                                    <field name="standard_price" />
+                                    <field name="theoretical_price" />
+                                    <field name="theoretical_price_vat" />
+                                    <field name="list_price" />
+                                    <field name="margin_state"/>
+                                    <field name="theoretical_difference" />
+                                    <button name="use_theoretical_price" type="object" string="Use Theoretical Price"
+                                            attrs="{'invisible': [('margin_state', '=', 'ok')]}" icon="gtk-convert"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </notebook>
+            </sheet>
+            <footer>
+                <button name="apply_theoretical_price" type="object" string="Apply Theoretical Price"/>
+                <button name="apply_theoretical_price_cheap" type="object" string="Up to Theoretical Price"/>
+                <button name="apply_theoretical_price_expensive" type="object" string="Down to Theoretical Price"/>
+            </footer>
+        </form>
+        </field>
+    </record>
+    <record id="action_product_margin_classification_check_wizard" model="ir.actions.act_window">
+        <field name="name">Theoretical Price State</field>
+        <field name="res_model">product.margin.classification.check</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem id="menu_product_margin_classification_check_wizard"
+        parent="base.menu_product"
+        action="action_product_margin_classification_check_wizard"
+        sequence="15"/>
+    </data>
+</openerp>
