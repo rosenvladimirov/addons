@@ -1,0 +1,36 @@
+# -*- coding: utf-8 -*-
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
+# Cron job
+- !record {model: ir.cron, id: ir_cron_product_stock_history_bg_day}:
+    name: Calculation of product stock history per day
+    user_id: base.user_root
+    interval_number: 1
+    interval_type: days
+    numbercall: -1
+    nextcall: !eval
+        (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d 02:00:00")
+    model: product.product
+    function: run_product_history_day
+
+- !record {model: ir.cron, id: ir_cron_product_stock_history_bg_week}:
+    name: Calculation of product stock history per week
+    user_id: base.user_root
+    interval_number: 1
+    interval_type: weeks
+    numbercall: -1
+    nextcall: !eval
+        (datetime.now() + timedelta(days=7)).strftime("%Y-%m-%d 02:00:00")
+    model: product.product
+    function: run_product_history_week
+
+- !record {model: ir.cron, id: ir_cron_product_stock_history_bg_month}:
+    name: Calculation of product stock history per month
+    user_id: base.user_root
+    interval_number: 1
+    interval_type: months
+    numbercall: -1
+    nextcall: !eval
+        (datetime.now() + timedelta(days=30)).strftime("%Y-%m-%d 02:00:00")
+    model: product.product
+    function: run_product_history_month

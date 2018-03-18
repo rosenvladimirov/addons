@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<openerp>
+  <data>
+    <record model="ir.ui.view" id="view_order_form">
+      <field name="name">sale.order.loyalty.form.view</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form" />
+      <field name="arch" type="xml">
+        <field name="pricelist_id" position="after">
+          <field name="loyalty_program_id"/>
+          <field name="loyalty_points" />
+        </field>
+        <field name="price_subtotal" position="before">
+          <field name="loyalty_points" />
+        </field>
+      </field>
+    </record>
+  </data>
+</openerp>

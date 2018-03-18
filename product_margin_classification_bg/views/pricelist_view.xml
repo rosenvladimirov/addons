@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+    <data>
+        <record id="product_pricelist_item_tree_view" model="ir.ui.view">
+            <field name="name">product.pricelist.item.tree</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="inherit_id" ref="product.product_pricelist_item_tree_view" />
+            <field name="arch" type="xml">
+                <field name="categ_id" position="after">
+                    <field name="margin_classification_id"/>
+                </field>
+            </field>
+        </record>
+        <record id="product_pricelist_item_form_view" model="ir.ui.view">
+            <field name="name">product.pricelist.item.form</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+            <field name="arch" type="xml">
+                <field name="categ_id" position="after">
+                    <field name="margin_classification_id"/>
+                </field>
+                <field name="price_surcharge" position="after">
+                    <newline/>
+                    <label string="New Discount ="/>
+                    <label string="Percent by discount"/>
+                    <field name="margin_classification_discount" nolabel="1"/>
+                    <label string="from max margin"/>
+                </field>
+                <field name="price_min_margin" position="replace">
+                    <field name="price_min_margin" string="Min. Margin" attrs="{'readonly': [('price_discount','!=', 0.0),('margin_classification_id','!=',False)]}"/>
+                </field>
+                <field name="price_max_margin" position="replace">
+                    <field name="price_max_margin" string="Max. Margin" attrs="{'readonly': [('price_discount','!=', 0.0),('margin_classification_id','!=',False)]}"/>
+                </field>
+            </field>
+        </record>
+        <record id="product_pricelist_version_form_view" model="ir.ui.view">
+            <field name="name">product.pricelist.version.form</field>
+            <field name="model">product.pricelist.version</field>
+            <field name="inherit_id" ref="product.product_pricelist_version_form_view"/>
+            <field name="arch" type="xml">
+                <field name="active" position="after">
+                    <field name="pricelist_visable"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
