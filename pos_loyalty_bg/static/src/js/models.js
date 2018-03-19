@@ -347,7 +347,7 @@ function pos_loyalty_bg_models(instance, module) {
                 var crounding = self.pos.currency.rounding;
                 var spendable = self.get_spendable_points();
                 var order_total = self.get_total_with_tax();
-                var product = self.db.get_product_by_id(reward.point_product_id[0]);
+                var product = self.pos.db.get_product_by_id(reward.point_product_id[0]);
 
                 if (!product) {
                     return;
